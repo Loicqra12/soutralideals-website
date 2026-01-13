@@ -1,107 +1,141 @@
+import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
-import { Users, Lightbulb, PenTool, Rocket } from 'lucide-react';
+import { Users, Layout, ShieldCheck } from 'lucide-react';
+import ecosystemImage from '../../assets/images/ecosysteme.png';
 
 export const Ecosystem = () => {
   return (
     <SectionWrapper id="ecosysteme" bg="dark">
-      <div className="text-center max-w-4xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dark-card border border-dark-border mb-6">
-          <span className="w-2 h-2 rounded-full bg-primary-green animate-pulse"></span>
-          <span className="text-sm font-medium text-text-secondary">Qui sommes-nous ?</span>
-        </div>
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-        <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
-          L'Écosystème <span className="text-primary-green">Soutrali Deals</span>
-        </h2>
-        <p className="text-lg text-text-secondary leading-relaxed">
-          SOUTRALI DEALS est bien plus qu'une plateforme. C'est un écosystème complet : une équipe de prestataires professionnels,
-          une technologie innovante, et une communauté vibrante d’artisans et freelances.
-        </p>
-      </div>
+        {/* Mobile: Image First */}
+        {/* Desktop: Image Right (Order-2) -> Wait, user asked: Desktop [TEXT] | [IMAGE]. Mobile [IMAGE] [TEXT]. 
+                    So on Mobile: Image first. On Desktop: Text first.
+                    Implementation: 
+                    Mobile default: Flex col. Image first? Or Grid.
+                    Let's use Flex col-reverse on mobile for Text first? No user said MOBILE: [ILLUSTRATION] then [TEXT].
+                    DESKTOP: [TEXT] | [ILLUSTRATION].
+                    
+                    So:
+                    <div className="flex flex-col lg:grid lg:grid-cols-2">
+                        <div className="order-2 lg:order-1"> TEXT </div>
+                        <div className="order-1 lg:order-2"> IMAGE </div>
+                    </div>
+                */}
 
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        {/* Illustrations / Team Grid */}
-        <div className="relative hidden md:block">
-          {/* Background Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary-green/10 blur-[100px] rounded-full"></div>
+        {/* Left Column (Desktop) / Bottom (Mobile) - Content */}
+        <div className="order-2 lg:order-1 space-y-8">
 
-          <div className="relative z-10 grid grid-cols-2 gap-6 p-4">
-            {/* Card 1 */}
-            <div className="bg-dark-card p-6 rounded-2xl border border-dark-border transform hover:-translate-y-2 transition-transform duration-300 shadow-xl">
-              <div className="w-14 h-14 bg-primary-green/10 rounded-xl mb-4 flex items-center justify-center border border-primary-green/20">
-                <Users className="w-7 h-7 text-primary-green" />
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-green/10 border border-primary-green/20"
+          >
+            <span className="w-2 h-2 rounded-full bg-primary-green animate-pulse"></span>
+            <span className="text-xs font-bold tracking-wider text-primary-green uppercase">🌍 Écosystème 100 % ivoirien</span>
+          </motion.div>
+
+          {/* Main Title & Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight">
+              <span className="break-words">L'Écosystème</span> <br />
+              <span className="gradient-text">Soutrali Deals</span>
+            </h2>
+            <p className="text-lg text-text-secondary leading-relaxed">
+              SOUTRALI DEALS est un écosystème digital complet qui réunit une <strong className="text-white">équipe de professionnels</strong>,
+              une <strong className="text-white">communauté de talents</strong> et une <strong className="text-white">plateforme technologique</strong> pensée
+              pour connecter, structurer et faire grandir les activités en Côte d’Ivoire.
+            </p>
+          </motion.div>
+
+          {/* Feature Blocks */}
+          <div className="space-y-8 pt-4">
+            {/* Block 1 */}
+            <motion.div
+              className="flex gap-4 group"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center group-hover:border-primary-green/50 transition-colors">
+                <Users className="w-6 h-6 text-primary-green" />
               </div>
-              <h3 className="font-bold text-lg mb-1">L'Équipe</h3>
-              <p className="text-sm text-text-muted">IT, Marketing & Admin</p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-dark-card p-6 rounded-2xl border border-dark-border transform translate-y-8 hover:translate-y-6 transition-transform duration-300 shadow-xl">
-              <div className="w-14 h-14 bg-primary-orange/10 rounded-xl mb-4 flex items-center justify-center border border-primary-orange/20">
-                <Lightbulb className="w-7 h-7 text-primary-orange" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary-green transition-colors">Une équipe de professionnels</h3>
+                <p className="text-text-muted text-sm leading-relaxed">
+                  Développeurs, marketeurs, communicants et gestionnaires qui conçoivent et opèrent l’écosystème au quotidien.
+                </p>
               </div>
-              <h3 className="font-bold text-lg mb-1">Philosophie</h3>
-              <p className="text-sm text-text-muted">Simplicité & Proximité</p>
-            </div>
+            </motion.div>
 
-            {/* Card 3 */}
-            <div className="bg-dark-card p-6 rounded-2xl border border-dark-border transform hover:-translate-y-2 transition-transform duration-300 shadow-xl">
-              <div className="w-14 h-14 bg-primary-blue/10 rounded-xl mb-4 flex items-center justify-center border border-primary-blue/20">
-                <Rocket className="w-7 h-7 text-primary-blue" />
+            {/* Block 2 */}
+            <motion.div
+              className="flex gap-4 group"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center group-hover:border-gold-premium/50 transition-colors">
+                <ShieldCheck className="w-6 h-6 text-gold-premium" />
               </div>
-              <h3 className="font-bold text-lg mb-1">Mission</h3>
-              <p className="text-sm text-text-muted">Digitaliser la CI 🇨🇮</p>
-            </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gold-premium transition-colors">Artisans & freelances</h3>
+                <p className="text-text-muted text-sm leading-relaxed">
+                  Des artisans, freelances et vendeurs issus du terrain, organisés en communautés et connectés à des opportunités réelles.
+                </p>
+              </div>
+            </motion.div>
 
-            {/* Card 4 */}
-            <div className="bg-dark-card p-6 rounded-2xl border border-dark-border transform translate-y-8 hover:translate-y-6 transition-transform duration-300 shadow-xl">
-              <div className="w-14 h-14 bg-gold-premium/10 rounded-xl mb-4 flex items-center justify-center border border-gold-premium/20">
-                <PenTool className="w-7 h-7 text-gold-premium" />
+            {/* Block 3 */}
+            <motion.div
+              className="flex gap-4 group"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center group-hover:border-primary-blue/50 transition-colors">
+                <Layout className="w-6 h-6 text-primary-blue" />
               </div>
-              <h3 className="font-bold text-lg mb-1">Prestataires</h3>
-              <p className="text-sm text-text-muted">Services Professionnels</p>
-            </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary-blue transition-colors">Une technologie au centre</h3>
+                <p className="text-text-muted text-sm leading-relaxed">
+                  Une plateforme web et mobile qui connecte les talents, les clients et les services dans un même environnement.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Content List */}
-        <div className="space-y-10">
-          <div className="flex gap-5 group">
-            <div className="w-14 h-14 bg-dark-card rounded-2xl flex items-center justify-center shrink-0 border border-dark-border group-hover:border-primary-green/50 transition-colors shadow-lg">
-              <span className="text-2xl group-hover:scale-110 transition-transform">🤝</span>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-primary-green transition-colors">Une Communauté Unie</h3>
-              <p className="text-text-secondary leading-relaxed">
-                Rejoignez plus de 400 artisans, freelances et vendeurs. Un réseau d'entraide pour partager des opportunités, des conseils et grandir ensemble.
-              </p>
-            </div>
-          </div>
+        {/* Right Column (Desktop) / Top (Mobile) - Central Illustration */}
+        <div className="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+          {/* Background Glow Effect */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-hero opacity-10 blur-[80px] rounded-full pointer-events-none"></div>
 
-          <div className="flex gap-5 group">
-            <div className="w-14 h-14 bg-dark-card rounded-2xl flex items-center justify-center shrink-0 border border-dark-border group-hover:border-primary-blue/50 transition-colors shadow-lg">
-              <span className="text-2xl group-hover:scale-110 transition-transform">💻</span>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-primary-blue transition-colors">Nos Propres Services</h3>
-              <p className="text-text-secondary leading-relaxed">
-                Nous ne somme pas qu'une plateforme, nous sommes aussi prestataires : Développement web, applications mobiles, marketing digital pour votre business.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-5 group">
-            <div className="w-14 h-14 bg-dark-card rounded-2xl flex items-center justify-center shrink-0 border border-dark-border group-hover:border-primary-orange/50 transition-colors shadow-lg">
-              <span className="text-2xl group-hover:scale-110 transition-transform">🚀</span>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-primary-orange transition-colors">Innovation Sociale</h3>
-              <p className="text-text-secondary leading-relaxed">
-                Notre application d'identification révolutionne la confiance en Côte d'Ivoire. Nous vérifions et certifions chaque prestataire pour la sécurité de tous.
-              </p>
-            </div>
-          </div>
+          <motion.div
+            className="relative z-10 w-full max-w-lg"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <img
+              src={ecosystemImage}
+              alt="Écosystème Soutrali Deals"
+              className="w-full h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+            />
+          </motion.div>
         </div>
+
       </div>
     </SectionWrapper>
   );

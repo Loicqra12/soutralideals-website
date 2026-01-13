@@ -5,7 +5,7 @@ interface SectionWrapperProps {
   children: React.ReactNode;
   id?: string;
   className?: string;
-  bg?: 'transparent' | 'dark' | 'glass';
+  bg?: 'transparent' | 'dark' | 'glass' | 'white' | 'gradient-brand';
 }
 
 export const SectionWrapper = ({
@@ -18,6 +18,8 @@ export const SectionWrapper = ({
     transparent: 'bg-transparent',
     dark: 'bg-dark-bg',
     glass: 'backdrop-blur-lg bg-dark-card/20',
+    white: 'bg-white',
+    'gradient-brand': 'bg-gradient-to-br from-primary-green to-primary-blue',
   };
 
   return (

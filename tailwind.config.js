@@ -11,13 +11,13 @@ export default {
         'primary-green': 'hsl(142, 71%, 45%)',
         'primary-blue': 'hsl(217, 91%, 60%)',
         'primary-orange': 'hsl(27, 96%, 55%)',
-        'gold-premium': 'hsl(45, 100%, 51%)',
-        
+        'gold-premium': 'hsl(45, 69%, 42%)',  // #D4AF37 - Or mat élégant
+
         // Dark Mode
         'dark-bg': 'hsl(220, 26%, 8%)',
         'dark-card': 'hsl(220, 20%, 12%)',
         'dark-border': 'hsl(220, 20%, 20%)',
-        
+
         // Text
         'text-light': 'hsl(0, 0%, 98%)',
         'text-secondary': 'hsl(0, 0%, 70%)',
