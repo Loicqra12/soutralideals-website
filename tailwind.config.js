@@ -10,7 +10,7 @@ export default {
         // Ivorian Premium Palette
         'primary-green': 'hsl(142, 71%, 45%)',
         'primary-blue': 'hsl(217, 91%, 60%)',
-        'primary-orange': 'hsl(27, 96%, 55%)',
+        // 'primary-orange': 'hsl(27, 96%, 55%)', // REMOVED
         'gold-premium': 'hsl(45, 69%, 42%)',  // #D4AF37 - Or mat élégant
 
         // Dark Mode
@@ -59,7 +59,7 @@ export default {
       },
       backgroundImage: {
         'gradient-hero': 'linear-gradient(135deg, hsl(142, 71%, 45%), hsl(217, 91%, 60%))',
-        'gradient-cta': 'linear-gradient(90deg, hsl(27, 96%, 55%), hsl(27, 96%, 65%))',
+        'gradient-cta': 'linear-gradient(90deg, hsl(45, 69%, 42%), hsl(45, 69%, 52%))',
         'gradient-card': 'linear-gradient(135deg, hsl(220, 20%, 12%), hsl(220, 20%, 16%))',
       },
     },

@@ -63,7 +63,7 @@ export const WebDashboard = () => {
                                 {/* Stats Cards */}
                                 <div className="grid grid-cols-3 gap-3">
                                     <div className="h-24 bg-dark-card border border-dark-border rounded-lg p-3">
-                                        <div className="w-8 h-8 rounded bg-primary-orange/20 mb-2"></div>
+                                        <div className="w-8 h-8 rounded bg-gold-premium/20 mb-2"></div>
                                         <div className="h-4 bg-dark-border/30 rounded w-1/2"></div>
                                     </div>
                                     <div className="h-24 bg-dark-card border border-dark-border rounded-lg p-3">

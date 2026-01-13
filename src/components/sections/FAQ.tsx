@@ -58,7 +58,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: { question: string, answ
     return (
         <motion.div
             initial={false}
-            className={`border border-gray-200 rounded-xl overflow-hidden mb-4 transition-all duration-300 ${isOpen ? 'bg-white shadow-lg border-primary-orange/30' : 'bg-gray-50 hover:bg-white'}`}
+            className={`border border-gray-200 rounded-xl overflow-hidden mb-4 transition-all duration-300 ${isOpen ? 'bg-white shadow-lg border-gold-premium/30' : 'bg-gray-50 hover:bg-white'}`}
         >
             <button
                 onClick={onClick}
@@ -67,7 +67,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: { question: string, answ
                 <span className={`font-bold text-lg ${isOpen ? 'text-gray-900' : 'text-gray-700'}`}>
                     {question}
                 </span>
-                <div className={`p-2 rounded-full transition-colors ${isOpen ? 'bg-primary-orange text-white' : 'bg-gray-200 text-gray-500'}`}>
+                <div className={`p-2 rounded-full transition-colors ${isOpen ? 'bg-gold-premium text-white' : 'bg-gray-200 text-gray-500'}`}>
                     {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                 </div>
             </button>
@@ -95,11 +95,11 @@ export const FAQ = () => {
     return (
         <SectionWrapper id="faq" bg="white" className="py-20">
             <div className="text-center mb-16">
-                <div className="inline-flex items-center justify-center p-3 bg-primary-orange/10 text-primary-orange rounded-xl mb-4">
+                <div className="inline-flex items-center justify-center p-3 bg-gold-premium/10 text-gold-premium rounded-xl mb-4">
                     <HelpCircle className="w-8 h-8" />
                 </div>
                 <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 text-gray-900">
-                    Questions <span className="text-primary-orange">Fréquentes</span>
+                    Questions <span className="text-gold-premium">Fréquentes</span>
                 </h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                     Tout ce que vous devez savoir sur l'écosystème Soutrali Deals.

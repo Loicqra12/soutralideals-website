@@ -5,17 +5,18 @@
 @tailwind utilities;
 
 @layer base {
+
   /* CSS Variables for theming */
   :root {
     --primary-green: 142 71% 45%;
     --primary-blue: 217 91% 60%;
-    --primary-orange: 27 96% 55%;
+    /* --primary-orange: 27 96% 55%; REMOVED */
     --gold-premium: 45 69% 42%;
-    
+
     --dark-bg: 220 26% 8%;
     --dark-card: 220 20% 12%;
     --dark-border: 220 20% 20%;
-    
+
     --text-light: 0 0% 98%;
     --text-secondary: 0 0% 70%;
     --text-muted: 0 0% 50%;
@@ -30,7 +31,12 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-bold;
   }
 
@@ -58,6 +64,7 @@
 }
 
 @layer components {
+
   /* Container */
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -113,8 +120,8 @@
     @apply bg-primary-blue/20 text-primary-blue border border-primary-blue/50;
   }
 
-  .badge-orange {
-    @apply bg-primary-orange/20 text-primary-orange border border-primary-orange/50;
+  .badge-gold {
+    @apply bg-gold-premium/20 text-gold-premium border border-gold-premium/50;
   }
 
   /* Glow effects */
@@ -126,12 +133,13 @@
     box-shadow: 0 0 40px hsla(217, 91%, 60%, 0.3);
   }
 
-  .glow-orange {
-    box-shadow: 0 0 40px hsla(27, 96%, 55%, 0.3);
+  .glow-gold {
+    box-shadow: 0 0 40px hsla(45, 69%, 42%, 0.3);
   }
 }
 
 @layer utilities {
+
   /* Text utilities */
   .text-balance {
     text-wrap: balance;

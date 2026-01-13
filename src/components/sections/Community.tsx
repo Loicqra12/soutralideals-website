@@ -109,14 +109,14 @@ export const Community = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.4 }}
                         >
-                            <div className="w-12 h-12 rounded-xl bg-primary-orange/10 flex items-center justify-center text-primary-orange group-hover:scale-110 transition-transform">
+                            <div className="w-12 h-12 rounded-xl bg-gold-premium/10 flex items-center justify-center text-gold-premium group-hover:scale-110 transition-transform">
                                 <ShoppingBag className="w-6 h-6" />
                             </div>
                             <div>
-                                <h4 className="font-bold text-lg text-gray-900 group-hover:text-primary-orange transition-colors">Pour les Commerçants</h4>
+                                <h4 className="font-bold text-lg text-gray-900 group-hover:text-gold-premium transition-colors">Pour les Commerçants</h4>
                                 <p className="text-sm text-gray-600">E-commerçants, Boutiques...</p>
                             </div>
-                            <ArrowRight className="w-5 h-5 text-gray-400 ml-auto group-hover:text-primary-orange transition-colors group-hover:translate-x-1" />
+                            <ArrowRight className="w-5 h-5 text-gray-400 ml-auto group-hover:text-gold-premium transition-colors group-hover:translate-x-1" />
                         </motion.div>
                     </div>
                 </div>

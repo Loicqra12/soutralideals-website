@@ -7,7 +7,7 @@ export const Newsletter = () => {
             <div className="max-w-4xl mx-auto">
                 <div className="bg-white rounded-3xl p-8 md:p-16 shadow-2xl text-center relative overflow-hidden">
                     {/* Decorative Circles */}
-                    <div className="absolute top-0 left-0 w-32 h-32 bg-primary-orange/20 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
+                    <div className="absolute top-0 left-0 w-32 h-32 bg-gold-premium/20 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
                     <div className="absolute bottom-0 right-0 w-32 h-32 bg-primary-blue/20 rounded-full translate-x-1/2 translate-y-1/2 blur-2xl"></div>
 
                     <div className="relative z-10">
@@ -29,7 +29,7 @@ export const Newsletter = () => {
                                 placeholder="Ton adresse email"
                                 className="flex-1 px-6 py-4 rounded-full bg-gray-100 border border-gray-200 focus:outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 text-gray-900 placeholder-gray-500"
                             />
-                            <button className="bg-black hover:bg-gray-900 text-primary-orange font-bold uppercase tracking-wider py-4 px-8 rounded-full transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg">
+                            <button className="bg-black hover:bg-gray-900 text-gold-premium font-bold uppercase tracking-wider py-4 px-8 rounded-full transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg">
                                 S'inscrire <ArrowRight className="w-5 h-5" />
                             </button>
                         </form>

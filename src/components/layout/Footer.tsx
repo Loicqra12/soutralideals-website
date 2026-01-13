@@ -26,7 +26,7 @@ export const Footer = () => {
                             <a href="#" className="w-10 h-10 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center text-text-secondary hover:text-cyan-400 hover:border-cyan-400 transition-all">
                                 <Twitter className="w-5 h-5" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center text-text-secondary hover:text-primary-orange hover:border-primary-orange transition-all">
+                            <a href="#" className="w-10 h-10 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center text-text-secondary hover:text-gold-premium hover:border-gold-premium transition-all">
                                 <Instagram className="w-5 h-5" />
                             </a>
                             <a href="#" className="w-10 h-10 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center text-text-secondary hover:text-blue-700 hover:border-blue-700 transition-all">
@@ -69,9 +69,9 @@ export const Footer = () => {
                             <input
                                 type="email"
                                 placeholder="Votre email"
-                                className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-orange transition-colors"
+                                className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-premium transition-colors"
                             />
-                            <Button className="w-full bg-primary-orange hover:bg-orange-600 text-white border-none">
+                            <Button className="w-full bg-gold-premium hover:bg-yellow-600 text-white border-none">
                                 S'abonner
                             </Button>
                         </form>

@@ -55,11 +55,11 @@ export const Testimonials = () => {
     return (
         <SectionWrapper id="avis" bg="dark" className="relative group">
             {/* Background Decoration */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary-orange/5 rounded-full blur-[100px] pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gold-premium/5 rounded-full blur-[100px] pointer-events-none"></div>
 
             <div className="text-center mb-16 relative z-10">
                 <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 text-white">
-                    Ce qu'ils disent de <span className="text-primary-orange">Nous</span>
+                    Ce qu'ils disent de <span className="text-gold-premium">Nous</span>
                 </h2>
                 <p className="text-lg text-text-secondary max-w-2xl mx-auto">
                     La satisfaction de notre communauté est notre plus belle réussite.
@@ -70,14 +70,14 @@ export const Testimonials = () => {
                 {/* Navigation Buttons */}
                 <button
                     onClick={prev}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-dark-card border border-dark-border text-white hover:bg-primary-orange hover:border-primary-orange transition-all duration-300 shadow-lg group-hover:opacity-100 opacity-0 sm:opacity-100"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-dark-card border border-dark-border text-white hover:bg-gold-premium hover:border-gold-premium transition-all duration-300 shadow-lg group-hover:opacity-100 opacity-0 sm:opacity-100"
                 >
                     <ChevronLeft className="w-6 h-6" />
                 </button>
 
                 <button
                     onClick={next}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-dark-card border border-dark-border text-white hover:bg-primary-orange hover:border-primary-orange transition-all duration-300 shadow-lg group-hover:opacity-100 opacity-0 sm:opacity-100"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-dark-card border border-dark-border text-white hover:bg-gold-premium hover:border-gold-premium transition-all duration-300 shadow-lg group-hover:opacity-100 opacity-0 sm:opacity-100"
                 >
                     <ChevronRight className="w-6 h-6" />
                 </button>
@@ -92,14 +92,14 @@ export const Testimonials = () => {
                             transition={{ duration: 0.5 }}
                             className="bg-dark-card border border-dark-border p-8 md:p-12 rounded-2xl relative shadow-2xl w-full"
                         >
-                            <Quote className="absolute top-8 left-8 w-12 h-12 text-primary-orange/20" />
+                            <Quote className="absolute top-8 left-8 w-12 h-12 text-gold-premium/20" />
 
                             <div className="flex flex-col items-center text-center">
                                 <div className="flex gap-1 mb-6">
                                     {[...Array(5)].map((_, i) => (
                                         <Star
                                             key={i}
-                                            className={`w-5 h-5 ${i < testimonials[currentIndex].rating ? 'text-primary-orange fill-primary-orange' : 'text-gray-600'}`}
+                                            className={`w-5 h-5 ${i < testimonials[currentIndex].rating ? 'text-gold-premium fill-gold-premium' : 'text-gray-600'}`}
                                         />
                                     ))}
                                 </div>
@@ -127,7 +127,7 @@ export const Testimonials = () => {
                         <button
                             key={index}
                             onClick={() => setCurrentIndex(index)}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-primary-orange w-8' : 'bg-gray-600 hover:bg-gray-400'
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-gold-premium w-8' : 'bg-gray-600 hover:bg-gray-400'
                                 }`}
                         />
                     ))}

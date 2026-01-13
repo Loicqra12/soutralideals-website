@@ -6,7 +6,7 @@ interface PricingItemProps {
   price: string;
   features: string[];
   icon: React.ReactNode;
-  variant?: 'green' | 'blue' | 'orange' | 'gold';
+  variant?: 'green' | 'blue' | 'gold';
   onAction?: () => void;
 }
 
@@ -31,12 +31,6 @@ export const PricingCard = ({
       iconBg: 'bg-primary-blue/10',
       iconColor: 'text-primary-blue',
       button: 'bg-primary-blue hover:bg-blue-600'
-    },
-    orange: {
-      border: 'hover:border-primary-orange',
-      iconBg: 'bg-primary-orange/10',
-      iconColor: 'text-primary-orange',
-      button: 'bg-primary-orange hover:bg-orange-600'
     },
     gold: {
       border: 'hover:border-gold-premium',

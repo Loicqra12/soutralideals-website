@@ -65,7 +65,7 @@ export const Events = () => {
 
             <div className="relative max-w-5xl mx-auto">
                 {/* Vertical Line */}
-                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-green via-primary-blue to-primary-orange md:-translate-x-1/2 opacity-30"></div>
+                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-green via-primary-blue to-gold-premium md:-translate-x-1/2 opacity-30"></div>
 
                 <div className="space-y-12">
                     {events.map((event, index) => (
@@ -118,7 +118,7 @@ export const Events = () => {
 
                             {/* Image */}
                             <div className="ml-12 md:ml-0 md:w-1/2 w-full flex justify-center">
-                                <div className="relative w-full max-w-sm aspect-video rounded-xl overflow-hidden border border-dark-border group-hover:border-primary-orange/50 transition-all shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-500">
+                                <div className="relative w-full max-w-sm aspect-video rounded-xl overflow-hidden border border-dark-border group-hover:border-gold-premium/50 transition-all shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-500">
                                     <div className="absolute inset-0 bg-primary-blue/20 mix-blend-overlay z-10"></div>
                                     <img
                                         src={event.image}

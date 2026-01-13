@@ -96,12 +96,12 @@ export const Portfolio = () => {
         <SectionWrapper id="portfolio" bg="white" className="relative">
             {/* Transition Elements (Floating Shapes) */}
             <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-dark-bg to-transparent opacity-10 pointer-events-none"></div>
-            <div className="absolute -left-20 top-40 w-72 h-72 bg-primary-orange/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute -left-20 top-40 w-72 h-72 bg-gold-premium/5 rounded-full blur-3xl pointer-events-none"></div>
             <div className="absolute -right-20 bottom-40 w-72 h-72 bg-primary-blue/5 rounded-full blur-3xl pointer-events-none"></div>
 
             <div className="text-center max-w-4xl mx-auto mb-16 relative z-10">
                 <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 text-gray-900">
-                    Nos <span className="text-primary-orange">Réalisations</span>
+                    Nos <span className="text-gold-premium">Réalisations</span>
                 </h2>
                 <p className="text-lg text-gray-600">
                     Découvrez les projets technologiques que nous développons pour l'écosystème ivoirien.
@@ -115,8 +115,8 @@ export const Portfolio = () => {
                         key={cat}
                         onClick={() => setActiveCategory(cat)}
                         className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${activeCategory === cat
-                            ? 'bg-primary-orange text-white border-primary-orange shadow-lg shadow-primary-orange/20'
-                            : 'bg-gray-100 text-gray-500 border-gray-200 hover:border-primary-orange/50 hover:text-primary-orange'
+                            ? 'bg-gold-premium text-white border-gold-premium shadow-lg shadow-gold-premium/20'
+                            : 'bg-gray-100 text-gray-500 border-gray-200 hover:border-gold-premium/50 hover:text-gold-premium'
                             }`}
                     >
                         {cat}
@@ -138,7 +138,7 @@ export const Portfolio = () => {
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            className="group relative bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-primary-orange/50 transition-all duration-300 cursor-pointer shadow-lg shadow-gray-200/50 hover:shadow-xl hover:shadow-primary-orange/10"
+                            className="group relative bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-gold-premium/50 transition-all duration-300 cursor-pointer shadow-lg shadow-gray-200/50 hover:shadow-xl hover:shadow-gold-premium/10"
                             onClick={() => setSelectedProject(project)}
                         >
                             {/* Image Container */}
@@ -152,7 +152,7 @@ export const Portfolio = () => {
 
                                 {/* Overlay Icon */}
                                 <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur-md p-2 rounded-lg border border-white/50 shadow-sm">
-                                    {project.category === 'Mobile' && <Smartphone className="w-5 h-5 text-primary-orange" />}
+                                    {project.category === 'Mobile' && <Smartphone className="w-5 h-5 text-gold-premium" />}
                                     {project.category === 'Web' && <Globe className="w-5 h-5 text-primary-blue" />}
                                     {project.category === 'Dashboard' && <LayoutDashboard className="w-5 h-5 text-primary-green" />}
                                 </div>
@@ -160,7 +160,7 @@ export const Portfolio = () => {
 
                             {/* Content */}
                             <div className="p-6 relative z-20">
-                                <h3 className="text-2xl font-bold mb-2 text-gray-900 group-hover:text-primary-orange transition-colors">
+                                <h3 className="text-2xl font-bold mb-2 text-gray-900 group-hover:text-gold-premium transition-colors">
                                     {project.title}
                                 </h3>
                                 <p className="text-gray-500 mb-4 line-clamp-2">
@@ -176,7 +176,7 @@ export const Portfolio = () => {
                                 </div>
 
                                 <div className="flex gap-4">
-                                    <button className="flex items-center gap-2 text-sm font-bold text-gray-900 hover:text-primary-orange transition-colors">
+                                    <button className="flex items-center gap-2 text-sm font-bold text-gray-900 hover:text-gold-premium transition-colors">
                                         <ExternalLink className="w-4 h-4" /> Voir détails
                                     </button>
                                 </div>
@@ -247,7 +247,7 @@ export const Portfolio = () => {
                                 </div>
 
                                 <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-100">
-                                    <button className="flex-1 bg-primary-orange hover:bg-orange-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-primary-orange/20">
+                                    <button className="flex-1 bg-gold-premium hover:bg-yellow-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-gold-premium/20">
                                         <ExternalLink className="w-5 h-5" /> Voir le site
                                     </button>
                                     <button className="flex-1 bg-gray-50 border border-gray-200 hover:border-gray-300 text-gray-700 font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors">

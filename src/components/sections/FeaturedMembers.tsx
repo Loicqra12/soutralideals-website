@@ -25,7 +25,7 @@ const members: Member[] = [
         role: "Designer UX/UI",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
         quote: "J'adore l'ambiance d'entraide. On apprend tous les jours des autres.",
-        color: "bg-primary-orange"
+        color: "bg-gold-premium"
     },
     {
         id: 3,

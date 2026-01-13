@@ -14,14 +14,14 @@ export const ProjectPresentation = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-orange/10 border border-primary-orange/20 mb-6">
-                        <span className="w-2 h-2 rounded-full bg-primary-orange animate-pulse"></span>
-                        <span className="text-sm font-bold text-primary-orange">Solution Complète</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-premium/10 border border-gold-premium/20 mb-6">
+                        <span className="w-2 h-2 rounded-full bg-gold-premium animate-pulse"></span>
+                        <span className="text-sm font-bold text-gold-premium">Solution Complète</span>
                     </div>
 
                     <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
                         La Technologie au Service <br />
-                        de <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-orange to-gold-premium">L'Informel</span>
+                        de <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-premium to-yellow-400">L'Informel</span>
                     </h2>
 
                     <p className="text-lg text-text-secondary leading-relaxed mb-8">
@@ -31,7 +31,7 @@ export const ProjectPresentation = () => {
 
                     <div className="grid sm:grid-cols-2 gap-6">
                         <div className="flex gap-4">
-                            <div className="w-10 h-10 rounded-lg bg-primary-orange/10 flex items-center justify-center text-primary-orange shrink-0">
+                            <div className="w-10 h-10 rounded-lg bg-gold-premium/10 flex items-center justify-center text-gold-premium shrink-0">
                                 <Smartphone className="w-5 h-5" />
                             </div>
                             <div>
@@ -77,11 +77,11 @@ export const ProjectPresentation = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-orange/5 to-primary-blue/5"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-gold-premium/5 to-primary-blue/5"></div>
 
                     {/* Center Circle */}
                     <div className="w-32 h-32 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center z-20 shadow-2xl relative">
-                        <img src="/logo.png" alt="Soutrali" className="w-16 h-16 object-contain opacity-80" onError={(e) => e.currentTarget.src = 'https://placehold.co/64x64/orange/white?text=SD'} />
+                        <img src="/logo.png" alt="Soutrali" className="w-16 h-16 object-contain opacity-80" onError={(e) => e.currentTarget.src = 'https://placehold.co/64x64/gold/white?text=SD'} />
 
                         {/* Orbiting Elements */}
                         <motion.div
@@ -89,7 +89,7 @@ export const ProjectPresentation = () => {
                             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                             className="absolute inset-0 w-full h-full"
                         >
-                            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-12 h-12 bg-dark-card border border-primary-orange/30 rounded-xl flex items-center justify-center text-primary-orange shadow-lg">
+                            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-12 h-12 bg-dark-card border border-gold-premium/30 rounded-xl flex items-center justify-center text-gold-premium shadow-lg">
                                 <Smartphone className="w-6 h-6" />
                             </div>
                         </motion.div>

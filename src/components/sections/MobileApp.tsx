@@ -5,7 +5,7 @@ import { Button } from '../ui/Button';
 
 const features = [
     {
-        icon: <MapPin className="w-6 h-6 text-primary-orange" />,
+        icon: <MapPin className="w-6 h-6 text-gold-premium" />,
         title: "Géolocalisation",
         description: "Trouvez les prestataires disponibles autour de vous en temps réel."
     },
@@ -59,7 +59,7 @@ export const MobileApp = () => {
 
                             {/* Floating Elements Animation */}
                             <motion.div
-                                className="absolute bottom-20 right-4 bg-primary-orange text-white p-3 rounded-full shadow-lg"
+                                className="absolute bottom-20 right-4 bg-gold-premium text-white p-3 rounded-full shadow-lg"
                                 animate={{ y: [0, -10, 0] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
@@ -69,14 +69,14 @@ export const MobileApp = () => {
                     </div>
 
                     {/* Background Blobs */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[650px] bg-primary-orange/20 blur-[100px] -z-10 rounded-full"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[650px] bg-gold-premium/20 blur-[100px] -z-10 rounded-full"></div>
                 </motion.div>
 
                 {/* Right: Features List */}
                 <div>
                     <h2 className="text-3xl md:text-5xl font-heading font-bold mb-8">
                         L'Application <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-orange via-primary-orange to-yellow-400">Tout-en-Un</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-premium via-gold-premium to-yellow-400">Tout-en-Un</span>
                     </h2>
 
                     <div className="space-y-8">
