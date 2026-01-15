@@ -4,6 +4,112 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 
+// Sous-menu Services definition
+const serviceLinks = [
+  { name: "Dév & Produits", path: "/services/developpement-produits", desc: "Apps Web, Mobile & SaaS" },
+  { name: "Solutions Métiers", path: "/services/solutions-metiers", desc: "ERP, CRM & Automatisation" },
+  { name: "Stratégie & Conseil", path: "/services/strategie-conseil", desc: "Audit, Architecture, CTO" },
+  { name: "Design & Branding", path: "/services/design-branding", desc: "UI/UX, Identité Visuelle" },
+  { name: "Marketing & Formation", path: "/services/marketing-formation", desc: "Acquisition & Montée en compétence" },
+];
+
+function NavItem({ link }: { link: any }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const location = useLocation();
+  const isActive = location.pathname === link.path || (link.path === '/services' && location.pathname.startsWith('/services'));
+
+  if (link.name === "Services") {
+    return (
+      <div
+        className="relative group h-full flex items-center"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <NavLink
+          to={link.path}
+          className={`
+              px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative flex items-center gap-1
+              ${isActive
+              ? 'text-white font-bold'
+              : 'text-white/80 hover:text-white'
+            }
+            `}
+        >
+          {link.name}
+          {/* Petit indicateur dropdown */}
+          <svg className={`w-3 h-3 transition-transform duration-300 ${isHovered ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+
+          {isActive && (
+            <motion.div
+              layoutId="nav-pill"
+              className="absolute inset-0 bg-white/20 backdrop-blur-sm rounded-full -z-10"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
+          )}
+        </NavLink>
+
+        {/* Dropdown Menu */}
+        <AnimatePresence>
+          {isHovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.15 }}
+              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-dark-card/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl overflow-hidden p-2 z-50 ring-1 ring-black/5"
+            >
+              <div className="flex flex-col gap-1">
+                {serviceLinks.map((subLink) => (
+                  <Link
+                    key={subLink.name}
+                    to={subLink.path}
+                    className="block p-3 rounded-xl hover:bg-white/10 transition-colors group/item"
+                  >
+                    <div className="text-sm font-bold text-white group-hover/item:text-gold-premium transition-colors">
+                      {subLink.name}
+                    </div>
+                    <div className="text-xs text-text-muted mt-0.5">
+                      {subLink.desc}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+  return (
+    <NavLink
+      to={link.path}
+      className={({ isActive }) => `
+        px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative
+        ${isActive
+          ? 'text-white font-bold'
+          : 'text-white/80 hover:text-white'
+        }
+      `}
+    >
+      {({ isActive }) => (
+        <>
+          <span className="relative z-10">{link.name}</span>
+          {isActive && (
+            <motion.div
+              layoutId="nav-pill"
+              className="absolute inset-0 bg-white/20 backdrop-blur-sm rounded-full"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
+          )}
+        </>
+      )}
+    </NavLink>
+  );
+}
+
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,14 +125,8 @@ export const Navbar = () => {
   }, []);
 
   // Scroll to top on route change
-  // Gestion de la fermeture du menu mobile lors du changement de route
   useEffect(() => {
     window.scrollTo(0, 0);
-    // On laisse le changement de route fermer le menu via l'état si nécessaire, 
-    // mais ici on le force pour être sûr. Pour éviter le warning, on pourrait le faire dans un event handler
-    // mais le pattern courant est acceptable. Pour calmer le linter, on peut ignorer la ligne ou changer la logique.
-    // Une meilleure approche est d'utiliser un layout effect ou de laisser le composant Link gérer ça.
-    // Ici, on va simplement supprimer l'appel direct si possible ou le masquer car c'est un faux positif courant pour ce cas d'usage précis (reset UI on navigation).
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
@@ -56,7 +156,6 @@ export const Navbar = () => {
             className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
           />
           <span className="font-heading font-bold text-xl tracking-wide transition-colors">
-            {/* Toujours blanc sur fond coloré (gradient ou transparent vert) */}
             <span className="text-white group-hover:text-white/90">SOUTRALI DEALS</span>
           </span>
         </Link>
@@ -67,34 +166,11 @@ export const Navbar = () => {
           : 'bg-white/10 border-white/10'
           }`}>
           {navLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={({ isActive }) => `
-                px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative
-                ${isActive
-                  ? 'text-white font-bold'
-                  : 'text-white/80 hover:text-white'
-                }
-              `}
-            >
-              {({ isActive }) => (
-                <>
-                  <span className="relative z-10">{link.name}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-pill"
-                      className="absolute inset-0 bg-white/20 backdrop-blur-sm rounded-full"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                </>
-              )}
-            </NavLink>
+            <NavItem key={link.name} link={link} />
           ))}
         </div>
 
-        {/* Premium CTA Button - Or Mat Élégant */}
+        {/* Premium CTA Button */}
         <div className="hidden lg:block">
           <NavLink
             to="/contact"

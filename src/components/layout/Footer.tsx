@@ -1,6 +1,7 @@
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
 
 export const Footer = () => {
     return (
@@ -10,12 +11,16 @@ export const Footer = () => {
 
                     {/* Column 1: Brand */}
                     <div className="space-y-6">
-                        <div className="flex items-center gap-2">
-                            <img src="/logo.png" alt="Soutrali" className="w-10 h-10" onError={(e) => e.currentTarget.style.display = 'none'} />
-                            <span className="text-2xl font-heading font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-green to-primary-blue">
+                        <Link to="/" className="flex items-center gap-3 group w-fit">
+                            <img
+                                src={logo}
+                                alt="Soutrali Deals Logo"
+                                className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                            />
+                            <span className="text-2xl font-heading font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-green to-primary-blue group-hover:from-primary-blue group-hover:to-primary-green transition-all">
                                 Soutrali Deals
                             </span>
-                        </div>
+                        </Link>
                         <p className="text-text-muted leading-relaxed">
                             L'écosystème digital n°1 en Côte d'Ivoire pour connecter talents, innovations et opportunités.
                         </p>

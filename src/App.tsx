@@ -13,6 +13,13 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage').then(module => ({ d
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
 
+// Pages Services Premium
+const DevProductPage = lazy(() => import('./pages/services/DevProductPage').then(module => ({ default: module.DevProductPage })));
+const SolutionsToolsPage = lazy(() => import('./pages/services/SolutionsToolsPage').then(module => ({ default: module.SolutionsToolsPage })));
+const StrategyConsultingPage = lazy(() => import('./pages/services/StrategyConsultingPage').then(module => ({ default: module.StrategyConsultingPage })));
+const DesignBrandingPage = lazy(() => import('./pages/services/DesignBrandingPage').then(module => ({ default: module.DesignBrandingPage })));
+const MarketingFormationPage = lazy(() => import('./pages/services/MarketingFormationPage').then(module => ({ default: module.MarketingFormationPage })));
+
 /**
  * App.tsx refactorisé avec react-router-dom
  * Structure de routing principale
@@ -25,7 +32,16 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="ecosysteme" element={<EcosystemPage />} />
+            <Route path="ecosysteme" element={<EcosystemPage />} />
+
+            {/* Routes Services */}
             <Route path="services" element={<ServicesPage />} />
+            <Route path="services/developpement-produits" element={<DevProductPage />} />
+            <Route path="services/solutions-metiers" element={<SolutionsToolsPage />} />
+            <Route path="services/strategie-conseil" element={<StrategyConsultingPage />} />
+            <Route path="services/design-branding" element={<DesignBrandingPage />} />
+            <Route path="services/marketing-formation" element={<MarketingFormationPage />} />
+
             <Route path="realisations" element={<PortfolioPage />} />
             <Route path="communaute" element={<CommunityPage />} />
             <Route path="le-projet" element={<ProjectPage />} />
