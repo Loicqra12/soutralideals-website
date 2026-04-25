@@ -32,7 +32,7 @@ export const Hero = () => {
       <div className="container-custom relative z-10 grid md:grid-cols-2 gap-12 items-center">
 
         {/* Left Content */}
-        <div className="space-y-4 text-white pt-4 md:pt-10">
+        <div className="space-y-8 text-white pt-8 md:pt-10">
 
           {/* Badge Premium */}
           <motion.div
@@ -42,11 +42,11 @@ export const Hero = () => {
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 w-fit hover:bg-white/20 transition-colors cursor-default"
           >
             <span className="text-base">🇨🇮</span>
-            <span className="text-xs font-bold text-white tracking-wider">L'ÉCOSYSTÈME 100% IVOIRIEN</span>
+            <span className="text-xs font-bold text-white tracking-wide">L'ÉCOSYSTÈME 100% IVOIRIEN</span>
           </motion.div>
 
           <motion.h1
-            className="text-4xl md:text-6xl font-heading font-bold leading-tight"
+            className="text-4xl md:text-6xl font-heading font-bold leading-snug"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -65,13 +65,13 @@ export const Hero = () => {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-3 pt-2"
+            className="flex flex-wrap gap-4 pt-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <Button
-              className="text-dark-bg border-none rounded-full px-6 py-4 font-bold text-base hover:scale-105 transition-transform shadow-[0_0_30px_rgba(184,134,11,0.3)] hover:shadow-[0_0_50px_rgba(184,134,11,0.6)]"
+              className="text-dark-bg border-none rounded-full px-6 py-4 font-bold text-base hover:scale-105 transition-transform shadow-glow-gold hover:shadow-glow-gold-hover focus:outline-none focus:ring-2 focus:ring-gold-premium focus:ring-offset-2 focus:ring-offset-transparent"
               style={{
                 background: 'linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #CFB53B 100%)',
               }}
@@ -80,7 +80,7 @@ export const Hero = () => {
               Découvrir nos services
             </Button>
             <Button
-              className="bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full px-6 py-4 font-bold text-base hover:bg-white/20 hover:scale-105 transition-all"
+              className="bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full px-6 py-4 font-bold text-base hover:bg-white/20 hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
               onClick={() => scrollToSection('communaute')}
             >
               Rejoindre la communauté
@@ -88,18 +88,18 @@ export const Hero = () => {
           </motion.div>
 
           <motion.div
-            className="pt-4 space-y-3"
+            className="pt-6 space-y-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="flex items-center gap-3 opacity-80">
+            <div className="flex items-center gap-4 opacity-80">
               <div className="h-px w-8 bg-white/30"></div>
               <span className="text-xs font-medium text-white/80 uppercase tracking-widest">Disponible sur mobile</span>
               <div className="h-px w-8 bg-white/30"></div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-4">
               <Button
                 className="text-dark-bg rounded-full px-5 py-2.5 font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg text-sm"
                 style={{
@@ -113,25 +113,27 @@ export const Hero = () => {
 
               <div className="flex gap-2">
                 <motion.button
-                  className="bg-black/40 backdrop-blur-md border border-white/10 text-white px-3 py-2 rounded-xl flex items-center gap-2 hover:bg-black/60 transition-all hover:scale-105 hover:border-white/30"
+                  className="bg-black/40 backdrop-blur-md border border-white/10 text-white px-3 py-2 rounded-xl flex items-center gap-2 hover:bg-black/60 transition-all hover:scale-105 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Télécharger sur App Store"
                 >
                   <Apple className="w-5 h-5" />
                   <div className="text-left">
-                    <div className="text-[9px] opacity-70 leading-none">Télécharger sur</div>
-                    <div className="font-bold text-xs leading-none mt-0.5">App Store</div>
+                    <div className="text-xs opacity-70 leading-tight">Télécharger sur</div>
+                    <div className="font-bold text-sm leading-tight mt-0.5">App Store</div>
                   </div>
                 </motion.button>
                 <motion.button
-                  className="bg-black/40 backdrop-blur-md border border-white/10 text-white px-3 py-2 rounded-xl flex items-center gap-2 hover:bg-black/60 transition-all hover:scale-105 hover:border-white/30"
+                  className="bg-black/40 backdrop-blur-md border border-white/10 text-white px-3 py-2 rounded-xl flex items-center gap-2 hover:bg-black/60 transition-all hover:scale-105 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Télécharger sur Google Play"
                 >
                   <Play className="w-4 h-4 fill-current" />
                   <div className="text-left">
-                    <div className="text-[9px] opacity-70 leading-none">DISPONIBLE SUR</div>
-                    <div className="font-bold text-xs leading-none mt-0.5">Google Play</div>
+                    <div className="text-xs opacity-70 leading-tight">DISPONIBLE SUR</div>
+                    <div className="font-bold text-sm leading-tight mt-0.5">Google Play</div>
                   </div>
                 </motion.button>
               </div>
@@ -160,7 +162,8 @@ export const Hero = () => {
       >
         <button
           onClick={() => scrollToSection('ecosysteme')}
-          className="flex flex-col items-center gap-3 group"
+          className="flex flex-col items-center gap-4 group focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-lg p-2"
+          aria-label="Défiler vers le bas"
         >
           <div className="w-[30px] h-[50px] rounded-full border-2 border-white/30 flex justify-center p-2 backdrop-blur-sm group-hover:border-white/60 transition-colors">
             <motion.div
@@ -169,7 +172,7 @@ export const Hero = () => {
               className="w-1.5 h-1.5 bg-white rounded-full bg-gradient-to-b from-white to-white/50"
             />
           </div>
-          <span className="text-xs font-medium text-white/60 tracking-widest uppercase group-hover:text-white transition-colors">Défiler</span>
+          <span className="text-xs font-medium text-white/60 tracking-wide uppercase group-hover:text-white transition-colors">Défiler</span>
         </button>
       </motion.div>
 

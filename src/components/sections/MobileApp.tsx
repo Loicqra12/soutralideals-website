@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { MapPin, ShieldCheck, MessageSquare, Star } from 'lucide-react';
 import { Button } from '../ui/Button';
+import mobileImage from '../../assets/images/project/project_mobile_app.png';
 
 const features = [
     {
@@ -31,41 +32,22 @@ export const MobileApp = () => {
         <SectionWrapper id="mobile-app">
             <div className="grid md:grid-cols-2 gap-16 items-center">
 
-                {/* Left: Phone Mockup */}
+                {/* Left: Mobile App Image */}
                 <motion.div
                     className="relative flex justify-center"
-                    initial={{ opacity: 0, y: 50, rotate: -5 }}
-                    whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    {/* Phone Frame */}
-                    <div className="relative w-[300px] h-[600px] bg-black rounded-[3rem] border-8 border-gray-800 shadow-2xl overflow-hidden ring-4 ring-gray-900/50">
-                        {/* Notch */}
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-20"></div>
-
-                        {/* Screen Content Plder */}
-                        <div className="w-full h-full bg-dark-bg relative">
-                            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-dark-bg to-dark-card">
-                                <img src="/logo.png" alt="Soutrali" className="w-20 h-20 mb-4 opacity-50 grayscale" onError={(e) => e.currentTarget.style.display = 'none'} />
-                                <h3 className="text-xl font-bold text-white mb-2">Soutrali Deals</h3>
-                                <p className="text-sm text-text-secondary">L'interface utilisateur sera affichée ici.</p>
-
-                                {/* Fake UI Elements */}
-                                <div className="w-full h-32 bg-dark-border/30 rounded-xl mt-8 animate-pulse"></div>
-                                <div className="w-full h-16 bg-dark-border/30 rounded-xl mt-4 animate-pulse delay-100"></div>
-                                <div className="w-full h-16 bg-dark-border/30 rounded-xl mt-4 animate-pulse delay-200"></div>
-                            </div>
-
-                            {/* Floating Elements Animation */}
-                            <motion.div
-                                className="absolute bottom-20 right-4 bg-gold-premium text-white p-3 rounded-full shadow-lg"
-                                animate={{ y: [0, -10, 0] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                            >
-                                <MapPin className="w-6 h-6" />
-                            </motion.div>
-                        </div>
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-dark-border group">
+                        <img
+                            src={mobileImage}
+                            alt="Application Mobile Soutrali Deals - Android et iOS"
+                            className="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-500"
+                            loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                     </div>
 
                     {/* Background Blobs */}
@@ -100,7 +82,7 @@ export const MobileApp = () => {
                         ))}
                     </div>
 
-                    <div className="mt-10 pt-8 border-t border-dark-border flex gap-4">
+                    <div className="mt-8 pt-8 border-t border-dark-border flex gap-4">
                         <Button className="bg-white text-black hover:bg-gray-200 rounded-full font-bold">
                             App Store
                         </Button>

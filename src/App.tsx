@@ -12,6 +12,7 @@ const CommunityPage = lazy(() => import('./pages/CommunityPage').then(module => 
 const ProjectPage = lazy(() => import('./pages/ProjectPage').then(module => ({ default: module.ProjectPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 // Pages Services Premium
 const DevProductPage = lazy(() => import('./pages/services/DevProductPage').then(module => ({ default: module.DevProductPage })));
@@ -32,7 +33,6 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="ecosysteme" element={<EcosystemPage />} />
-            <Route path="ecosysteme" element={<EcosystemPage />} />
 
             {/* Routes Services */}
             <Route path="services" element={<ServicesPage />} />
@@ -47,6 +47,7 @@ function App() {
             <Route path="le-projet" element={<ProjectPage />} />
             <Route path="a-propos" element={<AboutPage />} />
             <Route path="contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Suspense>

@@ -1,135 +1,239 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
-import { Calendar, Award, MapPin } from 'lucide-react';
+import { Calendar, Award, MapPin, Code, Building2, GraduationCap, Monitor } from 'lucide-react';
+import orangeFabImage from '../../assets/images/community/events/event-orange-fab-2025.jpg';
+import imphackImage from '../../assets/images/community/events/event-imphack-2023.jpg';
+import scredImage from '../../assets/images/community/events/event-scred-2025.jpg';
+import pejedecImage from '../../assets/images/community/events/event-pejedec-cipme3.jpg';
+import salonTechImage from '../../assets/images/community/events/event-salon-technologie-2025.jpg';
 
 interface Event {
     id: number;
     date: string;
     title: string;
-    category: 'Hackathon' | 'Meetup' | 'Award' | 'Bootcamp';
+    category: 'Hackathon' | 'Salon' | 'Programme' | 'Tech';
     location: string;
     image: string;
     description: string;
+    impact: string[];
+    icon: React.ElementType;
+    color: string;
 }
 
 const events: Event[] = [
     {
         id: 1,
-        date: "15 Juin 2024",
-        title: "Vainqueur du Hackathon Digital CI",
-        category: "Award",
-        location: "Abidjan, Sofitel Ivoire",
-        image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=800",
-        description: "1er prix catégorie Innovation Sociale pour notre solution d'identification des prestataires."
+        date: "2025",
+        title: "Hackathon Orange Fab 2025",
+        category: "Hackathon",
+        location: "Abidjan, Côte d'Ivoire",
+        image: orangeFabImage,
+        icon: Code,
+        color: "text-primary-blue",
+        description: "Soutrali Deals a participé au prestigieux Hackathon Orange Fab 2025, l'un des plus grands événements tech d'Afrique de l'Ouest. Organisé par Orange Digital Center, cet hackathon rassemble les meilleurs développeurs, designers et entrepreneurs autour de défis innovants pour la transformation digitale.",
+        impact: [
+            "Présence auprès de leaders tech internationaux",
+            "Réseautage avec startups ambitieuses",
+            "Partage de notre vision numérique inclusive",
+            "Validation de nos solutions par des experts"
+        ]
     },
     {
         id: 2,
-        date: "2 Mai 2024",
-        title: "Meetup Soutraliens #3",
-        category: "Meetup",
-        location: "Cocody, Orange Digital Center",
-        image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=800",
-        description: "Rencontre mensuelle avec plus de 50 freelances pour échanger sur les bonnes pratiques."
+        date: "Janvier 2023",
+        title: "Hackathon IMP'HACK (Impact Hub + 1XBET)",
+        category: "Hackathon",
+        location: "Abidjan, Côte d'Ivoire",
+        image: imphackImage,
+        icon: Code,
+        color: "text-primary-green",
+        description: "Participation à IMP'HACK, un hackathon d'envergure organisé par Impact Hub Abidjan en collaboration avec 1XBET. Cet événement visait à encourager des solutions innovantes axées sur l'inclusion financière, l'éducation numérique et le développement économique local.",
+        impact: [
+            "Développement de compétences tech avancées",
+            "Collaboration avec la communauté startup locale",
+            "Renforcement de l'écosystème d'innovation ivoirien",
+            "Visibilité médiatique et réseautage stratégique"
+        ]
     },
     {
         id: 3,
-        date: "20 Avril 2024",
-        title: "Bootcamp Fullstack JS",
-        category: "Bootcamp",
-        location: "Marcory, INP-HB",
-        image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=800",
-        description: "Formation intensive de 3 jours pour apprendre à créer des applications web modernes."
+        date: "2025",
+        title: "SCRED – Salon du Crédit & Financement",
+        category: "Salon",
+        location: "Abidjan, Côte d'Ivoire",
+        image: scredImage,
+        icon: Building2,
+        color: "text-gold-premium",
+        description: "Présence au Salon du Crédit et du Financement de Côte d'Ivoire (SCRED), un événement majeur dédié à l'accès au financement des PME et startups. SCRED réunit les principaux acteurs financiers, banques, fintechs, investisseurs et entrepreneurs pour booster l'inclusion financière.",
+        impact: [
+            "Rencontre avec investisseurs et institutions financières",
+            "Mise en avant de services digitaux adaptés aux PME",
+            "Opportunités de partenariats stratégiques",
+            "Validation de notre modèle économique"
+        ]
     },
     {
         id: 4,
-        date: "10 Mars 2024",
-        title: "Lancement Bêta Privée",
-        category: "Hackathon",
-        location: "En ligne",
-        image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
-        description: "Phase de test avec 100 bêta-testeurs sélectionnés pour valider l'UX de l'application."
+        date: "2023-2025",
+        title: "PEJEDEC CIPME 3 – Accompagnement des Jeunes Entrepreneurs",
+        category: "Programme",
+        location: "Côte d'Ivoire",
+        image: pejedecImage,
+        icon: GraduationCap,
+        color: "text-primary-green",
+        description: "Participation active au Projet Emploi Jeune et Développement des Compétences (PEJEDEC 3) — programme national d'accompagnement à l'entrepreneuriat, à la création d'entreprise, et à la formation professionnelle pour les jeunes. Plus de 200 jeunes entrepreneurs ont bénéficié de nos formations.",
+        impact: [
+            "Soutien à l'employabilité numérique des jeunes",
+            "Formation et coaching pour startups en devenir",
+            "Renforcement des compétences entrepreneuriales",
+            "Création d'un réseau de jeunes entrepreneurs"
+        ]
+    },
+    {
+        id: 5,
+        date: "2025",
+        title: "Salon de la Technologie – Abidjan",
+        category: "Tech",
+        location: "Abidjan, Côte d'Ivoire",
+        image: salonTechImage,
+        icon: Monitor,
+        color: "text-primary-blue",
+        description: "Participation au Salon de la Technologie d'Abidjan, l'événement phare de l'innovation technologique en Côte d'Ivoire. Soutrali Deals y a présenté sa plateforme complète, ses innovations en matière d'IA, ses solutions de gestion intégrées et sa vision de l'économie digitale inclusive.",
+        impact: [
+            "Visibilité maximale auprès de la communauté tech",
+            "Démonstration live de nos produits",
+            "Rencontres avec partenaires technologiques",
+            "Feedback utilisateurs en temps réel"
+        ]
     },
 ];
 
 export const Events = () => {
     return (
-        <SectionWrapper id="events">
+        <SectionWrapper id="events" bg="dark">
             <div className="text-center max-w-4xl mx-auto mb-16">
-                <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
-                    Nos Événements & <span className="text-gold-premium">Distinctions</span>
-                </h2>
-                <p className="text-lg text-text-secondary">
-                    Une équipe active sur le terrain, récompensée pour son impact et son innovation.
-                </p>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
+                        Nos Événements & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-gold-premium">Distinctions</span>
+                    </h2>
+                    <p className="text-lg text-text-secondary">
+                        Une équipe active sur le terrain, récompensée pour son impact et son innovation.
+                    </p>
+                </motion.div>
             </div>
 
-            <div className="relative max-w-5xl mx-auto">
-                {/* Vertical Line */}
-                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-green via-primary-blue to-gold-premium md:-translate-x-1/2 opacity-30"></div>
+            <div className="relative max-w-6xl mx-auto">
+                {/* Vertical Timeline Line */}
+                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-green via-primary-blue via-gold-premium to-primary-green md:-translate-x-1/2 opacity-30"></div>
 
-                <div className="space-y-12">
-                    {events.map((event, index) => (
-                        <motion.div
-                            key={event.id}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.7, delay: index * 0.2 }}
-                            className={`relative flex flex-col md:flex-row gap-8 items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                                }`}
-                        >
-                            {/* Timeline Dot */}
-                            <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-dark-bg border-4 border-primary-green rounded-full transform -translate-x-2 md:-translate-x-1/2 z-10 box-content shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
+                <div className="space-y-16">
+                    {events.map((event, index) => {
+                        const Icon = event.icon;
+                        return (
+                            <motion.div
+                                key={event.id}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 0.7, delay: index * 0.15 }}
+                                className={`relative flex flex-col md:flex-row gap-8 items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                            >
+                                {/* Timeline Dot with Icon */}
+                                <div className="absolute left-4 md:left-1/2 transform -translate-x-2 md:-translate-x-1/2 z-10">
+                                    <motion.div
+                                        className="w-12 h-12 bg-dark-bg border-4 border-primary-green rounded-full flex items-center justify-center shadow-lg shadow-primary-green/30"
+                                        whileHover={{ scale: 1.2 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <Icon className={`w-5 h-5 ${event.color}`} />
+                                    </motion.div>
+                                </div>
 
-                            {/* Content Card */}
-                            <div className="ml-12 md:ml-0 md:w-1/2 w-full">
-                                <div className={`bg-dark-card border border-dark-border p-6 rounded-2xl hover:border-primary-blue/30 transition-colors shadow-lg group ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'
-                                    }`}>
+                                {/* Content Card */}
+                                <div className="ml-16 md:ml-0 md:w-1/2 w-full">
+                                    <motion.div
+                                        className={`bg-dark-card border border-dark-border p-6 md:p-8 rounded-2xl hover:border-primary-blue/30 transition-all shadow-lg group relative overflow-hidden ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}
+                                        whileHover={{ y: -5 }}
+                                    >
+                                        {/* Background gradient effect */}
+                                        <div className={`absolute top-0 right-0 w-32 h-32 ${event.color.replace('text-', 'bg-')}/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
 
-                                    {/* Date Badge */}
-                                    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold mb-4 ${event.category === 'Award' ? 'bg-gold-premium/10 text-gold-premium border border-gold-premium/20' :
-                                        event.category === 'Meetup' ? 'bg-primary-blue/10 text-primary-blue border border-primary-blue/20' :
-                                            event.category === 'Bootcamp' ? 'bg-purple-500/10 text-purple-500 border border-purple-500/20' :
-                                                'bg-primary-green/10 text-primary-green border border-primary-green/20'
+                                        {/* Date Badge */}
+                                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold mb-4 ${
+                                            event.category === 'Hackathon' ? 'bg-primary-blue/10 text-primary-blue border border-primary-blue/20' :
+                                            event.category === 'Salon' ? 'bg-gold-premium/10 text-gold-premium border border-gold-premium/20' :
+                                            event.category === 'Programme' ? 'bg-primary-green/10 text-primary-green border border-primary-green/20' :
+                                            'bg-primary-blue/10 text-primary-blue border border-primary-blue/20'
                                         } ${index % 2 !== 0 ? 'md:ml-auto' : ''}`}>
-                                        <Calendar className="w-3 h-3" />
-                                        {event.date}
-                                    </div>
-
-                                    <h3 className="text-2xl font-bold mb-2 group-hover:text-primary-blue transition-colors">{event.title}</h3>
-
-                                    <div className={`flex items-center gap-4 text-sm text-text-muted mb-4 ${index % 2 !== 0 ? 'md:justify-end' : ''
-                                        }`}>
-                                        <div className="flex items-center gap-1">
-                                            <MapPin className="w-4 h-4" /> {event.location}
+                                            <Calendar className="w-3 h-3" />
+                                            {event.date}
                                         </div>
-                                        {event.category === 'Award' && (
-                                            <div className="flex items-center gap-1 text-gold-premium">
-                                                <Award className="w-4 h-4" /> Prix d'Excellence
+
+                                        {/* Title */}
+                                        <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-primary-blue transition-colors relative z-10">
+                                            {event.title}
+                                        </h3>
+
+                                        {/* Location */}
+                                        <div className={`flex items-center gap-2 text-sm text-text-muted mb-4 ${index % 2 !== 0 ? 'md:justify-end' : ''}`}>
+                                            <MapPin className="w-4 h-4" />
+                                            <span>{event.location}</span>
+                                        </div>
+
+                                        {/* Description */}
+                                        <p className="text-text-secondary leading-relaxed mb-4 relative z-10">
+                                            {event.description}
+                                        </p>
+
+                                        {/* Impact Points */}
+                                        <div className="space-y-2 mt-6 relative z-10">
+                                            <p className="text-sm font-semibold text-text-light mb-2">Impact :</p>
+                                            <ul className={`space-y-1.5 ${index % 2 !== 0 ? 'md:text-right' : ''}`}>
+                                                {event.impact.slice(0, 3).map((point, i) => (
+                                                    <li key={i} className="text-sm text-text-secondary flex items-start gap-2">
+                                                        <span className="text-primary-green mt-1">✓</span>
+                                                        <span>{point}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </motion.div>
+                                </div>
+
+                                {/* Image */}
+                                <div className="ml-16 md:ml-0 md:w-1/2 w-full flex justify-center">
+                                    <motion.div
+                                        className="relative w-full max-w-lg rounded-xl overflow-hidden border border-dark-border group-hover:border-gold-premium/50 transition-all shadow-2xl"
+                                        whileHover={{ scale: 1.02 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                                        <img
+                                            src={event.image}
+                                            alt={event.title}
+                                            className="w-full h-auto object-cover"
+                                            loading="lazy"
+                                        />
+                                        {/* Category Badge on Image */}
+                                        <div className="absolute top-4 right-4 z-20">
+                                            <div className={`px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md ${
+                                                event.category === 'Hackathon' ? 'bg-primary-blue/80 text-white' :
+                                                event.category === 'Salon' ? 'bg-gold-premium/80 text-white' :
+                                                event.category === 'Programme' ? 'bg-primary-green/80 text-white' :
+                                                'bg-primary-blue/80 text-white'
+                                            }`}>
+                                                {event.category}
                                             </div>
-                                        )}
-                                    </div>
-
-                                    <p className="text-text-secondary leading-relaxed">
-                                        {event.description}
-                                    </p>
+                                        </div>
+                                    </motion.div>
                                 </div>
-                            </div>
-
-                            {/* Image */}
-                            <div className="ml-12 md:ml-0 md:w-1/2 w-full flex justify-center">
-                                <div className="relative w-full max-w-sm aspect-video rounded-xl overflow-hidden border border-dark-border group-hover:border-gold-premium/50 transition-all shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-500">
-                                    <div className="absolute inset-0 bg-primary-blue/20 mix-blend-overlay z-10"></div>
-                                    <img
-                                        src={event.image}
-                                        alt={event.title}
-                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                                    />
-                                </div>
-                            </div>
-
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </SectionWrapper>

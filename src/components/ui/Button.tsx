@@ -20,13 +20,13 @@ export const Button = ({
   disabled,
   ...props
 }: ButtonProps) => {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-bg disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-gradient-cta text-white hover:shadow-lg hover:shadow-gold-premium/20 border-transparent',
-    secondary: 'bg-transparent border-2 border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white',
-    outline: 'bg-transparent border border-dark-border text-text-light hover:bg-dark-card hover:border-primary-green',
-    ghost: 'bg-transparent text-text-secondary hover:text-text-light hover:bg-dark-card/50',
+    primary: 'bg-gradient-cta text-white hover:shadow-lg hover:shadow-gold-premium/20 border-transparent focus:ring-gold-premium focus:ring-offset-dark-bg',
+    secondary: 'bg-transparent border-2 border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white focus:ring-primary-blue focus:ring-offset-dark-bg',
+    outline: 'bg-transparent border border-dark-border text-text-light hover:bg-dark-card hover:border-primary-green focus:ring-primary-green focus:ring-offset-dark-bg',
+    ghost: 'bg-transparent text-text-secondary hover:text-text-light hover:bg-dark-card/50 focus:ring-gold-premium focus:ring-offset-dark-bg',
   };
 
   const sizes = {

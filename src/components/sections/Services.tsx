@@ -67,7 +67,7 @@ export const Services = () => {
   return (
     <SectionWrapper id="services" bg="dark">
       <motion.div
-        className="text-center max-w-4xl mx-auto mb-20"
+        className="text-center max-w-4xl mx-auto mb-16"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -83,7 +83,7 @@ export const Services = () => {
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 mb-16">
+      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mb-16">
         {packages.map((pkg, index) => (
           <motion.div
             key={index}
@@ -105,15 +105,15 @@ export const Services = () => {
             </div>
 
             {/* Price Box */}
-            <div className="bg-dark-bg border border-dark-border rounded-xl py-4 px-2 text-center mb-6 group-hover:border-gold-premium/30 transition-colors">
+            <div className="bg-dark-bg border border-dark-border rounded-xl py-4 px-4 text-center mb-6 group-hover:border-gold-premium/30 transition-colors">
               <div className="text-2xl lg:text-3xl font-bold font-heading text-white">{pkg.price}</div>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
               <span className="text-sm font-bold text-text-light block mb-4">Inclus dans ce package :</span>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {pkg.features.map((feat, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-text-secondary">
+                  <li key={i} className="flex items-start gap-4 text-sm text-text-secondary">
                     <Check className="w-5 h-5 text-gold-premium shrink-0" />
                     <span className="leading-tight">{feat}</span>
                   </li>

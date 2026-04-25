@@ -76,7 +76,7 @@ export const ContactPage = () => {
                             <div>
                                 <h3 className="text-2xl font-heading font-bold mb-8 text-white">Nos Coordonnées</h3>
 
-                                <div className="space-y-8">
+                                <div className="space-y-6">
                                     <div className="flex items-start gap-4">
                                         <div className="w-12 h-12 rounded-xl bg-primary-green/10 flex items-center justify-center text-primary-green shrink-0">
                                             <Smartphone className="w-6 h-6" />
@@ -160,7 +160,7 @@ export const ContactPage = () => {
                                     <h3 className="text-2xl font-heading font-bold text-white mb-6">Envoyez-nous un message</h3>
 
                                     <div className="grid md:grid-cols-2 gap-6">
-                                        <div className="space-y-2">
+                                        <div className="space-y-3">
                                             <label htmlFor="name" className="text-sm font-medium text-text-secondary">Nom complet</label>
                                             <input
                                                 type="text"
@@ -169,11 +169,11 @@ export const ContactPage = () => {
                                                 required
                                                 value={formState.name}
                                                 onChange={handleChange}
-                                                className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-premium transition-colors"
+                                                className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-gold-premium focus:border-gold-premium transition-colors"
                                                 placeholder="Votre nom"
                                             />
                                         </div>
-                                        <div className="space-y-2">
+                                        <div className="space-y-3">
                                             <label htmlFor="email" className="text-sm font-medium text-text-secondary">Email</label>
                                             <input
                                                 type="email"
@@ -182,13 +182,13 @@ export const ContactPage = () => {
                                                 required
                                                 value={formState.email}
                                                 onChange={handleChange}
-                                                className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-premium transition-colors"
+                                                className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-gold-premium focus:border-gold-premium transition-colors"
                                                 placeholder="votre@email.com"
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="space-y-2">
+                                    <div className="space-y-3">
                                         <label htmlFor="subject" className="text-sm font-medium text-text-secondary">Sujet</label>
                                         <select
                                             id="subject"
@@ -196,7 +196,7 @@ export const ContactPage = () => {
                                             required
                                             value={formState.subject}
                                             onChange={handleChange}
-                                            className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-premium transition-colors appearance-none"
+                                            className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-gold-premium focus:border-gold-premium transition-colors appearance-none"
                                         >
                                             <option value="" disabled>Sélectionnez un sujet</option>
                                             <option value="devis">Demande de Devis</option>
@@ -206,7 +206,7 @@ export const ContactPage = () => {
                                         </select>
                                     </div>
 
-                                    <div className="space-y-2">
+                                    <div className="space-y-3">
                                         <label htmlFor="message" className="text-sm font-medium text-text-secondary">Message</label>
                                         <textarea
                                             id="message"
@@ -215,7 +215,7 @@ export const ContactPage = () => {
                                             rows={5}
                                             value={formState.message}
                                             onChange={handleChange}
-                                            className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-premium transition-colors resize-none"
+                                            className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-gold-premium focus:border-gold-premium transition-colors resize-none"
                                             placeholder="Détaillez votre demande..."
                                         ></textarea>
                                     </div>

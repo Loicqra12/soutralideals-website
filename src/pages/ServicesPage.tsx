@@ -42,7 +42,7 @@ export const ServicesPage = () => {
                                 <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight">
                                     Des services numériques complets pour <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-primary-blue">bâtir, structurer</span> et faire grandir votre entreprise
                                 </h1>
-                                <p className="text-xl text-text-secondary mb-10 leading-relaxed max-w-xl">
+                                <p className="text-xl text-text-secondary mb-8 leading-relaxed max-w-xl">
                                     De l’idée au produit final, nous accompagnons entrepreneurs, startups et entreprises dans la conception, le développement et la croissance de leurs solutions digitales.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4">

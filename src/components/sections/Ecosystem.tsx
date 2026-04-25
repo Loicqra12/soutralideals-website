@@ -6,7 +6,7 @@ import ecosystemImage from '../../assets/images/ecosysteme.png';
 export const Ecosystem = () => {
   return (
     <SectionWrapper id="ecosysteme" bg="dark">
-      <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
 
         {/* Mobile: Image First */}
         {/* Desktop: Image Right (Order-2) -> Wait, user asked: Desktop [TEXT] | [IMAGE]. Mobile [IMAGE] [TEXT]. 
@@ -56,7 +56,7 @@ export const Ecosystem = () => {
           </motion.div>
 
           {/* Feature Blocks */}
-          <div className="space-y-8 pt-4">
+          <div className="space-y-6 pt-6">
             {/* Block 1 */}
             <motion.div
               className="flex gap-4 group"

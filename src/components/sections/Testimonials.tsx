@@ -1,138 +1,168 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
-    {
-        id: 1,
-        name: "Koffi Jean-Marc",
-        role: "Développeur Freelance",
-        content: "Soutrali Deals a transformé ma façon de trouver des missions. La plateforme est intuitive et les clients sont sérieux. J'ai doublé mon chiffre d'affaires en 3 mois.",
-        rating: 5
-    },
-    {
-        id: 2,
-        name: "Aminata Traoré",
-        role: "Gérante Boutique Mode",
-        content: "Je cherchais un moyen simple de digitaliser ma boutique à Adjamé. Grâce aux partenaires de l'écosystème, j'ai maintenant une boutique en ligne qui tourne 24/7.",
-        rating: 5
-    },
-    {
-        id: 3,
-        name: "Cabinet Kouassi & Associés",
-        role: "Client Business",
-        content: "Nous avons recruté une équipe complète de développeurs via Soutrali Deals pour notre digitalisation. Le niveau de compétence est impressionnant.",
-        rating: 4
-    },
-    {
-        id: 4,
-        name: "Sarah Doumbia",
-        role: "Artisan Coiffeuse",
-        content: "Enfin une plateforme qui pense aux artisans ! J'ai pu trouver une formation et du matériel à prix réduit grâce aux deals proposés.",
-        rating: 5
-    },
-    {
-        id: 5,
-        name: "Tech Solutions Abidjan",
-        role: "Partenaire Technologique",
-        content: "Collaborer avec Soutrali Deals nous a ouvert les portes d'un marché immense. Une équipe dynamique et visionnaire.",
-        rating: 5
-    }
+  {
+    id: 1,
+    name: 'Gnon Sidney',
+    role: 'Entrepreneur digital - Abidjan',
+    content: "Soutrali Deals m'a permis de lancer mon projet en 3 semaines avec une equipe fiable.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: 'Yao Sidney Jordan',
+    role: 'Responsable operations - Yopougon',
+    content: "Service rapide, execution propre et communication tres claire du debut a la fin.",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: 'Jocelyn Boka',
+    role: 'Fondateur startup - Cocody',
+    content: "On sent une vraie exigence pro. Notre visibilite en ligne a clairement augmente.",
+    rating: 5,
+  },
+  {
+    id: 4,
+    name: 'Aquegnan Codouain',
+    role: 'Commercante - Treichville',
+    content: "Mon activite est mieux structuree, les clients commandent plus facilement qu'avant.",
+    rating: 4,
+  },
+  {
+    id: 5,
+    name: 'Nicaise Charles',
+    role: 'Consultant IT - Plateau',
+    content: 'Une equipe serieuse, des delais respectes et un rendu final vraiment premium.',
+    rating: 5,
+  },
+  {
+    id: 6,
+    name: 'Atebabierya Booba',
+    role: 'Prestataire BTP - Marcory',
+    content: "J'ai gagne en credibilite grace a leur approche et aux outils proposes.",
+    rating: 5,
+  },
+  {
+    id: 7,
+    name: 'Sarah Krobote',
+    role: 'Creatrice de marque - Bingerville',
+    content: "Le design, l'accompagnement et le suivi sont au-dessus de ce que j'attendais.",
+    rating: 5,
+  },
+  {
+    id: 8,
+    name: 'Kouadio Hermann',
+    role: 'Directeur commercial - Bouake',
+    content: 'On a enfin une presence digitale solide et une methode claire pour convertir.',
+    rating: 4,
+  },
+  {
+    id: 9,
+    name: 'Aminata Doumbia',
+    role: 'Gerante e-commerce - Abobo',
+    content: "L'equipe comprend vite les besoins et propose des solutions concretes.",
+    rating: 5,
+  },
+  {
+    id: 10,
+    name: 'Konan Wilfried',
+    role: 'Chef de projet - San Pedro',
+    content: "La collaboration est fluide et les resultats sont visibles sur nos performances.",
+    rating: 5,
+  },
+  {
+    id: 11,
+    name: 'Kouame Nestor',
+    role: 'Menuisier - Koumassi',
+    content: "Depuis Soutrali Deals, je recois plus de demandes serieuses pour mes travaux de menuiserie.",
+    rating: 5,
+  },
+  {
+    id: 12,
+    name: 'Kone Ibrahim',
+    role: 'Mecanicien - Yopougon',
+    content: "Les clients me trouvent plus vite, et mes rendez-vous atelier sont mieux organises.",
+    rating: 4,
+  },
+  {
+    id: 13,
+    name: 'Nguessan Serge',
+    role: 'Vigile - Cocody',
+    content: "J'ai pu presenter mon profil de securite clairement et trouver des missions stables.",
+    rating: 5,
+  },
+  {
+    id: 14,
+    name: 'Assande Mariam',
+    role: 'Servante - Riviera',
+    content: "La plateforme m'aide a trouver des familles fiables et a valoriser mon experience.",
+    rating: 5,
+  },
 ];
 
 export const Testimonials = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+  const marqueeItems = [...testimonials, ...testimonials];
 
-    const next = () => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    };
+  return (
+    <SectionWrapper id="avis" bg="dark" className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute -left-10 top-0 h-full w-1/3 bg-primary-blue/10 [clip-path:polygon(0_0,75%_0,35%_100%,0_100%)]" />
+        <div className="absolute right-0 top-0 h-full w-1/4 bg-primary-green/10 [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)]" />
+        <div className="absolute left-0 top-0 h-full w-full bg-[radial-gradient(circle_at_20%_0%,rgba(59,130,246,0.15),transparent_45%)]" />
+      </div>
 
-    const prev = () => {
-        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    };
+      <div className="relative z-10 mb-14 text-center">
+        <h2 className="mb-6 text-3xl font-heading font-bold text-white md:text-5xl">
+          Ce qu&apos;ils disent de <span className="bg-gradient-to-r from-primary-green to-primary-blue bg-clip-text text-transparent">Nous</span>
+        </h2>
+        <p className="mx-auto max-w-2xl text-lg text-text-secondary">
+          Des retours reels de clients et partenaires en Cote d&apos;Ivoire.
+        </p>
+      </div>
 
-    return (
-        <SectionWrapper id="avis" bg="dark" className="relative group">
-            {/* Background Decoration */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gold-premium/5 rounded-full blur-[100px] pointer-events-none"></div>
-
-            <div className="text-center mb-16 relative z-10">
-                <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 text-white">
-                    Ce qu'ils disent de <span className="text-gold-premium">Nous</span>
-                </h2>
-                <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-                    La satisfaction de notre communauté est notre plus belle réussite.
-                </p>
-            </div>
-
-            <div className="max-w-4xl mx-auto relative px-4 sm:px-12">
-                {/* Navigation Buttons */}
-                <button
-                    onClick={prev}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-dark-card border border-dark-border text-white hover:bg-gold-premium hover:border-gold-premium transition-all duration-300 shadow-lg group-hover:opacity-100 opacity-0 sm:opacity-100"
+      <div className="relative z-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {[0, 1, 2].map((column) => (
+          <div key={column} className="h-[420px] overflow-hidden">
+            <motion.div
+              className="flex w-full flex-col gap-5"
+              animate={{ y: column % 2 === 0 ? ['0%', '-50%'] : ['-50%', '0%'] }}
+              transition={{
+                duration: column === 1 ? 72 : 80,
+                ease: 'linear',
+                repeat: Infinity,
+              }}
+            >
+              {marqueeItems.map((item, index) => (
+                <article
+                  key={`${column}-${item.id}-${index}`}
+                  className="relative w-full min-h-[180px] rounded-2xl border border-white/15 bg-[#0b1324]/90 p-5 shadow-[0_16px_35px_rgba(0,0,0,0.28)] backdrop-blur-sm"
                 >
-                    <ChevronLeft className="w-6 h-6" />
-                </button>
+                  <Quote className="mb-3 h-6 w-6 text-primary-blue/35" />
 
-                <button
-                    onClick={next}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-dark-card border border-dark-border text-white hover:bg-gold-premium hover:border-gold-premium transition-all duration-300 shadow-lg group-hover:opacity-100 opacity-0 sm:opacity-100"
-                >
-                    <ChevronRight className="w-6 h-6" />
-                </button>
-
-                <div className="overflow-hidden relative min-h-[300px] flex items-center justify-center">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentIndex}
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -100 }}
-                            transition={{ duration: 0.5 }}
-                            className="bg-dark-card border border-dark-border p-8 md:p-12 rounded-2xl relative shadow-2xl w-full"
-                        >
-                            <Quote className="absolute top-8 left-8 w-12 h-12 text-gold-premium/20" />
-
-                            <div className="flex flex-col items-center text-center">
-                                <div className="flex gap-1 mb-6">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            className={`w-5 h-5 ${i < testimonials[currentIndex].rating ? 'text-gold-premium fill-gold-premium' : 'text-gray-600'}`}
-                                        />
-                                    ))}
-                                </div>
-
-                                <p className="text-xl md:text-2xl text-white font-medium italic mb-8 leading-relaxed">
-                                    "{testimonials[currentIndex].content}"
-                                </p>
-
-                                <div>
-                                    <h4 className="text-lg font-bold text-white uppercase tracking-wider">
-                                        {testimonials[currentIndex].name}
-                                    </h4>
-                                    <span className="text-primary-blue font-medium">
-                                        {testimonials[currentIndex].role}
-                                    </span>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
-                {/* Indicators */}
-                <div className="flex justify-center gap-3 mt-8">
-                    {testimonials.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setCurrentIndex(index)}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-gold-premium w-8' : 'bg-gray-600 hover:bg-gray-400'
-                                }`}
-                        />
+                  <div className="mb-3 flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${i < item.rating ? 'fill-primary-green text-primary-green' : 'text-white/20'}`}
+                      />
                     ))}
-                </div>
-            </div>
-        </SectionWrapper>
-    );
+                  </div>
+
+                  <p className="mb-4 line-clamp-4 text-sm leading-relaxed text-white/85">&quot;{item.content}&quot;</p>
+
+                  <div className="border-t border-white/10 pt-3">
+                    <h4 className="text-sm font-semibold tracking-wide text-white">{item.name}</h4>
+                    <p className="text-xs text-primary-blue/80">{item.role}</p>
+                  </div>
+                </article>
+              ))}
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    </SectionWrapper>
+  );
 };

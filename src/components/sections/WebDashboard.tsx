@@ -2,13 +2,14 @@ import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { Layout, BarChart3, Users, Settings } from 'lucide-react';
 import { Button } from '../ui/Button';
+import dashboardImage from '../../assets/images/project/project_dashboard_admin.png';
 
 export const WebDashboard = () => {
     return (
         <SectionWrapper id="web-dashboard">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-                {/* Left: Browser Window Mockup */}
+                {/* Left: Dashboard Image */}
                 <motion.div
                     className="order-2 lg:order-1 relative"
                     initial={{ opacity: 0, x: -50 }}
@@ -16,70 +17,14 @@ export const WebDashboard = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="bg-dark-card border border-dark-border rounded-xl shadow-2xl overflow-hidden aspect-[16/10] relative group">
-                        {/* Browser Header */}
-                        <div className="bg-dark-bg border-b border-dark-border p-3 flex items-center gap-2">
-                            <div className="flex gap-1.5">
-                                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                            </div>
-                            <div className="bg-dark-card rounded-md px-3 py-1 text-xs text-text-muted flex-1 text-center border border-dark-border mx-4">
-                                admin.soutralideals.com
-                            </div>
-                        </div>
-
-                        {/* Dashboard UI Fake */}
-                        <div className="p-6 grid grid-cols-4 gap-4 h-full bg-dark-bg/50">
-                            {/* Sidebar */}
-                            <div className="col-span-1 border-r border-dark-border pr-4 space-y-3 hidden md:block">
-                                <div className="h-8 bg-dark-border/40 rounded w-3/4 mb-6"></div>
-                                <div className="h-4 bg-primary-blue/20 rounded w-full"></div>
-                                <div className="h-4 bg-dark-border/20 rounded w-full"></div>
-                                <div className="h-4 bg-dark-border/20 rounded w-full"></div>
-                                <div className="h-4 bg-dark-border/20 rounded w-full"></div>
-                            </div>
-
-                            {/* Main Content */}
-                            <div className="col-span-4 md:col-span-3 space-y-4">
-                                <div className="flex justify-between items-center mb-6">
-                                    <div className="h-6 bg-dark-border/40 rounded w-1/3"></div>
-                                    <div className="h-8 bg-primary-green/20 rounded w-24"></div>
-                                </div>
-
-                                {/* Chart Area */}
-                                <div className="h-40 bg-gradient-to-t from-primary-blue/10 to-transparent rounded-lg border border-primary-blue/20 flex items-end justify-around px-4 pb-2 relative overflow-hidden group-hover:border-primary-blue/40 transition-colors">
-                                    {[40, 70, 50, 90, 60, 80, 50].map((h, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="w-8 bg-primary-blue/40 rounded-t-sm"
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${h}%` }}
-                                            transition={{ duration: 1, delay: i * 0.1 }}
-                                        />
-                                    ))}
-                                </div>
-
-                                {/* Stats Cards */}
-                                <div className="grid grid-cols-3 gap-3">
-                                    <div className="h-24 bg-dark-card border border-dark-border rounded-lg p-3">
-                                        <div className="w-8 h-8 rounded bg-gold-premium/20 mb-2"></div>
-                                        <div className="h-4 bg-dark-border/30 rounded w-1/2"></div>
-                                    </div>
-                                    <div className="h-24 bg-dark-card border border-dark-border rounded-lg p-3">
-                                        <div className="w-8 h-8 rounded bg-primary-green/20 mb-2"></div>
-                                        <div className="h-4 bg-dark-border/30 rounded w-1/2"></div>
-                                    </div>
-                                    <div className="h-24 bg-dark-card border border-dark-border rounded-lg p-3">
-                                        <div className="w-8 h-8 rounded bg-gold-premium/20 mb-2"></div>
-                                        <div className="h-4 bg-dark-border/30 rounded w-1/2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Overaly Glow */}
-                        <div className="absolute inset-0 bg-blue-500/5 pointer-events-none group-hover:bg-blue-500/10 transition-colors"></div>
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-dark-border group">
+                        <img
+                            src={dashboardImage}
+                            alt="Dashboard Administrateur Soutrali Deals - Centre de pilotage de l'écosystème"
+                            className="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-500"
+                            loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
                     </div>
                 </motion.div>
 
@@ -124,7 +69,7 @@ export const WebDashboard = () => {
                         </li>
                     </ul>
 
-                    <div className="mt-10">
+                    <div className="mt-8">
                         <Button className="bg-dark-card hover:bg-dark-border border border-dark-border text-white">
                             <Layout className="w-4 h-4 mr-2" />
                             Explorer la démo Web

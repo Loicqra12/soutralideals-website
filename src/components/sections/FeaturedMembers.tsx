@@ -1,5 +1,10 @@
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import { QuoteIcon } from '../icons';
+import testimonial1 from '../../assets/images/community/testimonials/testimonial-member-1.jpg';
+import testimonial2 from '../../assets/images/community/testimonials/testimonial-member-2.jpg';
+import testimonial3 from '../../assets/images/community/testimonials/testimonial-member-3.jpg';
+import testimonial4 from '../../assets/images/community/testimonials/testimonial-member-4.jpg';
+import memberCardTemplate from '../../assets/images/community/members/member-card-template.png';
 
 interface Member {
     id: number;
@@ -15,41 +20,52 @@ const members: Member[] = [
         id: 1,
         name: "Kouamé Jean",
         role: "Développeur Fullstack",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
-        quote: "La communauté m'a permis de trouver mes premiers clients internationaux.",
+        image: testimonial1,
+        quote: "Grâce à Soutrali Deals, j'ai trouvé mes premiers clients réguliers. La plateforme m'a permis de professionnaliser mon activité de développeur freelance et de gagner en crédibilité. Aujourd'hui, je travaille avec des clients internationaux grâce à la visibilité que m'offre la communauté.",
         color: "bg-primary-blue"
     },
     {
         id: 2,
         name: "Amina Koné",
-        role: "Designer UX/UI",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
-        quote: "J'adore l'ambiance d'entraide. On apprend tous les jours des autres.",
+        role: "Coiffeuse & Entrepreneure",
+        image: testimonial2,
+        quote: "L'application m'a permis de gérer mes clients, mes rendez-vous et mes paiements en un seul endroit. Avant, je perdais beaucoup de temps avec la gestion administrative. Maintenant, je me concentre sur mon métier et j'ai vu mes revenus augmenter de 40%.",
         color: "bg-gold-premium"
     },
     {
         id: 3,
         name: "Moussa Diaby",
         role: "E-commerçant",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
-        quote: "Les conseils business partagés dans le groupe valent de l'or !",
+        image: testimonial3,
+        quote: "La communauté Soutrali Deals, c'est une vraie famille. On s'entraide, on partage nos expériences et on apprend les uns des autres. Les formations et les événements m'ont permis de développer mes compétences en marketing digital.",
         color: "bg-primary-green"
     },
     {
         id: 4,
         name: "Sarah Touré",
-        role: "Rédactrice Web",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
-        quote: "Soutrali Deals m'a donné la visibilité qu'il manquait à mon activité.",
+        role: "Agent de Recensement",
+        image: testimonial4,
+        quote: "En tant qu'agent de recensement, je contribue à construire la base de données de la plateforme. C'est gratifiant de voir comment mon travail aide d'autres prestataires à trouver des clients et à développer leur activité.",
         color: "bg-gold-premium"
     }
 ];
 
 export const FeaturedMembers = () => {
     return (
-        <div className="py-20 bg-dark-bg border-y border-dark-border overflow-hidden">
+        <div className="py-20 bg-dark-bg border-y border-dark-border overflow-hidden" id="temoignages">
             <div className="container-custom mb-12 text-center">
-                <h3 className="text-2xl font-bold font-heading">Ils nous font confiance</h3>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <h3 className="text-3xl md:text-4xl font-bold font-heading mb-4">
+                        Ils nous font <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-gold-premium">confiance</span>
+                    </h3>
+                    <p className="text-text-secondary">
+                        Des histoires vraies de membres qui ont transformé leur activité grâce à Soutrali Deals
+                    </p>
+                </motion.div>
             </div>
 
             <div className="relative w-full">
@@ -57,32 +73,70 @@ export const FeaturedMembers = () => {
                     {members.map((member, index) => (
                         <motion.div
                             key={member.id}
-                            className="min-w-[300px] bg-dark-card border border-dark-border p-6 rounded-2xl relative snap-center"
+                            className="min-w-[320px] max-w-[400px] relative snap-center group"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -5, borderColor: 'rgba(255,255,255,0.2)' }}
+                            whileHover={{ y: -8, scale: 1.02 }}
                         >
-                            <Quote className="absolute top-6 right-6 w-8 h-8 text-dark-border/50" />
-
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className={`p-1 rounded-full ${member.color}/20`}>
-                                    <img
-                                        src={member.image}
-                                        alt={member.name}
-                                        className="w-12 h-12 rounded-full object-cover"
-                                    />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white">{member.name}</h4>
-                                    <p className="text-xs text-text-muted uppercase tracking-wider">{member.role}</p>
-                                </div>
+                            {/* Card Template Background */}
+                            <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <img 
+                                    src={memberCardTemplate} 
+                                    alt=""
+                                    className="w-full h-full object-cover rounded-2xl"
+                                />
                             </div>
 
-                            <p className="text-text-secondary italic text-sm leading-relaxed">
-                                "{member.quote}"
-                            </p>
+                            {/* Card Content */}
+                            <div className="relative bg-dark-card border border-dark-border p-6 rounded-2xl group-hover:border-primary-green/50 transition-all">
+                                {/* Quote Icon */}
+                                <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-40 transition-opacity z-10">
+                                    <QuoteIcon size={32} className="text-primary-green" />
+                                </div>
+
+                                {/* Member Info */}
+                                <div className="flex items-center gap-4 mb-4 relative z-10">
+                                    <div 
+                                        className="p-1 rounded-full ring-2"
+                                        style={{
+                                            backgroundColor: member.color === 'bg-primary-blue' ? 'rgba(59, 130, 246, 0.2)' :
+                                                           member.color === 'bg-primary-green' ? 'rgba(34, 197, 94, 0.2)' :
+                                                           'rgba(184, 134, 11, 0.2)',
+                                            ringColor: member.color === 'bg-primary-blue' ? 'rgba(59, 130, 246, 0.3)' :
+                                                      member.color === 'bg-primary-green' ? 'rgba(34, 197, 94, 0.3)' :
+                                                      'rgba(184, 134, 11, 0.3)'
+                                        }}
+                                    >
+                                        <img
+                                            src={member.image}
+                                            alt={member.name}
+                                            className="w-14 h-14 rounded-full object-cover"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-white text-lg">{member.name}</h4>
+                                        <p className="text-xs text-text-muted uppercase tracking-wider">{member.role}</p>
+                                    </div>
+                                </div>
+
+                                {/* Quote */}
+                                <p className="text-text-secondary leading-relaxed relative z-10">
+                                    "{member.quote}"
+                                </p>
+
+                                {/* Decorative gradient */}
+                                <div 
+                                    className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity rounded-b-2xl"
+                                    style={{
+                                        background: member.color === 'bg-primary-blue' ? 'linear-gradient(to right, #3B82F6, transparent)' :
+                                                   member.color === 'bg-primary-green' ? 'linear-gradient(to right, #22C55E, transparent)' :
+                                                   'linear-gradient(to right, #B8860B, transparent)'
+                                    }}
+                                ></div>
+                            </div>
                         </motion.div>
                     ))}
                 </div>

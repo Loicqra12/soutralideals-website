@@ -85,7 +85,7 @@ export const StatsSection = () => {
           </div>
 
           {/* Divider & Tagline */}
-          <div className="mt-12 pt-10 border-t border-white/10 text-center">
+          <div className="mt-12 pt-8 border-t border-white/10 text-center">
             <h2 className="text-2xl md:text-3xl font-heading font-bold text-white max-w-3xl mx-auto leading-relaxed">
               Pourquoi rejoindre <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-primary-blue">l'élite des indépendants</span> en Côte d'Ivoire ?
             </h2>

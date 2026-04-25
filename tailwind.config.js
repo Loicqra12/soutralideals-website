@@ -62,6 +62,20 @@ export default {
         'gradient-cta': 'linear-gradient(90deg, hsl(45, 69%, 42%), hsl(45, 69%, 52%))',
         'gradient-card': 'linear-gradient(135deg, hsl(220, 20%, 12%), hsl(220, 20%, 16%))',
       },
+      boxShadow: {
+        'glow-gold': '0 0 30px rgba(184, 134, 11, 0.4)',
+        'glow-gold-hover': '0 0 50px rgba(184, 134, 11, 0.7)',
+        'glow-green': '0 0 40px hsla(142, 71%, 45%, 0.3)',
+        'glow-blue': '0 0 40px hsla(217, 91%, 60%, 0.3)',
+        'glow-gold-sm': '0 0 20px rgba(184, 134, 11, 0.3)',
+      },
+      spacing: {
+        'section': '4rem',      // 64px - Espacement sections
+        'section-md': '6rem',   // 96px - Desktop
+        'section-lg': '8rem',    // 128px - Large screens
+        'card': '1.5rem',       // 24px - Padding cards
+        'input': '0.875rem',    // 14px - Padding inputs
+      },
     },
   },
   plugins: [],

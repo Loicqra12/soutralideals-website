@@ -1,111 +1,133 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { Smartphone, Mail, Users, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import impactIcon from '../../assets/images/community/pillars/pillar-impact-icon.svg';
+import growIcon from '../../assets/images/community/pillars/pillar-grow-icon.svg';
+import starsIcon from '../../assets/images/community/gamification/gamification-stars-icon.svg';
 
 export const FinalCTA = () => {
-    return (
-        <SectionWrapper id="contact" bg="dark">
-            <div className="text-center max-w-4xl mx-auto mb-16">
-                <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8">
-                    Prêt à <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-primary-blue">Passer à l'Action ?</span>
-                </h2>
-                <p className="text-xl text-text-secondary">
-                    Rejoignez la révolution digitale en Côte d'Ivoire. Une seule plateforme pour tous vos besoins.
-                </p>
-            </div>
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+  const ctaItems = [
+    {
+      title: 'Demander un Devis',
+      description: 'Un projet web, mobile ou marketing ? Parlons-en.',
+      action: 'Estimer mon projet',
+      to: '/contact',
+      Icon: Mail,
+      accent: 'text-primary-blue',
+      accentSoft: 'bg-primary-blue/15',
+    },
+    {
+      title: 'Rejoindre le Réseau',
+      description: 'Intégrez la famille des Soutraliens.',
+      action: "Je m'inscris",
+      to: '/communaute',
+      Icon: Users,
+      accent: 'text-primary-green',
+      accentSoft: 'bg-primary-green/15',
+    },
+    {
+      title: "Télécharger l'App",
+      description: 'Accédez à tous les services depuis votre poche.',
+      action: "C'est parti",
+      to: '/le-projet',
+      Icon: Smartphone,
+      accent: 'text-primary-blue',
+      accentSoft: 'bg-primary-blue/15',
+    },
+    {
+      title: 'Nous Contacter',
+      description: 'Une question ? Notre équipe est là 24/7.',
+      action: 'Envoyer un message',
+      to: '/contact',
+      Icon: Mail,
+      accent: 'text-primary-blue',
+      accentSoft: 'bg-primary-blue/15',
+    },
+  ];
 
-                {/* 1. Devis (Priorité Conversion) */}
-                <Link to="/contact">
-                    <motion.div
-                        className="group relative bg-gradient-to-br from-dark-card to-dark-bg border border-dark-border p-8 rounded-2xl overflow-hidden hover:border-primary-blue/50 transition-all cursor-pointer h-full"
-                        whileHover={{ y: -10 }}
-                    >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Mail className="w-24 h-24 text-primary-blue" />
-                        </div>
-                        <div className="relative z-10">
-                            <div className="w-12 h-12 bg-primary-blue/20 rounded-xl flex items-center justify-center text-primary-blue mb-6 group-hover:scale-110 transition-transform">
-                                <Mail className="w-6 h-6" />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Demander un Devis</h3>
-                            <p className="text-sm text-text-secondary mb-6">Un projet web, mobile ou marketing ? Parlons-en.</p>
-                            <div className="flex items-center text-primary-blue font-bold text-sm gap-2 mt-auto">
-                                Estimer mon projet <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                        </div>
-                    </motion.div>
-                </Link>
+  return (
+    <SectionWrapper id="contact" bg="dark">
+      <div
+        className="relative"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+        }}
+      >
+        {/* Micro-animations "trail" du curseur avec mini-images */}
+        <motion.div
+          className="pointer-events-none absolute hidden rounded-xl border border-white/15 bg-[#0f1a31]/90 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm lg:block"
+          animate={{ x: cursor.x - 56, y: cursor.y - 44 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 24, mass: 0.6 }}
+          aria-hidden
+        >
+          <img src={impactIcon} alt="" className="h-7 w-7 opacity-90" />
+        </motion.div>
+        <motion.div
+          className="pointer-events-none absolute hidden rounded-xl border border-white/15 bg-[#0f1a31]/90 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-sm lg:block"
+          animate={{ x: cursor.x + 12, y: cursor.y - 26 }}
+          transition={{ type: 'spring', stiffness: 190, damping: 22, mass: 0.7 }}
+          aria-hidden
+        >
+          <img src={growIcon} alt="" className="h-6 w-6 opacity-90" />
+        </motion.div>
+        <motion.div
+          className="pointer-events-none absolute hidden rounded-lg border border-primary-blue/30 bg-primary-blue/15 p-1.5 lg:block"
+          animate={{ x: cursor.x + 56, y: cursor.y + 10 }}
+          transition={{ type: 'spring', stiffness: 250, damping: 26, mass: 0.4 }}
+          aria-hidden
+        >
+          <img src={starsIcon} alt="" className="h-4 w-4 opacity-95" />
+        </motion.div>
 
-                {/* 2. Communauté (Engagement) */}
-                <Link to="/communaute">
-                    <motion.div
-                        className="group relative bg-gradient-to-br from-dark-card to-dark-bg border border-dark-border p-8 rounded-2xl overflow-hidden hover:border-primary-green/50 transition-all cursor-pointer h-full"
-                        whileHover={{ y: -10 }}
-                    >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Users className="w-24 h-24 text-primary-green" />
-                        </div>
-                        <div className="relative z-10">
-                            <div className="w-12 h-12 bg-primary-green/20 rounded-xl flex items-center justify-center text-primary-green mb-6 group-hover:scale-110 transition-transform">
-                                <Users className="w-6 h-6" />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Rejoindre le Réseau</h3>
-                            <p className="text-sm text-text-secondary mb-6">Intégrez la famille des Soutraliens.</p>
-                            <div className="flex items-center text-primary-green font-bold text-sm gap-2 mt-auto">
-                                Je m'inscris <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                        </div>
-                    </motion.div>
-                </Link>
+        <div className="mx-auto mb-16 max-w-4xl text-center">
+          <h2 className="mb-8 text-4xl font-heading font-bold md:text-6xl">
+            Prêt à{' '}
+            <span className="bg-gradient-to-r from-primary-green to-primary-blue bg-clip-text text-transparent">
+              Passer à l&apos;Action ?
+            </span>
+          </h2>
+          <p className="text-xl text-text-secondary">
+            Rejoignez la révolution digitale en Côte d&apos;Ivoire. Une seule plateforme pour tous vos besoins.
+          </p>
+        </div>
 
-                {/* 3. App Mobile (Produit) */}
-                <Link to="/le-projet">
-                    <motion.div
-                        className="group relative bg-gradient-to-br from-dark-card to-dark-bg border border-dark-border p-8 rounded-2xl overflow-hidden hover:border-gold-premium/50 transition-all cursor-pointer h-full"
-                        whileHover={{ y: -10 }}
-                    >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Smartphone className="w-24 h-24 text-gold-premium" />
-                        </div>
-                        <div className="relative z-10">
-                            <div className="w-12 h-12 bg-gold-premium/20 rounded-xl flex items-center justify-center text-gold-premium mb-6 group-hover:scale-110 transition-transform">
-                                <Smartphone className="w-6 h-6" />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Télécharger l'App</h3>
-                            <p className="text-sm text-text-secondary mb-6">Accédez à tous les services depuis votre poche.</p>
-                            <div className="flex items-center text-gold-premium font-bold text-sm gap-2 mt-auto">
-                                C'est parti <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                        </div>
-                    </motion.div>
-                </Link>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {ctaItems.map(({ title, description, action, to, Icon, accent, accentSoft }) => (
+            <Link key={title} to={to}>
+              <motion.div
+                className="group relative h-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-[#0a1223] p-8 transition-all hover:border-primary-blue/40"
+                whileHover={{ y: -8 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <div className={`absolute right-3 top-3 opacity-[0.08] transition-opacity group-hover:opacity-[0.14] ${accent}`}>
+                  <Icon className="h-20 w-20" />
+                </div>
 
-                {/* 4. Contact (Support) */}
-                <Link to="/contact">
-                    <motion.div
-                        className="group relative bg-gradient-to-br from-dark-card to-dark-bg border border-dark-border p-8 rounded-2xl overflow-hidden hover:border-gold-premium/50 transition-all cursor-pointer h-full"
-                        whileHover={{ y: -10 }}
-                    >
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Mail className="w-24 h-24 text-gold-premium" />
-                        </div>
-                        <div className="relative z-10">
-                            <div className="w-12 h-12 bg-gold-premium/20 rounded-xl flex items-center justify-center text-gold-premium mb-6 group-hover:scale-110 transition-transform">
-                                <Mail className="w-6 h-6" />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Nous Contacter</h3>
-                            <p className="text-sm text-text-secondary mb-6">Une question ? Notre équipe est là 24/7.</p>
-                            <div className="flex items-center text-gold-premium font-bold text-sm gap-2 mt-auto">
-                                Envoyer un message <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                        </div>
-                    </motion.div>
-                </Link>
-
-            </div>
-        </SectionWrapper>
-    );
+                <div className="relative z-10">
+                  <motion.div
+                    className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl ${accentSoft} ${accent}`}
+                    whileHover={{ scale: 1.08, rotate: -3 }}
+                    transition={{ duration: 0.22 }}
+                  >
+                    <Icon className="h-6 w-6" />
+                  </motion.div>
+                  <h3 className="mb-2 text-xl font-bold text-white">{title}</h3>
+                  <p className="mb-6 text-sm text-text-secondary">{description}</p>
+                  <div className={`mt-auto flex items-center gap-2 text-sm font-bold ${accent}`}>
+                    {action}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </SectionWrapper>
+  );
 };

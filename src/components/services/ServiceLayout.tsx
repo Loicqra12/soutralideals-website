@@ -72,7 +72,7 @@ export const ServiceLayout = ({
               <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight">
                 {title}
               </h1>
-              <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-10 leading-relaxed">
+              <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-8 leading-relaxed">
                 {description}
               </p>
 
@@ -250,7 +250,7 @@ export const ServiceLayout = ({
                 Start your project
               </Link>
               <Link
-                to="/portfolio"
+                to="/realisations"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-lg text-white border border-white/20 hover:bg-white/5 transition-all"
               >
                 Voir nos réalisations

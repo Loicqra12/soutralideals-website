@@ -36,7 +36,7 @@ export const PartnersSection = () => {
                 <div className="flex">
                     {/* First Loop */}
                     <motion.div
-                        className="flex gap-20 min-w-max px-8 items-center"
+                        className="flex gap-12 min-w-max px-8 items-center"
                         animate={{ x: "-100%" }}
                         transition={{
                             duration: 30,
@@ -57,7 +57,7 @@ export const PartnersSection = () => {
 
                     {/* Second Loop */}
                     <motion.div
-                        className="flex gap-20 min-w-max px-8 items-center"
+                        className="flex gap-12 min-w-max px-8 items-center"
                         animate={{ x: "-100%" }}
                         transition={{
                             duration: 30,
