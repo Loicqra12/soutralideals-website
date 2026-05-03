@@ -12,6 +12,12 @@ const CommunityPage = lazy(() => import('./pages/CommunityPage').then(module => 
 const ProjectPage = lazy(() => import('./pages/ProjectPage').then(module => ({ default: module.ProjectPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
+const InformationsLegalesPage = lazy(() =>
+  import('./pages/InformationsLegalesPage').then((module) => ({ default: module.InformationsLegalesPage })),
+);
+const PlanDuSitePage = lazy(() =>
+  import('./pages/PlanDuSitePage').then((module) => ({ default: module.PlanDuSitePage })),
+);
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 // Pages Services Premium
@@ -47,6 +53,8 @@ function App() {
             <Route path="le-projet" element={<ProjectPage />} />
             <Route path="a-propos" element={<AboutPage />} />
             <Route path="contact" element={<ContactPage />} />
+            <Route path="informations-legales" element={<InformationsLegalesPage />} />
+            <Route path="plan-du-site" element={<PlanDuSitePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

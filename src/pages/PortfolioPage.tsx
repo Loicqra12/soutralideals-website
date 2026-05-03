@@ -18,7 +18,7 @@ export const PortfolioPage = () => {
                 description="Explorez nos projets récents : applications mobiles, sites e-commerce, dashboards et solutions digitales innovantes."
             />
             <div className="pt-24" id="portfolio">
-                <Portfolio />
+                <Portfolio standalonePage />
                 <FinalCTA />
             </div>
         </>

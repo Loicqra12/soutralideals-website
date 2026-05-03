@@ -35,17 +35,50 @@ export const ServiceLayout = ({
   ctaText = "Demander un devis sur mesure",
   colorTheme = 'gold'
 }: ServiceLayoutProps) => {
+  type ThemeKey = NonNullable<ServiceLayoutProps['colorTheme']>;
 
-  const themeColors = {
+  const themeColors: Record<ThemeKey, string> = {
     green: 'text-primary-green border-primary-green bg-primary-green/10',
     blue: 'text-primary-blue border-primary-blue bg-primary-blue/10',
-    gold: 'text-gold-premium border-gold-premium bg-gold-premium/10'
+    gold: 'text-gold-premium border-gold-premium bg-gold-premium/10',
   };
 
-  const gradientTheme = {
+  const gradientTheme: Record<ThemeKey, string> = {
     green: 'from-primary-green to-emerald-600',
     blue: 'from-primary-blue to-cyan-600',
-    gold: 'from-[#B8860B] via-[#D4AF37] to-[#CFB53B]'
+    gold: 'from-[#B8860B] via-[#D4AF37] to-[#CFB53B]',
+  };
+
+  /** Classes entièrement statiques pour que Tailwind les inclue au build */
+  const heroBlobBg: Record<ThemeKey, string> = {
+    green: 'bg-primary-green opacity-10 blur-[100px] rounded-full',
+    blue: 'bg-primary-blue opacity-10 blur-[100px] rounded-full',
+    gold: 'bg-gold-premium opacity-10 blur-[100px] rounded-full',
+  };
+
+  const solutionCardHoverBorder: Record<ThemeKey, string> = {
+    green:
+      'p-8 rounded-2xl bg-dark-bg border border-white/5 hover:border-primary-green/30 transition-colors group',
+    blue: 'p-8 rounded-2xl bg-dark-bg border border-white/5 hover:border-primary-blue/30 transition-colors group',
+    gold: 'p-8 rounded-2xl bg-dark-bg border border-white/5 hover:border-gold-premium/30 transition-colors group',
+  };
+
+  const solutionTitleClass: Record<ThemeKey, string> = {
+    green: 'text-primary-green',
+    blue: 'text-primary-blue',
+    gold: 'text-gold-premium',
+  };
+
+  const solutionDotClass: Record<ThemeKey, string> = {
+    green: 'bg-primary-green',
+    blue: 'bg-primary-blue',
+    gold: 'bg-gold-premium',
+  };
+
+  const checkIconClass: Record<ThemeKey, string> = {
+    green: 'text-primary-green',
+    blue: 'text-primary-blue',
+    gold: 'text-gold-premium',
   };
 
   return (
@@ -56,7 +89,7 @@ export const ServiceLayout = ({
         {/* 1. Hero Section */}
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
-            <div className={`absolute top-0 right-0 w-96 h-96 bg-${colorTheme === 'gold' ? 'gold-premium' : 'primary-' + colorTheme} opacity-10 blur-[100px] rounded-full`}></div>
+            <div className={`absolute top-0 right-0 w-96 h-96 ${heroBlobBg[colorTheme]}`}></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-blue opacity-10 blur-[80px] rounded-full"></div>
           </div>
 
@@ -109,10 +142,10 @@ export const ServiceLayout = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className={`p-8 rounded-2xl bg-dark-bg border border-white/5 hover:border-${colorTheme === 'gold' ? 'gold-premium' : 'primary-' + colorTheme}/30 transition-colors group`}
+                className={solutionCardHoverBorder[colorTheme]}
               >
-                <div className={`font-bold mb-4 flex items-center gap-2 ${colorTheme === 'gold' ? 'text-gold-premium' : 'text-primary-' + colorTheme}`}>
-                  <span className={`w-2 h-2 rounded-full ${colorTheme === 'gold' ? 'bg-gold-premium' : 'bg-primary-' + colorTheme}`}></span>
+                <div className={`font-bold mb-4 flex items-center gap-2 ${solutionTitleClass[colorTheme]}`}>
+                  <span className={`w-2 h-2 rounded-full ${solutionDotClass[colorTheme]}`}></span>
                   Notre Solution
                 </div>
                 <p className="text-text-secondary text-lg group-hover:text-white transition-colors">{valueProps.solution}</p>
@@ -163,7 +196,7 @@ export const ServiceLayout = ({
                   <ul className="space-y-3">
                     {offer.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <Check className={`w-5 h-5 shrink-0 mt-1 ${colorTheme === 'gold' ? 'text-gold-premium' : 'text-primary-' + colorTheme}`} />
+                        <Check className={`w-5 h-5 shrink-0 mt-1 ${checkIconClass[colorTheme]}`} />
                         <span className="text-text-muted group-hover:text-white/80 transition-colors">{feature}</span>
                       </li>
                     ))}

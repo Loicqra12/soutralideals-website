@@ -81,7 +81,7 @@ export const ProjectPresentation = () => {
 
                     {/* Center Circle */}
                     <div className="w-32 h-32 rounded-full bg-dark-bg border border-dark-border flex items-center justify-center z-20 shadow-2xl relative">
-                        <img src="/logo.png" alt="Soutrali" className="w-16 h-16 object-contain opacity-80" onError={(e) => e.currentTarget.src = 'https://placehold.co/64x64/gold/white?text=SD'} />
+                        <img src="/brand/logo.png" alt="Soutrali" className="w-16 h-16 object-contain opacity-80" onError={(e) => e.currentTarget.src = 'https://placehold.co/64x64/gold/white?text=SD'} />
 
                         {/* Orbiting Elements */}
                         <motion.div

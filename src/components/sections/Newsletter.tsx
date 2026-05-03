@@ -1,11 +1,20 @@
+import { useState } from 'react';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { Mail, ArrowRight } from 'lucide-react';
 
 export const Newsletter = () => {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubmitted(true);
+  };
+
   return (
     <SectionWrapper id="newsletter" bg="dark" className="py-20">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-[#07142b] via-[#0b2350] to-[#1e4f9a] p-6 shadow-2xl md:p-10">
-        {/* Figures discretes de fond */}
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute -left-16 top-0 h-full w-[38%] bg-primary-blue/20 [clip-path:polygon(0_0,78%_0,38%_100%,0_100%)]" />
           <div className="absolute right-0 top-0 h-full w-[30%] bg-white/10 [clip-path:polygon(32%_0,100%_0,100%_100%,0_100%)]" />
@@ -26,18 +35,41 @@ export const Newsletter = () => {
               Inscris-toi pour recevoir nos meilleurs deals, les actualites tech d&apos;Abidjan et des conseils utiles pour booster ton activite.
             </p>
 
-            <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-3" onSubmit={handleSubmit} noValidate>
+              <label htmlFor="newsletter-email" className="sr-only">
+                Adresse e-mail
+              </label>
               <input
+                id="newsletter-email"
+                name="email"
                 type="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setSubmitted(false);
+                }}
                 placeholder="Ton adresse email"
                 className="w-full rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-sm text-white placeholder:text-white/60 outline-none transition focus:border-primary-green/60 focus:ring-2 focus:ring-primary-green/20"
+                aria-describedby="newsletter-hint"
               />
-              <button className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#07142b] transition hover:bg-white/90">
+              <button
+                type="submit"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#07142b] transition hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1733]"
+              >
                 S&apos;inscrire <ArrowRight className="h-5 w-5" />
               </button>
             </form>
 
-            <p className="mt-4 text-xs text-white/60">Nous respectons ta vie privee. Desinscription a tout moment.</p>
+            <p id="newsletter-hint" className="mt-4 text-xs text-white/60">
+              Nous respectons ta vie privee. Desinscription a tout moment.
+            </p>
+            {submitted && (
+              <p className="mt-3 text-sm font-medium text-primary-green" role="status">
+                Merci ! Nous enregistrons les inscriptions ; la confirmation par e-mail arrivera bientôt.
+              </p>
+            )}
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
@@ -47,6 +79,9 @@ export const Newsletter = () => {
                 alt="Artisans et prestataires en intervention"
                 className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
+                width={600}
+                height={384}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07142b]/80 via-transparent to-transparent" />
               <p className="absolute bottom-3 left-4 right-4 text-sm font-semibold text-white">
@@ -60,6 +95,9 @@ export const Newsletter = () => {
                 alt="Metiers techniques et services de proximite"
                 className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
+                width={600}
+                height={384}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07142b]/80 via-transparent to-transparent" />
               <p className="absolute bottom-3 left-4 right-4 text-sm font-semibold text-white">

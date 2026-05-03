@@ -27,7 +27,7 @@ export const CommunityPage = () => {
                 description="Rejoignez la plus grande communauté de talents en Côte d'Ivoire. Networking, événements, entraide et opportunités d'affaires."
             />
             <div className="pt-24">
-                <Community />
+                <Community heroAsH1 />
                 <CommunityPillars />
                 <ArtisanCommunities />
                 <CommunityGamification />

@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { CookieBanner } from '../consent/CookieBanner';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 
@@ -22,6 +23,8 @@ export const Layout = () => {
             </main>
 
             <Footer />
+
+            <CookieBanner />
         </div>
     );
 };

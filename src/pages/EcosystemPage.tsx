@@ -33,7 +33,7 @@ export const EcosystemPage = () => {
             />
             <div className="pt-24">
                 {/* Hero Section - Existing Ecosystem component */}
-                <Ecosystem />
+                <Ecosystem pageHero />
 
                 {/* 2. Schéma Global de l'Écosystème */}
                 <section className="py-20 bg-dark-bg relative overflow-hidden">

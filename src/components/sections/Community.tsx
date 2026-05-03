@@ -34,9 +34,15 @@ const FloatingParticles = () => {
     );
 };
 
-export const Community = () => {
+export interface CommunityProps {
+  /** Sur la page /communaute : un H1 unique pour le SEO */
+  heroAsH1?: boolean;
+}
+
+export const Community = ({ heroAsH1 = false }: CommunityProps) => {
   const whatsappLink = 'https://chat.whatsapp.com/JnPGnE5qAFPLTg5foFozm5';
   const prefersReducedMotion = useReducedMotion();
+  const TitleTag = heroAsH1 ? motion.h1 : motion.h2;
 
   const audienceCards = [
     {
@@ -92,7 +98,7 @@ export const Community = () => {
             <Sparkles className="h-4 w-4 text-primary-green" />
           </div>
 
-          <motion.h2
+          <TitleTag
             className="mb-5 font-heading text-3xl font-bold text-white md:text-5xl"
             initial={prefersReducedMotion ? false : { opacity: 0, filter: 'blur(4px)' }}
             whileInView={prefersReducedMotion ? {} : { opacity: 1, filter: 'blur(0px)' }}
@@ -100,7 +106,7 @@ export const Community = () => {
             transition={{ duration: 0.5, delay: 0.08 }}
           >
             Une communaute qui construit <span className="text-primary-green">l&apos;economie locale</span>
-          </motion.h2>
+          </TitleTag>
 
           <p className="mb-7 text-base leading-relaxed text-white/85 md:text-lg">
             Prestataires, freelances, vendeurs, entrepreneurs et equipes terrain avances ensemble.

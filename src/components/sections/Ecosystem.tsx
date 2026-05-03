@@ -3,7 +3,12 @@ import { SectionWrapper } from '../ui/SectionWrapper';
 import { Users, Layout, ShieldCheck } from 'lucide-react';
 import ecosystemImage from '../../assets/images/ecosysteme.png';
 
-export const Ecosystem = () => {
+export interface EcosystemProps {
+  /** Sur /ecosysteme : titre principal en H1 pour le SEO (sur l’accueil rester en H2 sous le hero) */
+  pageHero?: boolean;
+}
+
+export const Ecosystem = ({ pageHero = false }: EcosystemProps) => {
   return (
     <SectionWrapper id="ecosysteme" bg="dark">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -44,10 +49,17 @@ export const Ecosystem = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight">
-              <span className="break-words">L'Écosystème</span> <br />
-              <span className="gradient-text">Soutrali Deals</span>
-            </h2>
+            {pageHero ? (
+              <h1 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight">
+                <span className="break-words">L&apos;Écosystème</span> <br />
+                <span className="gradient-text">Soutrali Deals</span>
+              </h1>
+            ) : (
+              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 leading-tight">
+                <span className="break-words">L&apos;Écosystème</span> <br />
+                <span className="gradient-text">Soutrali Deals</span>
+              </h2>
+            )}
             <p className="text-lg text-text-secondary leading-relaxed">
               SOUTRALI DEALS est un écosystème digital complet qui réunit une <strong className="text-white">équipe de professionnels</strong>,
               une <strong className="text-white">communauté de talents</strong> et une <strong className="text-white">plateforme technologique</strong> pensée
