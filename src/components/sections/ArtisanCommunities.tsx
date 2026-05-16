@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import prestatairesImage from '../../assets/images/community/members/members-prestataires-category.png';
@@ -35,11 +36,23 @@ const jobs = {
 
 type Category = keyof typeof jobs;
 
+const HASH_TO_TAB: Record<string, Category> = {
+    artisans: 'Artisans',
+    freelances: 'Freelances',
+    commercants: 'Commerce',
+};
+
 export const ArtisanCommunities = () => {
     const [activeTab, setActiveTab] = useState<Category>('Artisans');
 
+    useEffect(() => {
+        const hash = window.location.hash.replace('#', '');
+        const tab = HASH_TO_TAB[hash];
+        if (tab) setActiveTab(tab);
+    }, []);
+
     return (
-        <SectionWrapper id="metiers">
+        <SectionWrapper id="artisans" className="scroll-mt-28">
             <div className="text-center max-w-3xl mx-auto mb-12">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -136,7 +149,12 @@ export const ArtisanCommunities = () => {
                 >
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <h3 className="text-2xl font-bold mb-4">🧭 Agents de Recensement</h3>
+                            <div className="mb-4 flex items-center gap-3">
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-primary-green/20 bg-primary-green/10">
+                                <MapPin className="h-5 w-5 text-primary-green" />
+                              </span>
+                              <h3 className="text-2xl font-bold">Agents de Recensement</h3>
+                            </div>
                             <p className="text-text-secondary leading-relaxed">
                                 Acteurs terrain essentiels qui construisent et enrichissent notre base de données de prestataires. Grâce à leur travail, nous cartographions l'écosystème économique local et connectons les talents aux opportunités.
                             </p>

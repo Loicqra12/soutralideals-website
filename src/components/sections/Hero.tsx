@@ -1,185 +1,243 @@
-import { motion } from 'framer-motion';
-import { Button } from '../ui/Button';
-import { Smartphone, Apple, Play } from 'lucide-react';
-import heroBg from '../../assets/images/hero.png';
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import heroSlide1 from '../../assets/images/Hero/Hero-1.png';
+import appStoreBadge from '../../assets/images/appstore.png';
+import googlePlayBadge from '../../assets/images/googleplay.png';
+import heroSlide2 from '../../assets/images/Hero/Hero-2.png';
+import heroSlide3 from '../../assets/images/Hero/Hero-3.png';
+import heroSlide4 from '../../assets/images/Hero/Hero-4.png';
+
+const SLIDE_INTERVAL_MS = 5500;
+
+const HERO_SLIDES = [
+  { src: heroSlide1, alt: 'Professionnel ivoirien — Soutrali Deals' },
+  { src: heroSlide2, alt: 'Artisan au travail — Soutrali Deals' },
+  { src: heroSlide3, alt: 'Communauté Soutrali Deals en action' },
+  { src: heroSlide4, alt: 'Écosystème digital ivoirien — Soutrali Deals' },
+];
 
 export const Hero = () => {
+  const reduced = useReducedMotion();
+  const [active, setActive] = useState(0);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-primary-green">
+  const goTo = useCallback((index: number) => {
+    setActive(index % HERO_SLIDES.length);
+  }, []);
 
-      {/* Background Gradient/Image with Parallax */}
+  const next = useCallback(() => {
+    setActive((i) => (i + 1) % HERO_SLIDES.length);
+  }, []);
+
+  useEffect(() => {
+    if (reduced) return;
+    const id = setInterval(next, SLIDE_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [reduced, next]);
+
+  return (
+    <section className="relative flex min-h-[92vh] items-end overflow-hidden bg-[#071228] pt-20">
+
+      {/* ── Carousel fond plein écran ── */}
       <motion.div
         className="absolute inset-0 z-0"
-        initial={{ scale: 1.1 }}
+        initial={reduced ? false : { scale: 1.04 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+        transition={{ duration: 1.4, ease: 'easeOut' }}
       >
-        <img
-          src={heroBg}
-          alt="Soutrali Deals Background"
-          className="absolute inset-0 w-full h-full object-cover"
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={active}
+            src={HERO_SLIDES[active].src}
+            alt={HERO_SLIDES[active].alt}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            initial={reduced ? false : { opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={reduced ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.85, ease: 'easeInOut' }}
+            loading={active === 0 ? 'eager' : 'lazy'}
+          />
+        </AnimatePresence>
+
+        {/* Overlay lecture texte (gauche plus sombre, style Gozem) */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-[#061024]/92 via-[#061024]/55 to-[#061024]/25"
+          initial={reduced ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-green/90 via-primary-green/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#071228]/90 via-transparent to-[#061024]/40" />
       </motion.div>
 
-      <div className="container-custom relative z-10 grid md:grid-cols-2 gap-12 items-center">
-
-        {/* Left Content */}
-        <div className="space-y-8 text-white pt-8 md:pt-10">
-
-          {/* Badge Premium */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 w-fit hover:bg-white/20 transition-colors cursor-default"
-          >
-            <span className="text-base">🇨🇮</span>
-            <span className="text-xs font-bold text-white tracking-wide">L'ÉCOSYSTÈME 100% IVOIRIEN</span>
-          </motion.div>
-
+      {/* ── Contenu (textes inchangés) ── */}
+      <div className="container-custom relative z-10 w-full pb-36 pt-10 md:pb-40 md:pt-14">
+        <motion.div
+          className="max-w-2xl space-y-7 text-white"
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.12 }}
+        >
           <motion.h1
-            className="text-4xl md:text-6xl font-heading font-bold leading-snug"
-            initial={{ opacity: 0, y: 30 }}
+            className="font-heading text-4xl font-bold leading-snug text-white md:text-6xl lg:text-[3.5rem]"
+            initial={reduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.65, delay: 0.16 }}
           >
             Transformez <br />
-            Votre <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-gold-premium to-yellow-200 drop-shadow-[0_0_25px_rgba(234,179,8,0.3)]">Avenir Digital !</span>
+            Votre Avenir Digital !
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-white/90 font-medium max-w-xl leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
+            className="max-w-xl text-lg font-medium leading-relaxed text-white md:text-xl"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.26 }}
           >
-            La plateforme tout-en-un pour propulser les indépendants, artisans et entrepreneurs ivoiriens vers le succès.
+            La plateforme tout-en-un pour propulser les freelance, artisans et entrepreneurs ivoiriens vers le succès.
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-4 pt-2"
-            initial={{ opacity: 0, y: 20 }}
+            className="space-y-4 pt-2"
+            initial={reduced ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.45, delay: 0.34 }}
           >
-            <Button
-              className="text-dark-bg border-none rounded-full px-6 py-4 font-bold text-base hover:scale-105 transition-transform shadow-glow-gold hover:shadow-glow-gold-hover focus:outline-none focus:ring-2 focus:ring-gold-premium focus:ring-offset-2 focus:ring-offset-transparent"
-              style={{
-                background: 'linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #CFB53B 100%)',
-              }}
-              onClick={() => scrollToSection('services')}
+            <motion.div
+              className="flex items-center gap-4 opacity-80"
+              initial={reduced ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.45, delay: 0.42 }}
             >
-              Découvrir nos services
-            </Button>
-            <Button
-              className="bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full px-6 py-4 font-bold text-base hover:bg-white/20 hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
-              onClick={() => scrollToSection('communaute')}
+              <motion.div
+                className="h-px w-8 bg-white/30"
+                initial={reduced ? false : { scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                style={{ originX: 0 }}
+              />
+              <span className="text-xs font-medium uppercase tracking-widest text-white">
+                Disponible sur mobile
+              </span>
+              <motion.div
+                className="h-px w-8 bg-white/30"
+                initial={reduced ? false : { scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.4, delay: 0.58 }}
+                style={{ originX: 1 }}
+              />
+            </motion.div>
+
+            <motion.div
+              className="flex flex-wrap items-center gap-3"
+              initial={reduced ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.48 }}
             >
-              Rejoindre la communauté
-            </Button>
-          </motion.div>
-
-          <motion.div
-            className="pt-6 space-y-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <div className="flex items-center gap-4 opacity-80">
-              <div className="h-px w-8 bg-white/30"></div>
-              <span className="text-xs font-medium text-white/80 uppercase tracking-widest">Disponible sur mobile</span>
-              <div className="h-px w-8 bg-white/30"></div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Button
-                className="text-dark-bg rounded-full px-5 py-2.5 font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg text-sm"
-                style={{
-                  background: 'linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #CFB53B 100%)',
+              <motion.a
+                href="#projet"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('projet');
                 }}
-                onClick={() => scrollToSection('projet')}
+                className="inline-block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                whileHover={reduced ? {} : { y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                aria-label="Télécharger sur l'App Store"
               >
-                <Smartphone className="w-4 h-4" />
-                App Mobile
-              </Button>
-
-              <div className="flex gap-2">
-                <motion.button
-                  className="bg-black/40 backdrop-blur-md border border-white/10 text-white px-3 py-2 rounded-xl flex items-center gap-2 hover:bg-black/60 transition-all hover:scale-105 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Télécharger sur App Store"
-                >
-                  <Apple className="w-5 h-5" />
-                  <div className="text-left">
-                    <div className="text-xs opacity-70 leading-tight">Télécharger sur</div>
-                    <div className="font-bold text-sm leading-tight mt-0.5">App Store</div>
-                  </div>
-                </motion.button>
-                <motion.button
-                  className="bg-black/40 backdrop-blur-md border border-white/10 text-white px-3 py-2 rounded-xl flex items-center gap-2 hover:bg-black/60 transition-all hover:scale-105 hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Télécharger sur Google Play"
-                >
-                  <Play className="w-4 h-4 fill-current" />
-                  <div className="text-left">
-                    <div className="text-xs opacity-70 leading-tight">DISPONIBLE SUR</div>
-                    <div className="font-bold text-sm leading-tight mt-0.5">Google Play</div>
-                  </div>
-                </motion.button>
-              </div>
-            </div>
+                <img
+                  src={appStoreBadge}
+                  alt="Télécharger sur l'App Store"
+                  className="h-11 w-auto md:h-12"
+                  loading="lazy"
+                />
+              </motion.a>
+              <motion.a
+                href="#projet"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('projet');
+                }}
+                className="inline-block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                whileHover={reduced ? {} : { y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                aria-label="Télécharger sur Google Play"
+              >
+                <img
+                  src={googlePlayBadge}
+                  alt="Disponible sur Google Play"
+                  className="h-11 w-auto md:h-12"
+                  loading="lazy"
+                />
+              </motion.a>
+            </motion.div>
           </motion.div>
-        </div>
-
-        {/* Right Content - Animated Icons Floating */}
-        <motion.div
-          className="relative hidden md:block h-full"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-        >
-          {/* Floating animation for visible icons in image */}
         </motion.div>
 
+        {/* ── Indicateurs carousel (style Gozem) ── */}
+        <motion.div
+          className="absolute bottom-28 left-4 flex items-center gap-2 md:left-8 lg:left-[max(2rem,calc((100vw-1280px)/2+2rem))]"
+          role="tablist"
+          aria-label="Diaporama hero"
+        >
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={i === active}
+              aria-label={`Image ${i + 1} sur ${HERO_SLIDES.length}`}
+              onClick={() => goTo(i)}
+              className="group p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded"
+            >
+              <motion.span
+                className="block h-[3px] rounded-full bg-white/35"
+                animate={{
+                  width: i === active ? 40 : 24,
+                  backgroundColor: i === active ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.35)',
+                }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              />
+            </button>
+          ))}
+        </motion.div>
       </div>
 
-      {/* Scroll Indicator Premium */}
+      {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-32 left-1/2 z-20 -translate-x-1/2"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, delay: 1 }}
+        animate={reduced ? { opacity: 1 } : { opacity: 1, y: [0, 8, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, delay: 1 }}
       >
         <button
           onClick={() => scrollToSection('ecosysteme')}
-          className="flex flex-col items-center gap-4 group focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-lg p-2"
+          className="group flex flex-col items-center gap-4 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
           aria-label="Défiler vers le bas"
         >
-          <div className="w-[30px] h-[50px] rounded-full border-2 border-white/30 flex justify-center p-2 backdrop-blur-sm group-hover:border-white/60 transition-colors">
+          <motion.div
+            className="flex h-[50px] w-[30px] justify-center rounded-full border-2 border-white/30 p-2 backdrop-blur-sm transition-colors group-hover:border-white/60"
+            whileHover={reduced ? {} : { scale: 1.05 }}
+          >
             <motion.div
-              animate={{ y: [0, 12, 0] }}
+              animate={reduced ? {} : { y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-1.5 bg-white rounded-full bg-gradient-to-b from-white to-white/50"
+              className="h-1.5 w-1.5 rounded-full bg-white"
             />
-          </div>
-          <span className="text-xs font-medium text-white/60 tracking-wide uppercase group-hover:text-white transition-colors">Défiler</span>
+          </motion.div>
+          <span className="text-xs font-medium uppercase tracking-wide text-white/60 transition-colors group-hover:text-white">
+            Défiler
+          </span>
         </button>
       </motion.div>
 
-      {/* Bottom Curve Divider */}
+      {/* Bottom Curve */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg viewBox="0 0 1440 100" className="fill-dark-bg w-full h-auto block">
-          <path d="M0,32L80,42.7C160,53,320,75,480,80C640,85,800,75,960,64C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"></path>
+        <svg viewBox="0 0 1440 100" className="block h-auto w-full fill-dark-bg">
+          <path d="M0,32L80,42.7C160,53,320,75,480,80C640,85,800,75,960,64C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z" />
         </svg>
       </div>
     </section>

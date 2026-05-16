@@ -6,13 +6,15 @@ interface SectionWrapperProps {
   id?: string;
   className?: string;
   bg?: 'transparent' | 'dark' | 'glass' | 'white' | 'gradient-brand';
+  decorativeBackground?: React.ReactNode;
 }
 
 export const SectionWrapper = ({
   children,
   id,
   className = '',
-  bg = 'transparent'
+  bg = 'transparent',
+  decorativeBackground,
 }: SectionWrapperProps) => {
   const bgStyles = {
     transparent: 'bg-transparent',
@@ -27,6 +29,7 @@ export const SectionWrapper = ({
       id={id}
       className={`section-padding relative overflow-hidden ${bgStyles[bg]} ${className}`}
     >
+      {decorativeBackground}
       <div className="container-custom relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

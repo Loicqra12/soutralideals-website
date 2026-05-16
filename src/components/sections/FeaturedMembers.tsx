@@ -6,141 +6,137 @@ import testimonial3 from '../../assets/images/community/testimonials/testimonial
 import testimonial4 from '../../assets/images/community/testimonials/testimonial-member-4.jpg';
 import memberCardTemplate from '../../assets/images/community/members/member-card-template.png';
 
+type MemberColor = 'blue' | 'gold' | 'green';
+
+const RING: Record<MemberColor, string> = {
+  blue:  'ring-primary-blue/30  bg-primary-blue/15',
+  green: 'ring-primary-green/30 bg-primary-green/15',
+  gold:  'ring-gold-premium/30  bg-gold-premium/15',
+};
+
+const LINE: Record<MemberColor, string> = {
+  blue:  'from-primary-blue',
+  green: 'from-primary-green',
+  gold:  'from-gold-premium',
+};
+
 interface Member {
-    id: number;
-    name: string;
-    role: string;
-    image: string;
-    quote: string;
-    color: string;
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  quote: string;
+  color: MemberColor;
 }
 
 const members: Member[] = [
-    {
-        id: 1,
-        name: "Kouamé Jean",
-        role: "Développeur Fullstack",
-        image: testimonial1,
-        quote: "Grâce à Soutrali Deals, j'ai trouvé mes premiers clients réguliers. La plateforme m'a permis de professionnaliser mon activité de développeur freelance et de gagner en crédibilité. Aujourd'hui, je travaille avec des clients internationaux grâce à la visibilité que m'offre la communauté.",
-        color: "bg-primary-blue"
-    },
-    {
-        id: 2,
-        name: "Amina Koné",
-        role: "Coiffeuse & Entrepreneure",
-        image: testimonial2,
-        quote: "L'application m'a permis de gérer mes clients, mes rendez-vous et mes paiements en un seul endroit. Avant, je perdais beaucoup de temps avec la gestion administrative. Maintenant, je me concentre sur mon métier et j'ai vu mes revenus augmenter de 40%.",
-        color: "bg-gold-premium"
-    },
-    {
-        id: 3,
-        name: "Moussa Diaby",
-        role: "E-commerçant",
-        image: testimonial3,
-        quote: "La communauté Soutrali Deals, c'est une vraie famille. On s'entraide, on partage nos expériences et on apprend les uns des autres. Les formations et les événements m'ont permis de développer mes compétences en marketing digital.",
-        color: "bg-primary-green"
-    },
-    {
-        id: 4,
-        name: "Sarah Touré",
-        role: "Agent de Recensement",
-        image: testimonial4,
-        quote: "En tant qu'agent de recensement, je contribue à construire la base de données de la plateforme. C'est gratifiant de voir comment mon travail aide d'autres prestataires à trouver des clients et à développer leur activité.",
-        color: "bg-gold-premium"
-    }
+  {
+    id: 1,
+    name: 'Kouamé Jean',
+    role: 'Développeur Fullstack',
+    image: testimonial1,
+    quote: 'Grâce à Soutrali Deals, j\'ai trouvé mes premiers clients réguliers. La plateforme m\'a permis de professionnaliser mon activité et de gagner en crédibilité. Aujourd\'hui, je travaille avec des clients internationaux.',
+    color: 'blue',
+  },
+  {
+    id: 2,
+    name: 'Amina Koné',
+    role: 'Coiffeuse & Entrepreneure',
+    image: testimonial2,
+    quote: 'L\'application m\'a permis de gérer mes clients, mes rendez-vous et mes paiements en un seul endroit. J\'ai vu mes revenus augmenter de 40% depuis que je suis sur la plateforme.',
+    color: 'gold',
+  },
+  {
+    id: 3,
+    name: 'Moussa Diaby',
+    role: 'E-commerçant',
+    image: testimonial3,
+    quote: 'La communauté Soutrali Deals, c\'est une vraie famille. On s\'entraide, on partage nos expériences et on apprend les uns des autres. Les formations m\'ont permis de développer mes compétences en marketing.',
+    color: 'green',
+  },
+  {
+    id: 4,
+    name: 'Sarah Touré',
+    role: 'Agent de Recensement',
+    image: testimonial4,
+    quote: 'En tant qu\'agent de recensement, je contribue à construire la base de données de la plateforme. C\'est gratifiant de voir comment mon travail aide d\'autres prestataires à développer leur activité.',
+    color: 'gold',
+  },
 ];
 
 export const FeaturedMembers = () => {
-    return (
-        <div className="py-20 bg-dark-bg border-y border-dark-border overflow-hidden" id="temoignages">
-            <div className="container-custom mb-12 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
-                    <h3 className="text-3xl md:text-4xl font-bold font-heading mb-4">
-                        Ils nous font <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-gold-premium">confiance</span>
-                    </h3>
-                    <p className="text-text-secondary">
-                        Des histoires vraies de membres qui ont transformé leur activité grâce à Soutrali Deals
-                    </p>
-                </motion.div>
-            </div>
+  return (
+    <div className="overflow-hidden border-y border-dark-border bg-dark-bg py-20" id="temoignages">
+      <div className="container-custom mb-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="mb-4 font-heading text-3xl font-bold md:text-4xl">
+            Ils nous font{' '}
+            <span className="bg-gradient-to-r from-primary-green to-gold-premium bg-clip-text text-transparent">
+              confiance
+            </span>
+          </h3>
+          <p className="text-text-secondary">
+            Des histoires vraies de membres qui ont transformé leur activité grâce à Soutrali Deals
+          </p>
+        </motion.div>
+      </div>
 
-            <div className="relative w-full">
-                <div className="flex gap-6 overflow-x-auto pb-8 snap-x px-4 md:justify-center no-scrollbar">
-                    {members.map((member, index) => (
-                        <motion.div
-                            key={member.id}
-                            className="min-w-[320px] max-w-[400px] relative snap-center group"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -8, scale: 1.02 }}
-                        >
-                            {/* Card Template Background */}
-                            <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
-                                <img 
-                                    src={memberCardTemplate} 
-                                    alt=""
-                                    className="w-full h-full object-cover rounded-2xl"
-                                />
-                            </div>
+      <div className="relative w-full">
+        <div className="no-scrollbar flex snap-x gap-6 overflow-x-auto pb-8 px-4 md:justify-center">
+          {members.map((member, index) => (
+            <motion.div
+              key={member.id}
+              className="relative min-w-[320px] max-w-[400px] snap-center group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              {/* Template en fond */}
+              <div className="absolute inset-0 opacity-10 transition-opacity group-hover:opacity-20">
+                <img src={memberCardTemplate} alt="" className="h-full w-full rounded-2xl object-cover" />
+              </div>
 
-                            {/* Card Content */}
-                            <div className="relative bg-dark-card border border-dark-border p-6 rounded-2xl group-hover:border-primary-green/50 transition-all">
-                                {/* Quote Icon */}
-                                <div className="absolute top-6 right-6 opacity-20 group-hover:opacity-40 transition-opacity z-10">
-                                    <QuoteIcon size={32} className="text-primary-green" />
-                                </div>
-
-                                {/* Member Info */}
-                                <div className="flex items-center gap-4 mb-4 relative z-10">
-                                    <div 
-                                        className="p-1 rounded-full ring-2"
-                                        style={{
-                                            backgroundColor: member.color === 'bg-primary-blue' ? 'rgba(59, 130, 246, 0.2)' :
-                                                           member.color === 'bg-primary-green' ? 'rgba(34, 197, 94, 0.2)' :
-                                                           'rgba(184, 134, 11, 0.2)',
-                                            ringColor: member.color === 'bg-primary-blue' ? 'rgba(59, 130, 246, 0.3)' :
-                                                      member.color === 'bg-primary-green' ? 'rgba(34, 197, 94, 0.3)' :
-                                                      'rgba(184, 134, 11, 0.3)'
-                                        }}
-                                    >
-                                        <img
-                                            src={member.image}
-                                            alt={member.name}
-                                            className="w-14 h-14 rounded-full object-cover"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-white text-lg">{member.name}</h4>
-                                        <p className="text-xs text-text-muted uppercase tracking-wider">{member.role}</p>
-                                    </div>
-                                </div>
-
-                                {/* Quote */}
-                                <p className="text-text-secondary leading-relaxed relative z-10">
-                                    "{member.quote}"
-                                </p>
-
-                                {/* Decorative gradient */}
-                                <div 
-                                    className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity rounded-b-2xl"
-                                    style={{
-                                        background: member.color === 'bg-primary-blue' ? 'linear-gradient(to right, #3B82F6, transparent)' :
-                                                   member.color === 'bg-primary-green' ? 'linear-gradient(to right, #22C55E, transparent)' :
-                                                   'linear-gradient(to right, #B8860B, transparent)'
-                                    }}
-                                ></div>
-                            </div>
-                        </motion.div>
-                    ))}
+              {/* Contenu */}
+              <div className="relative rounded-2xl border border-dark-border bg-dark-card p-6 transition-all group-hover:border-primary-green/50">
+                {/* Icône quote */}
+                <div className="absolute right-6 top-6 z-10 opacity-20 transition-opacity group-hover:opacity-40">
+                  <QuoteIcon size={32} className="text-primary-green" />
                 </div>
-            </div>
+
+                {/* Infos membre — ring en Tailwind, zéro inline style */}
+                <div className="relative z-10 mb-4 flex items-center gap-4">
+                  <div className={`rounded-full p-1 ring-2 ${RING[member.color]}`}>
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="h-14 w-14 rounded-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold text-white">{member.name}</h4>
+                    <p className="text-xs uppercase tracking-wider text-text-muted">{member.role}</p>
+                  </div>
+                </div>
+
+                {/* Citation */}
+                <p className="relative z-10 leading-relaxed text-text-secondary">
+                  &ldquo;{member.quote}&rdquo;
+                </p>
+
+                {/* Ligne basse — Tailwind gradient */}
+                <div className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl bg-gradient-to-r ${LINE[member.color]} to-transparent opacity-0 transition-opacity group-hover:opacity-100`} />
+              </div>
+            </motion.div>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 };

@@ -1,44 +1,42 @@
 import { Hero } from '../components/sections/Hero';
-import { StatsSection } from '../components/sections/StatsSection';
+import { SuperAppServices } from '../components/sections/SuperAppServices';
 import { MarqueeSection } from '../components/ui/MarqueeSection';
+import { ProfileModesSection } from '../components/sections/ProfileModesSection';
 import { Ecosystem } from '../components/sections/Ecosystem';
-import { PartnersSection } from '../components/sections/PartnersSection';
-import { Services } from '../components/sections/Services';
-import { Portfolio } from '../components/sections/Portfolio';
-import { Community } from '../components/sections/Community';
 import { IdentificationApp } from '../components/sections/IdentificationApp';
+import { Services } from '../components/sections/Services';
 import { Testimonials } from '../components/sections/Testimonials';
-import { Newsletter } from '../components/sections/Newsletter';
+import { CommunityTeaser } from '../components/sections/CommunityTeaser';
 import { FAQ } from '../components/sections/FAQ';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { SEO } from '../components/seo/SEO';
 
 /**
- * HomePage - Copie exacte du App.tsx actuel (one-page)
- * Cette page est temporaire pour migration progressive
- * Elle sera refactorisée pour ne garder que Hero + Stats + CTA
+ * Accueil — fil narratif :
+ * Promesse → Plateforme → Métiers → Profils → Écosystème → Confiance (ID)
+ * → Agence → Preuve sociale → Communauté (teaser) → FAQ → CTA
+ *
+ * Hors accueil : Portfolio (/realisations), Communauté complète (/communaute),
+ * Partenaires (footer), Newsletter (footer).
  */
 export const HomePage = () => {
-    return (
-        <>
-            <SEO
-                title="Accueil"
-                description="La plateforme tout-en-un pour les travailleurs indépendants en Côte d'Ivoire. Trouvez des missions, gérez votre activité et rejoignez une communauté."
-            />
-            <Hero />
-            <StatsSection />
-            <MarqueeSection />
-            <Ecosystem />
-            <Services />
-            <Portfolio />
-            <PartnersSection />
-            <Community />
-            <Testimonials />
-            <Newsletter />
-            <FAQ />
-            <IdentificationApp />
-
-            <FinalCTA />
-        </>
-    );
+  return (
+    <>
+      <SEO
+        title="Accueil"
+        description="La plateforme tout-en-un pour les travailleurs indépendants en Côte d'Ivoire. Trouvez des missions, gérez votre activité et rejoignez une communauté."
+      />
+      <Hero />
+      <SuperAppServices />
+      <MarqueeSection />
+      <ProfileModesSection />
+      <Ecosystem />
+      <IdentificationApp />
+      <Services />
+      <Testimonials />
+      <CommunityTeaser />
+      <FAQ />
+      <FinalCTA />
+    </>
+  );
 };

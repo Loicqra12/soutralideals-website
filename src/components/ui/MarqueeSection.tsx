@@ -18,7 +18,7 @@ const icons = [
 
 export const MarqueeSection = () => {
     return (
-        <div className="relative w-full overflow-hidden bg-dark-bg py-8 -mt-8 mb-8 border-y border-white/5">
+        <div className="relative w-full overflow-hidden border-y border-white/5 bg-dark-bg py-8">
             {/* Gradient Masks for fade effect at edges */}
             <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-dark-bg to-transparent z-10"></div>
             <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-dark-bg to-transparent z-10"></div>

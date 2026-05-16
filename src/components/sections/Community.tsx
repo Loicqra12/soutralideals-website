@@ -4,35 +4,30 @@ import { SectionWrapper } from '../ui/SectionWrapper';
 import { Button } from '../ui/Button';
 import { Users, Briefcase, ShoppingBag, ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
 import heroBackground from '../../assets/images/community/hero/hero-community-background.jpg';
-import heroIllustration from '../../assets/images/community/hero/hero-community-illustration.jpg';
 import heroPeopleConnected from '../../assets/images/community/hero/hero-people-connected.jpg';
 
-// Floating Particles Component
-const FloatingParticles = () => {
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(15)].map((_, i) => (
-                <motion.div
-                    key={i}
-                    className="absolute w-2 h-2 bg-white/20 rounded-full"
-                    initial={{
-                        x: Math.random() * 100 + '%',
-                        y: Math.random() * 100 + '%',
-                    }}
-                    animate={{
-                        x: [null, Math.random() * 100 + '%'],
-                        y: [null, Math.random() * 100 + '%'],
-                    }}
-                    transition={{
-                        duration: Math.random() * 10 + 20,
-                        repeat: Infinity,
-                        repeatType: 'reverse',
-                    }}
-                />
-            ))}
-        </div>
-    );
-};
+// Positions déterministes — pas de Math.random() pour éviter les re-renders instables
+const PARTICLES = Array.from({ length: 15 }, (_, i) => ({
+  x1: `${(i * 7 + 3) % 93}%`,
+  y1: `${(i * 13 + 8) % 88}%`,
+  x2: `${(i * 11 + 55) % 93}%`,
+  y2: `${(i * 17 + 35) % 88}%`,
+  dur: 20 + (i * 3) % 12,
+}));
+
+const FloatingParticles = () => (
+  <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+    {PARTICLES.map((p, i) => (
+      <motion.div
+        key={i}
+        className="absolute h-1.5 w-1.5 rounded-full bg-white/20"
+        initial={{ left: p.x1, top: p.y1 }}
+        animate={{ left: p.x2, top: p.y2 }}
+        transition={{ duration: p.dur, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+      />
+    ))}
+  </div>
+);
 
 export interface CommunityProps {
   /** Sur la page /communaute : un H1 unique pour le SEO */
@@ -69,6 +64,13 @@ export const Community = ({ heroAsH1 = false }: CommunityProps) => {
       tone: 'text-gold-premium',
       bgTone: 'bg-gold-premium/12',
     },
+  ];
+
+  const ecosystemNodes = [
+    { label: 'Freelance', x: '16%', y: '26%' },
+    { label: 'Artisan', x: '36%', y: '66%' },
+    { label: 'Commercant', x: '58%', y: '34%' },
+    { label: 'Client', x: '80%', y: '62%' },
   ];
 
   const softReveal = prefersReducedMotion
@@ -118,21 +120,48 @@ export const Community = ({ heroAsH1 = false }: CommunityProps) => {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
+              animate={
+                prefersReducedMotion
+                  ? {}
+                  : {
+                      y: [0, -1.5, 0],
+                      boxShadow: [
+                        '0 8px 22px rgba(37,211,102,0.22)',
+                        '0 12px 30px rgba(37,211,102,0.34)',
+                        '0 8px 22px rgba(37,211,102,0.22)',
+                      ],
+                    }
+              }
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
               whileHover={prefersReducedMotion ? {} : { y: -2 }}
               whileTap={{ scale: 0.98 }}
+              className="rounded-xl"
             >
-              <Button className="group w-full rounded-xl bg-[#25D366] text-white hover:bg-[#20BA5A]">
+              <Button
+                variant="ghost"
+                className="h-12 w-full rounded-xl border border-[#25D366]/60 bg-gradient-to-r from-[#25D366] to-[#1fb158] px-4 text-sm font-semibold text-white shadow-[0_8px_22px_rgba(37,211,102,0.28)] transition hover:bg-[#20BA5A] hover:shadow-[0_12px_28px_rgba(37,211,102,0.38)]"
+              >
+                <span className="relative inline-flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/85 opacity-70" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
+                </span>
                 <MessageCircle className="h-4 w-4" />
                 Rejoindre WhatsApp
               </Button>
             </motion.a>
             <Link to="/communaute#piliers">
-              <Button variant="outline" className="w-full rounded-xl border-white/30 text-white hover:bg-white/15">
+              <Button
+                variant="outline"
+                className="h-12 w-full rounded-xl border-white/30 px-4 text-sm font-semibold text-white hover:bg-white/15"
+              >
                 Avantages
               </Button>
             </Link>
             <Link to="/communaute#events">
-              <Button variant="outline" className="w-full rounded-xl border-white/30 text-white hover:bg-white/15">
+              <Button
+                variant="outline"
+                className="h-12 w-full rounded-xl border-white/30 px-4 text-sm font-semibold text-white hover:bg-white/15"
+              >
                 Evenements
               </Button>
             </Link>
@@ -173,7 +202,62 @@ export const Community = ({ heroAsH1 = false }: CommunityProps) => {
               whileHover={prefersReducedMotion ? {} : { y: -4 }}
               className="overflow-hidden rounded-2xl border border-white/20 bg-white/5 sm:col-span-2"
             >
-              <img src={heroIllustration} alt="Illustration de la communaute connectee" className="h-40 w-full object-cover" loading="eager" />
+              <div className="relative h-40 w-full overflow-hidden bg-gradient-to-r from-[#061629] via-[#0a2a4f] to-[#0a3f45]">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,197,94,0.28),transparent_45%)]" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_75%,rgba(59,130,246,0.3),transparent_45%)]" />
+
+                {/* Lignes de connexion */}
+                <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden>
+                  <defs>
+                    <linearGradient id="communityLine" x1="0" x2="1" y1="0" y2="0">
+                      <stop offset="0%" stopColor="rgba(74,222,128,0.65)" />
+                      <stop offset="100%" stopColor="rgba(59,130,246,0.65)" />
+                    </linearGradient>
+                  </defs>
+                  <motion.path
+                    d="M16 11 L36 27 L58 14 L80 25"
+                    fill="none"
+                    stroke="url(#communityLine)"
+                    strokeWidth="0.7"
+                    strokeLinecap="round"
+                    strokeDasharray="2.2 2.2"
+                    animate={prefersReducedMotion ? {} : { pathLength: [0.4, 1, 0.4], opacity: [0.45, 0.95, 0.45] }}
+                    transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                </svg>
+
+                {/* Nodes + badges */}
+                {ecosystemNodes.map((node, index) => (
+                  <motion.div
+                    key={node.label}
+                    className="absolute -translate-x-1/2 -translate-y-1/2"
+                    style={{ left: node.x, top: node.y }}
+                    animate={
+                      prefersReducedMotion
+                        ? {}
+                        : {
+                            y: [0, -3, 0],
+                            scale: [1, 1.03, 1],
+                          }
+                    }
+                    transition={{ duration: 2.8, delay: index * 0.22, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <div className="h-2.5 w-2.5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.8)]" />
+                    <div className="mt-1 rounded-full border border-white/20 bg-[#081428]/85 px-2 py-0.5 text-[10px] font-semibold text-white/80 backdrop-blur-sm">
+                      {node.label}
+                    </div>
+                  </motion.div>
+                ))}
+
+                {/* Label principal */}
+                <motion.div
+                  className="absolute right-3 top-3 rounded-full border border-primary-green/35 bg-[#071b1f]/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-green backdrop-blur-sm"
+                  animate={prefersReducedMotion ? {} : { opacity: [0.72, 1, 0.72] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  Reseau actif
+                </motion.div>
+              </div>
             </motion.div>
 
             {audienceCards.map(({ title, subtitle, to, Icon, tone, bgTone }, index) => (
