@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { SEO } from '../../components/seo/SEO';
 import {
   Code2, Smartphone, ShoppingCart, Cloud, ArrowRight, Check,
-  Sparkles, Terminal, Zap, Shield,
+  Sparkles, Terminal, Zap,
 } from 'lucide-react';
 
 // ── Data ──────────────────────────────────────────────────────────────────────

@@ -49,7 +49,8 @@ const ecosystemNodes = [
   { label: 'Client', x: '80%', y: '62%' },
 ];
 
-function CommunityPageHero({ reduced }: { reduced: boolean | null }) {
+function CommunityPageHero({ reduced, heroAsH1 = false }: { reduced: boolean | null; heroAsH1?: boolean }) {
+  const HeadingTag = heroAsH1 ? 'h1' : 'h2';
   return (
     <section
       id="communaute"
@@ -78,9 +79,9 @@ function CommunityPageHero({ reduced }: { reduced: boolean | null }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 className="mb-5 font-heading text-3xl font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-4xl md:text-5xl lg:text-[3.25rem]">
+          <HeadingTag className="mb-5 font-heading text-3xl font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-4xl md:text-5xl lg:text-[3.25rem]">
             Une communauté qui construit l&apos;économie locale
-          </h1>
+          </HeadingTag>
 
           <p className="mb-8 text-base leading-relaxed text-white md:text-lg">
             Prestataires, freelances, vendeurs et entrepreneurs avancent ensemble. Plus qu&apos;un réseau :
@@ -262,7 +263,7 @@ export const Community = ({ heroAsH1 = false }: CommunityProps) => {
 
   return (
     <>
-      <CommunityPageHero reduced={reduced} />
+      <CommunityPageHero reduced={reduced} heroAsH1={heroAsH1} />
       <CommunityAudienceSection reduced={reduced} />
     </>
   );

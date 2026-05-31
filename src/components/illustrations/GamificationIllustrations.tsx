@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TrophyIcon, StarsIcon } from '../icons/GamificationIcons';
+import { StarsIcon } from '../icons/GamificationIcons';
 import { ProgressBar } from '../icons/ProgressBar';
 
 export const GamificationLevelsIllustration: React.FC<{ className?: string }> = ({ className = '' }) => {

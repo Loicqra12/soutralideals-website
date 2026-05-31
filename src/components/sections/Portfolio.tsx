@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useId, useCallback } from 'react';
-import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { ExternalLink, Github, X, Calendar, Tag, ArrowRight, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -78,11 +78,6 @@ const projects: Project[] = [
 
 const INTERVAL_MS = 2800;
 
-const cardVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
-  exit: { opacity: 0, scale: 0.9, transition: { duration: 0.3 } },
-};
 
 export interface PortfolioProps {
   standalonePage?: boolean;

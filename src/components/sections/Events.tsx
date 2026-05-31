@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { RainBackground } from '../ui/RainBackground';
-import { Calendar, Award, MapPin, Code, Building2, GraduationCap, Monitor } from 'lucide-react';
+import { Calendar, MapPin, Code, Building2, GraduationCap, Monitor } from 'lucide-react';
 import orangeFabImage from '../../assets/images/community/events/event-orange-fab-2025.jpg';
 import imphackImage from '../../assets/images/community/events/event-imphack-2023.jpg';
 import scredImage from '../../assets/images/community/events/event-scred-2025.jpg';

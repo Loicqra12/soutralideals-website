@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../../ui/SectionWrapper';
-import { Users, Award, TrendingUp, MapPin, Database, CheckCircle } from 'lucide-react';
+import { Users, Award, TrendingUp, MapPin, Database } from 'lucide-react';
 import recensementImage from '../../../assets/images/project/project_recensement.png';
 
 export const RecensementApp = () => {

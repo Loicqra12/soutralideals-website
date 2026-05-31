@@ -7,7 +7,6 @@ import {
   Shield,
   Activity,
   Award,
-  Users,
   Compass,
   ArrowRight,
   Check,
@@ -16,7 +15,6 @@ import {
   FileCheck,
   Search,
   Code,
-  LineChart,
 } from 'lucide-react';
 
 // ── Données ──────────────────────────────────────────────────────────────────

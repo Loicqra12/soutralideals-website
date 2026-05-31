@@ -47,12 +47,6 @@ const CoteDIvoireMini = () => (
 export const StatsSection = () => {
   const reduced = useReducedMotion();
 
-  const cards = [
-    { id: 'rating', delay: 0 },
-    { id: 'members', delay: 0.1 },
-    { id: 'coverage', delay: 0.2 },
-  ];
-
   return (
     <section className="relative z-30 -mt-24 px-4 pb-20">
       <div className="container-custom">

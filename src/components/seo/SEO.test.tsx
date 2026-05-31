@@ -1,8 +1,28 @@
 import { describe, it, expect } from 'vitest';
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { SEO } from './SEO';
+
+// Fonction waitFor personnalisée pour éviter les dépendances et erreurs de typage externes
+const waitFor = async (callback: () => void, timeout = 1000): Promise<void> => {
+  const start = Date.now();
+  return new Promise((resolve, reject) => {
+    const check = () => {
+      try {
+        callback();
+        resolve();
+      } catch (err) {
+        if (Date.now() - start > timeout) {
+          reject(err);
+        } else {
+          setTimeout(check, 20);
+        }
+      }
+    };
+    check();
+  });
+};
 
 describe('SEO', () => {
   it('expose une balise canonical basée sur le chemin courant', async () => {
