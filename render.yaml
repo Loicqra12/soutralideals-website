@@ -2,7 +2,7 @@ services:
   - type: web
     name: soutralideals-web
     env: static
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --legacy-peer-deps && npm run build
     staticPublishPath: dist
     routes:
       # Règle indispensable pour les Single Page Applications (React Router)
