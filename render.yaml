@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: soutralideals-web
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      # Règle indispensable pour les Single Page Applications (React Router)
+      # Redirige toutes les requêtes vers index.html pour laisser le routeur gérer l'affichage
+      - type: rewrite
+        source: /*
+        destination: /index.html
