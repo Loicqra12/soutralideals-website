@@ -17,6 +17,55 @@ const defaultOptional = (): Pick<CookieConsentPreferences, 'functional' | 'analy
   marketing: false,
 });
 
+const SWITCH_BASE =
+  'relative inline-flex h-7 w-12 shrink-0 items-center rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(45,45%,96%)]';
+
+function ConsentSwitch({
+  checked,
+  label,
+  onToggle,
+}: {
+  checked: boolean;
+  label: string;
+  onToggle: () => void;
+}) {
+  const knob = (
+    <span
+      className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
+        checked ? 'translate-x-6' : 'translate-x-1'
+      }`}
+    />
+  );
+
+  if (checked) {
+    return (
+      <button
+        type="button"
+        role="switch"
+        aria-checked="true"
+        aria-label={`Désactiver ${label}`}
+        onClick={onToggle}
+        className={`${SWITCH_BASE} border-primary-green/40 bg-primary-green/90`}
+      >
+        {knob}
+      </button>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked="false"
+      aria-label={`Activer ${label}`}
+      onClick={onToggle}
+      className={`${SWITCH_BASE} border-dark-border/40 bg-white`}
+    >
+      {knob}
+    </button>
+  );
+}
+
 export const CookieBanner = () => {
   const panelId = useId();
   const [visible, setVisible] = useState(false);
@@ -179,7 +228,9 @@ export const CookieBanner = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setSettingsOpen((o) => !o)}
-                      aria-expanded={settingsOpen}
+                      {...(settingsOpen
+                        ? { 'aria-expanded': 'true' }
+                        : { 'aria-expanded': 'false' })}
                       aria-controls={panelId}
                       className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary-blue/70 bg-white/90 px-4 py-2.5 text-sm font-semibold text-primary-blue shadow-sm transition hover:bg-primary-blue/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(45,45%,96%)]"
                     >
@@ -237,23 +288,11 @@ export const CookieBanner = () => {
                               <p className="text-sm font-semibold text-dark-bg">{label}</p>
                               <p className="mt-0.5 text-xs text-text-muted">{description}</p>
                             </div>
-                            <button
-                              type="button"
-                              role="switch"
-                              aria-checked={prefs[key]}
-                              onClick={() => setPrefs((p) => ({ ...p, [key]: !p[key] }))}
-                              className={`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(45,45%,96%)] ${
-                                prefs[key]
-                                  ? 'border-primary-green/40 bg-primary-green/90'
-                                  : 'border-dark-border/40 bg-white'
-                              }`}
-                            >
-                              <span
-                                className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
-                                  prefs[key] ? 'translate-x-6' : 'translate-x-1'
-                                }`}
-                              />
-                            </button>
+                            <ConsentSwitch
+                              checked={prefs[key]}
+                              label={label}
+                              onToggle={() => setPrefs((p) => ({ ...p, [key]: !p[key] }))}
+                            />
                           </div>
                         ))}
                       </div>

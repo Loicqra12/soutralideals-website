@@ -34,6 +34,7 @@ export default {
         'slide-down': 'slideDown 0.6s ease-out',
         'scale-in': 'scaleIn 0.4s ease-out',
         'glow': 'glow 2s ease-in-out infinite alternate',
+        'trust-marquee': 'trust-marquee 38s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -55,6 +56,10 @@ export default {
         glow: {
           '0%': { boxShadow: '0 0 20px rgba(45, 212, 191, 0.3)' },
           '100%': { boxShadow: '0 0 40px rgba(45, 212, 191, 0.6)' },
+        },
+        'trust-marquee': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       backgroundImage: {

@@ -37,6 +37,10 @@ export const InformationsLegalesPage = () => {
       <SEO
         title="Informations légales"
         description="Mentions légales, politique de confidentialité, cookies, CGV, CGU et autres documents Soutrali Deals."
+        breadcrumbs={[
+          { name: 'Accueil', path: '/' },
+          { name: 'Informations légales', path: '/informations-legales' },
+        ]}
       />
       <div className="border-b border-dark-border bg-gradient-to-b from-dark-card to-dark-bg pt-24 pb-12">
         <div className="container-custom max-w-3xl">

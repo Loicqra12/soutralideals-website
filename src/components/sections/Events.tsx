@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
+import { RainBackground } from '../ui/RainBackground';
 import { Calendar, Award, MapPin, Code, Building2, GraduationCap, Monitor } from 'lucide-react';
 import orangeFabImage from '../../assets/images/community/events/event-orange-fab-2025.jpg';
 import imphackImage from '../../assets/images/community/events/event-imphack-2023.jpg';
@@ -110,15 +111,15 @@ const events: Event[] = [
 
 export const Events = () => {
     return (
-        <SectionWrapper id="events" bg="dark">
+        <SectionWrapper id="events" bg="dark" decorativeBackground={<RainBackground />}>
             <div className="text-center max-w-4xl mx-auto mb-16">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
-                        Nos Événements & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-gold-premium">Distinctions</span>
+                    <h2 className="mb-6 font-heading text-3xl font-bold text-white md:text-5xl">
+                        Nos Événements & Distinctions
                     </h2>
                     <p className="text-lg text-text-secondary">
                         Une équipe active sur le terrain, récompensée pour son impact et son innovation.

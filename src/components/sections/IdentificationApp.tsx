@@ -58,7 +58,7 @@ export const IdentificationApp = () => {
                     className={`w-full rounded-lg py-4 pl-5 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-green/40 ${
                       isActive ? 'border-l-[3px] border-primary-green bg-white/60' : 'border-l-[3px] border-transparent hover:bg-white/40'
                     }`}
-                    aria-expanded={isActive}
+                    {...(isActive ? { 'aria-expanded': 'true' } : { 'aria-expanded': 'false' })}
                   >
                     <span
                       className={`block text-base md:text-lg ${

@@ -1,291 +1,269 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { SectionWrapper } from '../ui/SectionWrapper';
 import { Button } from '../ui/Button';
-import { Users, Briefcase, ShoppingBag, ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
-import heroBackground from '../../assets/images/community/hero/hero-community-background.jpg';
-import heroPeopleConnected from '../../assets/images/community/hero/hero-people-connected.jpg';
+import { Users, Briefcase, ShoppingBag, ArrowRight, MessageCircle } from 'lucide-react';
+import heroIllustration from '../../assets/images/community/hero/hero-community-illustration.jpg';
 
-// Positions déterministes — pas de Math.random() pour éviter les re-renders instables
-const PARTICLES = Array.from({ length: 15 }, (_, i) => ({
-  x1: `${(i * 7 + 3) % 93}%`,
-  y1: `${(i * 13 + 8) % 88}%`,
-  x2: `${(i * 11 + 55) % 93}%`,
-  y2: `${(i * 17 + 35) % 88}%`,
-  dur: 20 + (i * 3) % 12,
-}));
+const WHATSAPP_URL = 'https://chat.whatsapp.com/JnPGnE5qAFPLTg5foFozm5';
 
-const FloatingParticles = () => (
-  <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-    {PARTICLES.map((p, i) => (
-      <motion.div
-        key={i}
-        className="absolute h-1.5 w-1.5 rounded-full bg-white/20"
-        initial={{ left: p.x1, top: p.y1 }}
-        animate={{ left: p.x2, top: p.y2 }}
-        transition={{ duration: p.dur, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-      />
-    ))}
-  </div>
-);
+const STATS = [
+  { value: '400+', label: 'Membres actifs' },
+  { value: '50+', label: 'Partenaires' },
+  { value: '24/7', label: 'Entraide' },
+] as const;
 
-export interface CommunityProps {
-  /** Sur la page /communaute : un H1 unique pour le SEO */
-  heroAsH1?: boolean;
-}
+const audienceCards = [
+  {
+    title: 'Pour les Freelances',
+    subtitle: 'Développeurs, graphistes, rédacteurs…',
+    to: '/communaute#freelances',
+    Icon: Briefcase,
+    tone: 'text-primary-blue',
+    bgTone: 'bg-primary-blue/25',
+    borderTone: 'border-primary-blue/35',
+  },
+  {
+    title: 'Pour les Artisans',
+    subtitle: 'Menuisiers, mécaniciens, coiffeurs…',
+    to: '/communaute#artisans',
+    Icon: Users,
+    tone: 'text-primary-green',
+    bgTone: 'bg-primary-green/25',
+    borderTone: 'border-primary-green/35',
+  },
+  {
+    title: 'Pour les Commerçants',
+    subtitle: 'Boutiques, vendeurs, e-commerçants…',
+    to: '/communaute#commercants',
+    Icon: ShoppingBag,
+    tone: 'text-gold-premium',
+    bgTone: 'bg-gold-premium/25',
+    borderTone: 'border-gold-premium/35',
+  },
+];
 
-export const Community = ({ heroAsH1 = false }: CommunityProps) => {
-  const whatsappLink = 'https://chat.whatsapp.com/JnPGnE5qAFPLTg5foFozm5';
-  const prefersReducedMotion = useReducedMotion();
-  const TitleTag = heroAsH1 ? motion.h1 : motion.h2;
+const ecosystemNodes = [
+  { label: 'Freelance', x: '16%', y: '26%' },
+  { label: 'Artisan', x: '36%', y: '66%' },
+  { label: 'Commerçant', x: '58%', y: '34%' },
+  { label: 'Client', x: '80%', y: '62%' },
+];
 
-  const audienceCards = [
-    {
-      title: 'Pour les Freelances',
-      subtitle: 'Developpeurs, graphistes, redacteurs...',
-      to: '/communaute#freelances',
-      Icon: Briefcase,
-      tone: 'text-primary-blue',
-      bgTone: 'bg-primary-blue/12',
-    },
-    {
-      title: 'Pour les Artisans',
-      subtitle: 'Menuisiers, mecaniciens, coiffeurs...',
-      to: '/communaute#artisans',
-      Icon: Users,
-      tone: 'text-primary-green',
-      bgTone: 'bg-primary-green/12',
-    },
-    {
-      title: 'Pour les Commercants',
-      subtitle: 'Boutiques, vendeurs, e-commercants...',
-      to: '/communaute#commercants',
-      Icon: ShoppingBag,
-      tone: 'text-gold-premium',
-      bgTone: 'bg-gold-premium/12',
-    },
-  ];
-
-  const ecosystemNodes = [
-    { label: 'Freelance', x: '16%', y: '26%' },
-    { label: 'Artisan', x: '36%', y: '66%' },
-    { label: 'Commercant', x: '58%', y: '34%' },
-    { label: 'Client', x: '80%', y: '62%' },
-  ];
-
-  const softReveal = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 18 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.25 },
-        transition: { duration: 0.45, ease: 'easeOut' as const },
-      };
-
+function CommunityPageHero({ reduced }: { reduced: boolean | null }) {
   return (
-    <SectionWrapper id="communaute" bg="dark" className="relative overflow-hidden">
-      <FloatingParticles />
+    <section
+      id="communaute"
+      className="relative flex min-h-[min(72vh,680px)] items-end overflow-hidden bg-[#070d1c] md:min-h-[min(80vh,760px)] md:items-center"
+    >
+      <img
+        src={heroIllustration}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover object-[72%_center] md:object-[78%_center]"
+        loading="eager"
+      />
+      <motion.div className="absolute inset-0 bg-[#040b18]/50" aria-hidden />
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-[#040b18]/96 via-[#061024]/88 to-[#061024]/25"
+        aria-hidden
+      />
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-t from-[#040b18]/80 via-transparent to-[#040b18]/45 md:from-[#040b18]/55"
+        aria-hidden
+      />
 
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <img src={heroBackground} alt="" className="h-full w-full object-cover opacity-15" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#061024] via-[#0b2557]/90 to-[#163f88]/85" />
-        <div className="absolute -left-24 top-0 h-[140%] w-[40%] bg-primary-blue/20 [clip-path:polygon(0_0,75%_0,25%_100%,0_100%)]" />
-      </div>
+      <motion.div className="relative z-10 mx-auto w-full max-w-[1520px] px-4 pb-14 pt-28 text-left sm:px-6 md:pb-20 md:pt-32 lg:px-8 2xl:px-12">
+        <motion.div
+          className="max-w-xl md:max-w-2xl"
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <h1 className="mb-5 font-heading text-3xl font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-4xl md:text-5xl lg:text-[3.25rem]">
+            Une communauté qui construit l&apos;économie locale
+          </h1>
 
-      <div className="relative z-10 grid items-start gap-8 lg:grid-cols-12">
-        <motion.div {...softReveal} className="rounded-3xl border border-white/15 bg-[#0a1a37]/75 p-6 backdrop-blur-sm sm:p-8 lg:col-span-6">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2">
-            <Users className="h-4 w-4 text-white" />
-            <span className="text-sm font-semibold text-white">La Force du Nombre</span>
-            <Sparkles className="h-4 w-4 text-primary-green" />
-          </div>
-
-          <TitleTag
-            className="mb-5 font-heading text-3xl font-bold text-white md:text-5xl"
-            initial={prefersReducedMotion ? false : { opacity: 0, filter: 'blur(4px)' }}
-            whileInView={prefersReducedMotion ? {} : { opacity: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.08 }}
-          >
-            Une communaute qui construit <span className="text-primary-green">l&apos;economie locale</span>
-          </TitleTag>
-
-          <p className="mb-7 text-base leading-relaxed text-white/85 md:text-lg">
-            Prestataires, freelances, vendeurs, entrepreneurs et equipes terrain avances ensemble.
-            Plus qu&apos;un reseau, c&apos;est un cadre d&apos;entraide, d&apos;opportunites et de progression concrete.
+          <p className="mb-8 text-base leading-relaxed text-white md:text-lg">
+            Prestataires, freelances, vendeurs et entrepreneurs avancent ensemble. Plus qu&apos;un réseau :
+            un cadre d&apos;entraide, d&apos;opportunités et de progression concrète en Côte d&apos;Ivoire.
           </p>
 
-          <div className="mb-8 grid gap-3 sm:grid-cols-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <motion.a
-              href={whatsappLink}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              animate={
-                prefersReducedMotion
-                  ? {}
-                  : {
-                      y: [0, -1.5, 0],
-                      boxShadow: [
-                        '0 8px 22px rgba(37,211,102,0.22)',
-                        '0 12px 30px rgba(37,211,102,0.34)',
-                        '0 8px 22px rgba(37,211,102,0.22)',
-                      ],
-                    }
-              }
-              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-              whileHover={prefersReducedMotion ? {} : { y: -2 }}
+              whileHover={reduced ? {} : { y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="rounded-xl"
+              className="sm:flex-1 sm:max-w-xs"
             >
               <Button
                 variant="ghost"
-                className="h-12 w-full rounded-xl border border-[#25D366]/60 bg-gradient-to-r from-[#25D366] to-[#1fb158] px-4 text-sm font-semibold text-white shadow-[0_8px_22px_rgba(37,211,102,0.28)] transition hover:bg-[#20BA5A] hover:shadow-[0_12px_28px_rgba(37,211,102,0.38)]"
+                className="h-12 w-full rounded-xl border border-[#25D366]/60 bg-gradient-to-r from-[#25D366] to-[#1fb158] px-5 text-sm font-semibold text-white shadow-[0_8px_22px_rgba(37,211,102,0.28)] hover:bg-[#20BA5A]"
               >
-                <span className="relative inline-flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/85 opacity-70" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
-                </span>
                 <MessageCircle className="h-4 w-4" />
                 Rejoindre WhatsApp
               </Button>
             </motion.a>
-            <Link to="/communaute#piliers">
+            <Link to="/communaute#piliers" className="sm:flex-1 sm:max-w-[11rem]">
               <Button
                 variant="outline"
-                className="h-12 w-full rounded-xl border-white/30 px-4 text-sm font-semibold text-white hover:bg-white/15"
+                className="h-12 w-full rounded-xl border-white/40 bg-transparent px-5 text-sm font-semibold text-white hover:bg-white/10"
               >
-                Avantages
+                Nos avantages
               </Button>
             </Link>
-            <Link to="/communaute#events">
-              <Button
-                variant="outline"
-                className="h-12 w-full rounded-xl border-white/30 px-4 text-sm font-semibold text-white hover:bg-white/15"
-              >
-                Evenements
-              </Button>
+            <Link
+              to="/communaute#events"
+              className="text-sm font-semibold text-white underline-offset-4 transition hover:underline sm:px-2"
+            >
+              Voir les événements
             </Link>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 border-t border-white/15 pt-6">
-            {[
-              ['400+', 'Membres actifs'],
-              ['50+', 'Partenaires'],
-              ['24/7', 'Entraide'],
-            ].map(([value, label], idx) => (
+          <div className="mt-10 grid max-w-lg grid-cols-3 gap-3 border-t border-white/20 pt-8 sm:max-w-xl">
+            {STATS.map(({ value, label }, idx) => (
               <motion.div
                 key={label}
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
-                whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.12 + idx * 0.05 }}
-                whileHover={prefersReducedMotion ? {} : { y: -3 }}
-                className="rounded-xl border border-white/15 bg-white/5 p-3"
+                initial={reduced ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: 0.35 + idx * 0.06 }}
+                className="text-left"
               >
-                <div className="text-2xl font-bold text-white">{value}</div>
-                <div className="text-xs text-white/75">{label}</div>
+                <motion.div className="font-heading text-2xl font-bold text-white md:text-3xl">{value}</motion.div>
+                <p className="mt-0.5 text-xs text-white md:text-sm">{label}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
+      </motion.div>
+    </section>
+  );
+}
 
-        <motion.div {...softReveal} transition={{ duration: 0.55, delay: 0.08 }} className="space-y-4 lg:col-span-6">
-          <motion.div
-            whileHover={prefersReducedMotion ? {} : { y: -4 }}
-            className="overflow-hidden rounded-2xl border border-white/20 bg-white/5"
-          >
-            <img src={heroPeopleConnected} alt="Photo de la communaute Soutrali Deals" className="h-56 w-full object-cover md:h-64" loading="lazy" />
-          </motion.div>
+function CommunityNetworkBackground({ reduced }: { reduced: boolean | null }) {
+  return (
+    <motion.div className="absolute inset-0 bg-[#0a1528]" aria-hidden>
+      <motion.div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(34,197,94,0.28),transparent_55%)]" />
+      <motion.div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_88%_78%,rgba(59,130,246,0.24),transparent_55%)]" />
+      <motion.div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#061024]/25 via-transparent to-[#040b18]/50" />
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <motion.div
-              whileHover={prefersReducedMotion ? {} : { y: -4 }}
-              className="overflow-hidden rounded-2xl border border-white/20 bg-white/5 sm:col-span-2"
-            >
-              <div className="relative h-40 w-full overflow-hidden bg-gradient-to-r from-[#061629] via-[#0a2a4f] to-[#0a3f45]">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,197,94,0.28),transparent_45%)]" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_75%,rgba(59,130,246,0.3),transparent_45%)]" />
+      <svg className="absolute inset-0 h-full w-full opacity-90" viewBox="0 0 100 40" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="communityLineProfils" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stopColor="rgba(74,222,128,0.75)" />
+            <stop offset="100%" stopColor="rgba(59,130,246,0.75)" />
+          </linearGradient>
+        </defs>
+        <motion.path
+          d="M16 11 L36 27 L58 14 L80 25"
+          fill="none"
+          stroke="url(#communityLineProfils)"
+          strokeWidth="0.85"
+          strokeLinecap="round"
+          strokeDasharray="2.2 2.2"
+          animate={reduced ? {} : { pathLength: [0.4, 1, 0.4], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </svg>
 
-                {/* Lignes de connexion */}
-                <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden>
-                  <defs>
-                    <linearGradient id="communityLine" x1="0" x2="1" y1="0" y2="0">
-                      <stop offset="0%" stopColor="rgba(74,222,128,0.65)" />
-                      <stop offset="100%" stopColor="rgba(59,130,246,0.65)" />
-                    </linearGradient>
-                  </defs>
-                  <motion.path
-                    d="M16 11 L36 27 L58 14 L80 25"
-                    fill="none"
-                    stroke="url(#communityLine)"
-                    strokeWidth="0.7"
-                    strokeLinecap="round"
-                    strokeDasharray="2.2 2.2"
-                    animate={prefersReducedMotion ? {} : { pathLength: [0.4, 1, 0.4], opacity: [0.45, 0.95, 0.45] }}
-                    transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-                </svg>
-
-                {/* Nodes + badges */}
-                {ecosystemNodes.map((node, index) => (
-                  <motion.div
-                    key={node.label}
-                    className="absolute -translate-x-1/2 -translate-y-1/2"
-                    style={{ left: node.x, top: node.y }}
-                    animate={
-                      prefersReducedMotion
-                        ? {}
-                        : {
-                            y: [0, -3, 0],
-                            scale: [1, 1.03, 1],
-                          }
-                    }
-                    transition={{ duration: 2.8, delay: index * 0.22, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <div className="h-2.5 w-2.5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.8)]" />
-                    <div className="mt-1 rounded-full border border-white/20 bg-[#081428]/85 px-2 py-0.5 text-[10px] font-semibold text-white/80 backdrop-blur-sm">
-                      {node.label}
-                    </div>
-                  </motion.div>
-                ))}
-
-                {/* Label principal */}
-                <motion.div
-                  className="absolute right-3 top-3 rounded-full border border-primary-green/35 bg-[#071b1f]/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-green backdrop-blur-sm"
-                  animate={prefersReducedMotion ? {} : { opacity: [0.72, 1, 0.72] }}
-                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  Reseau actif
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {audienceCards.map(({ title, subtitle, to, Icon, tone, bgTone }, index) => (
-              <Link key={title} to={to} className={index === 2 ? 'sm:col-span-2' : ''}>
-                <motion.div
-                  whileHover={prefersReducedMotion ? {} : { y: -3 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                  className="group flex h-full items-center gap-3 rounded-2xl border border-white/20 bg-white/90 p-4 shadow-xl transition"
-                >
-                  <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${bgTone} ${tone}`}>
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{title}</h4>
-                    <p className="text-sm text-gray-600">{subtitle}</p>
-                  </div>
-                  <motion.div
-                    animate={prefersReducedMotion ? {} : { x: [0, 2, 0] }}
-                    transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <ArrowRight className="ml-auto h-5 w-5 text-gray-400 transition group-hover:translate-x-1 group-hover:text-gray-700" />
-                  </motion.div>
-                </motion.div>
-              </Link>
-            ))}
+      {ecosystemNodes.map((node, index) => (
+        <motion.div
+          key={node.label}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
+          style={{ left: node.x, top: node.y }}
+          animate={reduced ? {} : { y: [0, -4, 0], scale: [1, 1.04, 1] }}
+          transition={{ duration: 2.8, delay: index * 0.22, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <div className="h-3 w-3 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,0.9)]" />
+          <div className="mt-1.5 whitespace-nowrap rounded-full border border-white/25 bg-[#081428]/92 px-2.5 py-1 text-[11px] font-semibold text-white/90 backdrop-blur-sm">
+            {node.label}
           </div>
         </motion.div>
-      </div>
-    </SectionWrapper>
+      ))}
+    </motion.div>
+  );
+}
+
+function CommunityAudienceSection({ reduced }: { reduced: boolean | null }) {
+  const softReveal = reduced
+    ? {}
+    : {
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: '-60px' },
+        transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+      };
+
+  return (
+    <section id="profils" className="border-t border-[#e8e8e8]">
+      <motion.div
+        {...softReveal}
+        className="bg-[#f6f7f8] px-4 py-14 sm:px-6 md:py-20 lg:px-8 2xl:px-12"
+      >
+        <motion.div className="mx-auto max-w-[1520px] text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#888]">Les Soutraliens</p>
+          <h2 className="mx-auto mt-3 max-w-4xl font-heading text-3xl font-bold leading-[1.1] tracking-[-0.03em] text-[#111] sm:text-4xl md:text-5xl lg:text-[3.5rem]">
+            Un réseau pour chaque profil
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#6b6b6b] md:text-lg">
+            Freelances, artisans et commerçants connectés aux clients et aux opportunités sur la même plateforme.
+          </p>
+        </motion.div>
+      </motion.div>
+
+      <motion.div className="relative min-h-[min(480px,78vw)] overflow-hidden md:min-h-[520px] lg:min-h-[560px]">
+        <CommunityNetworkBackground reduced={reduced} />
+
+        <motion.div className="relative z-10 flex min-h-[inherit] items-end px-4 pb-10 pt-6 sm:px-6 sm:pb-12 sm:pt-8 md:pb-14 md:pt-10 lg:px-8 2xl:px-12">
+          <motion.div className="mx-auto w-full max-w-[1520px]">
+            <motion.div
+              {...softReveal}
+              transition={{ duration: 0.5, delay: 0.08 }}
+              className="grid gap-4 md:grid-cols-3 md:gap-5 lg:gap-6"
+            >
+              {audienceCards.map(({ title, subtitle, to, Icon, tone, bgTone, borderTone }, index) => (
+                <Link key={title} to={to} className="block h-full">
+                  <motion.div
+                    initial={reduced ? false : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.45, delay: 0.1 + index * 0.08 }}
+                    whileHover={reduced ? {} : { y: -3 }}
+                    className="group flex h-full min-h-[140px] items-center gap-4 rounded-3xl border border-white/[0.12] bg-[#1c2636]/55 p-5 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.45)] backdrop-blur-md transition-colors hover:border-white/20 hover:bg-[#243044]/65 sm:min-h-[152px] sm:p-6 md:min-h-[160px] md:p-7"
+                  >
+                    <div
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border sm:h-12 sm:w-12 ${bgTone} ${borderTone} ${tone}`}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold leading-snug text-white sm:text-lg">{title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-white/72">{subtitle}</p>
+                    </div>
+                    <ArrowRight className="h-5 w-5 shrink-0 text-white/45 transition group-hover:translate-x-0.5 group-hover:text-white/90" />
+                  </motion.div>
+                </Link>
+              ))}
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+
+export interface CommunityProps {
+  /** Sur la page /communaute : hero plein écran + H1 */
+  heroAsH1?: boolean;
+}
+
+export const Community = ({ heroAsH1 = false }: CommunityProps) => {
+  const reduced = useReducedMotion();
+
+  return (
+    <>
+      <CommunityPageHero reduced={reduced} />
+      <CommunityAudienceSection reduced={reduced} />
+    </>
   );
 };

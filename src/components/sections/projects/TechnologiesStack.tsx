@@ -1,102 +1,146 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { SectionWrapper } from '../../ui/SectionWrapper';
-import { Smartphone, Globe, Server, Cpu } from 'lucide-react';
+import {
+  TECH_ARCHITECTURE_POINTS,
+  TECH_CATEGORIES,
+} from './techStackData';
+import { TechCategoryCard } from './TechCategoryCard';
+import { TechBrandIcon } from './TechBrandIcon';
+import {
+  siFirebase,
+  siFlutter,
+  siMapbox,
+  siNodedotjs,
+  siPostgresql,
+  siReact,
+} from 'simple-icons';
 
-const techCategories = [
-    {
-        title: 'Mobile',
-        icon: Smartphone,
-        technologies: ['Flutter', 'Dart', 'Android (Kotlin)', 'iOS (Swift)', 'Firebase'],
-        bgColor: 'bg-gold-premium/10',
-        iconColor: 'text-gold-premium'
-    },
-    {
-        title: 'Web',
-        icon: Globe,
-        technologies: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Flutter Web'],
-        bgColor: 'bg-primary-blue/10',
-        iconColor: 'text-primary-blue'
-    },
-    {
-        title: 'Backend',
-        icon: Server,
-        technologies: ['Node.js', 'API REST', 'GraphQL', 'PostgreSQL', 'MongoDB'],
-        bgColor: 'bg-primary-green/10',
-        iconColor: 'text-primary-green'
-    },
-    {
-        title: 'Outils & Services',
-        icon: Cpu,
-        technologies: ['IA (OpenAI)', 'Géolocalisation (Mapbox)', 'Mobile Money APIs', 'Analytics', 'CI/CD'],
-        bgColor: 'bg-gold-premium/10',
-        iconColor: 'text-gold-premium'
-    }
-];
+const PIPELINE_ICONS = [
+  { label: 'Flutter', icon: siFlutter },
+  { label: 'React', icon: siReact },
+  { label: 'Node.js', icon: siNodedotjs },
+  { label: 'PostgreSQL', icon: siPostgresql },
+  { label: 'Firebase', icon: siFirebase },
+  { label: 'Mapbox', icon: siMapbox },
+] as const;
+
+const mobile = TECH_CATEGORIES.find((c) => c.id === 'mobile')!;
+const web = TECH_CATEGORIES.find((c) => c.id === 'web')!;
+const backend = TECH_CATEGORIES.find((c) => c.id === 'backend')!;
+const tools = TECH_CATEGORIES.find((c) => c.id === 'tools')!;
 
 export const TechnologiesStack = () => {
-    return (
-        <SectionWrapper id="technologies" bg="dark">
-            <div className="container-custom">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center max-w-3xl mx-auto mb-16"
-                >
-                    <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
-                        Technologies & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-primary-blue">Compétences</span>
-                    </h2>
-                    <p className="text-lg text-text-secondary">
-                        Un stack technique moderne et performant pour des solutions évolutives
-                    </p>
-                </motion.div>
+  const reduced = useReducedMotion();
 
-                <div className="grid md:grid-cols-2 gap-8">
-                    {techCategories.map((category, index) => {
-                        const Icon = category.icon;
-                        return (
-                            <motion.div
-                                key={category.title}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-primary-green/50 transition-all"
-                            >
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className={`w-14 h-14 rounded-xl ${category.bgColor} flex items-center justify-center`}>
-                                        <Icon className={`w-7 h-7 ${category.iconColor}`} />
-                                    </div>
-                                    <h3 className="font-bold text-white text-2xl">{category.title}</h3>
-                                </div>
-                                <div className="flex flex-wrap gap-3">
-                                    {category.technologies.map((tech, i) => (
-                                        <span
-                                            key={i}
-                                            className="px-4 py-2 rounded-lg bg-dark-bg border border-dark-border text-text-secondary text-sm font-mono hover:border-primary-green/50 transition-colors"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
+  return (
+    <SectionWrapper id="technologies" bg="dark" className="relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,hsl(142,71%,45%)/0.05,transparent_60%)]"
+        aria-hidden
+      />
 
-                {/* Architecture Note */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-12 bg-gradient-to-r from-dark-card to-dark-bg border border-dark-border rounded-2xl p-8 text-center"
-                >
-                    <h3 className="font-bold text-white text-xl mb-4">Architecture Scalable & Sécurisée</h3>
-                    <p className="text-text-secondary max-w-2xl mx-auto">
-                        Notre infrastructure cloud garantit performance, sécurité et scalabilité pour accompagner votre croissance.
-                    </p>
-                </motion.div>
+      <div className="relative z-10">
+        <div className="mx-auto max-w-3xl text-center">
+          <motion.h2
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-heading text-3xl font-bold md:text-5xl"
+          >
+            Technologies &{' '}
+            <span className="bg-gradient-to-r from-primary-green to-primary-blue bg-clip-text text-transparent">
+              Compétences
+            </span>
+          </motion.h2>
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="mt-5 text-lg text-text-secondary"
+          >
+            Le stack réellement utilisé sur Soutrali : mobile Flutter, web React, API Node.js et
+            données PostgreSQL — avec Firebase, Mapbox et les APIs Mobile Money.
+          </motion.p>
+        </div>
+
+        {/* Pipeline produit (remplace les stats génériques) */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.08 }}
+          className="mx-auto mt-10 flex max-w-4xl flex-wrap items-center justify-center gap-2 md:gap-3"
+          aria-label="Chaîne technique du produit"
+        >
+          {PIPELINE_ICONS.map((step, i) => (
+            <span key={step.label} className="flex items-center gap-2 md:gap-3">
+              <span className="inline-flex items-center gap-2 rounded-lg border border-dark-border bg-dark-bg px-3 py-2">
+                <TechBrandIcon icon={step.icon} size={18} />
+                <span className="text-sm font-medium text-[#d8dee8]">{step.label}</span>
+              </span>
+              {i < PIPELINE_ICONS.length - 1 ? (
+                <span className="hidden text-[#5a6570] sm:inline" aria-hidden>
+                  →
+                </span>
+              ) : null}
+            </span>
+          ))}
+        </motion.div>
+
+        <div className="mt-14 grid gap-4 lg:grid-cols-3 lg:grid-rows-2 lg:gap-5">
+          <TechCategoryCard category={mobile} index={0} className="lg:row-span-2" />
+          <TechCategoryCard category={web} index={1} />
+          <TechCategoryCard category={backend} index={2} />
+          <TechCategoryCard category={tools} index={3} className="lg:col-span-2" />
+        </div>
+
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 rounded-2xl border border-dark-border bg-dark-card p-8 md:p-10"
+        >
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+            <div>
+              <h3 className="font-heading text-xl font-bold text-white md:text-2xl">
+                Architecture scalable & sécurisée
+              </h3>
+              <ul className="mt-6 space-y-4">
+                {TECH_ARCHITECTURE_POINTS.map((point, i) => (
+                  <li key={point} className="flex gap-4 text-sm leading-relaxed text-[#9aa8b8]">
+                    <span className="font-mono text-xs font-bold text-primary-green/80">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
-        </SectionWrapper>
-    );
+
+            <div
+              className="rounded-xl border border-dark-border bg-dark-bg p-5 font-mono text-xs leading-relaxed text-[#8a96a8] md:text-sm"
+              aria-label="Schéma simplifié de l'architecture"
+            >
+              <p className="text-[#c5cdd8]">
+                <span className="text-primary-green">[Mobile]</span> Flutter App
+              </p>
+              <p className="my-2 text-white/30">↓ HTTPS</p>
+              <p className="text-[#c5cdd8]">
+                <span className="text-primary-blue">[API]</span> Node.js · REST / GraphQL
+              </p>
+              <p className="my-2 text-white/30">↓</p>
+              <p className="text-[#c5cdd8]">
+                <span className="text-gold-premium">[Data]</span> PostgreSQL · MongoDB
+              </p>
+              <p className="my-2 text-white/30">↔</p>
+              <p className="text-[#c5cdd8]">
+                <span className="text-teal-400">[Services]</span> Firebase · Mapbox · Mobile Money
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </SectionWrapper>
+  );
 };

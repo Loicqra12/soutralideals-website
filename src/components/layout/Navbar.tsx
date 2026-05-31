@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useId } from 'react';
-import { Menu, X, ChevronDown, Code2, Building2, LineChart, Palette, Megaphone, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight, ArrowLeft, Code2, Building2, LineChart, Palette, Megaphone, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
@@ -108,9 +108,10 @@ function ServicesMenuDesktop({
         <button
           type="button"
           className={`${linkClass(isActive)} inline-flex items-center rounded-r-lg px-1.5 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40`}
-          aria-expanded={open ? 'true' : 'false'}
           aria-haspopup="menu"
-          aria-controls={menuId}
+          {...(open
+            ? ({ 'aria-expanded': 'true', 'aria-controls': menuId } as const)
+            : ({ 'aria-expanded': 'false' } as const))}
           onClick={() => setOpen((v) => !v)}
           onKeyDown={(e) => {
             if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
@@ -134,7 +135,7 @@ function ServicesMenuDesktop({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="absolute left-1/2 top-full z-50 mt-3 w-[640px] -translate-x-1/3 rounded-2xl border border-white/10 bg-[#08101f] shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-2xl ring-1 ring-white/5"
+            className="absolute left-1/2 top-full z-50 mt-3 w-[min(640px,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-white/10 bg-[#08101f] shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-2xl ring-1 ring-white/5 lg:-translate-x-1/3"
           >
             {/* top accent line */}
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r from-primary-green/50 via-primary-blue/50 to-transparent" />
@@ -172,7 +173,7 @@ function ServicesMenuDesktop({
 
                 <div className="mt-3 border-t border-white/8 pt-3 px-3">
                   <Link
-                    to="/contact"
+                    to="/devis"
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary-green/80 hover:text-primary-green transition"
                     onClick={() => setOpen(false)}
                   >
@@ -249,8 +250,15 @@ function NavItem({ link }: { link: NavLinkItem }) {
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileMenuPath, setMobileMenuPath] = useState<string | false>(false);
+  const [mobileSubmenu, setMobileSubmenu] = useState<null | 'services'>(null);
   const location = useLocation();
+  const isMobileMenuOpen = mobileMenuPath === location.pathname;
+
+  const closeMobileMenu = () => {
+    setMobileMenuPath(false);
+    setMobileSubmenu(null);
+  };
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
@@ -261,8 +269,16 @@ export const Navbar = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks: NavLinkItem[] = [
     { name: 'Accueil', path: '/' },
@@ -270,8 +286,9 @@ export const Navbar = () => {
     { name: 'Services', path: '/services' },
     { name: 'Réalisations', path: '/realisations' },
     { name: 'Communauté', path: '/communaute' },
-    { name: 'Le Projet', path: '/le-projet' },
+    { name: 'Plateforme', path: '/plateforme' },
     { name: 'À propos', path: '/a-propos' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const barClass = [
@@ -282,8 +299,9 @@ export const Navbar = () => {
   ].join(' ');
 
   return (
+    <>
     <nav className={barClass} aria-label="Navigation principale">
-      <div className="container-custom grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4 md:h-[72px] lg:grid-cols-[auto_1fr_auto]">
+      <div className="container-custom flex h-16 items-center justify-between gap-4 md:h-[72px] lg:grid lg:grid-cols-[auto_1fr_auto]">
         <Link to="/" className="group flex w-fit items-center gap-2.5 justify-self-start">
           <img
             src={logo}
@@ -306,7 +324,7 @@ export const Navbar = () => {
 
         <div className="hidden justify-self-end lg:block">
           <NavLink
-            to="/contact"
+            to="/devis"
             className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] shadow-sm transition hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#060912]"
           >
             Demander un devis
@@ -316,14 +334,23 @@ export const Navbar = () => {
         <button
           type="button"
           className="justify-self-end rounded-xl p-2.5 text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 lg:hidden"
-          onClick={() => setIsMobileMenuOpen((v) => !v)}
+          onClick={() => {
+            if (isMobileMenuOpen) {
+              closeMobileMenu();
+            } else {
+              setMobileSubmenu(null);
+              setMobileMenuPath(location.pathname);
+            }
+          }}
           aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-          aria-expanded={isMobileMenuOpen ? 'true' : 'false'}
-          aria-controls="mobile-nav-panel"
+          {...(isMobileMenuOpen
+            ? ({ 'aria-expanded': 'true', 'aria-controls': 'mobile-nav-panel' } as const)
+            : ({ 'aria-expanded': 'false' } as const))}
         >
           {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
+    </nav>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -331,55 +358,115 @@ export const Navbar = () => {
             id="mobile-nav-panel"
             role="region"
             aria-label="Menu de navigation"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="border-t border-white/10 bg-[#060912]/98 backdrop-blur-xl lg:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto overscroll-contain border-t border-white/10 bg-[#060912] md:top-[72px] lg:hidden"
           >
-            <div className="container-custom max-h-[min(70vh,560px)] overflow-y-auto py-6">
-              <div className="flex flex-col gap-1">
-                {navLinks.map((link) => (
-                  <NavLink
-                    key={link.path}
-                    to={link.path}
-                    className={({ isActive }) =>
-                      `rounded-xl px-4 py-3 text-base font-medium transition-colors ${
-                        isActive ? 'bg-white/10 text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'
-                      }`
-                    }
-                    onClick={() => setIsMobileMenuOpen(false)}
+            <div className="container-custom py-6">
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileSubmenu === 'services' ? (
+                  <motion.div
+                    key="services-sub"
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 24 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
                   >
-                    {link.name}
-                  </NavLink>
-                ))}
-                <div className="mt-4 border-t border-white/10 pt-4">
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">Services</p>
-                  <div className="flex flex-col gap-0.5">
-                    {serviceLinks.map((s) => (
-                      <Link
-                        key={s.path}
-                        to={s.path}
-                        className="rounded-lg px-4 py-2.5 text-sm text-white/80 hover:bg-white/5 hover:text-white"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {s.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                <NavLink
-                  to="/contact"
-                  className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-white py-3.5 text-center text-sm font-semibold text-[#0a0a0a] hover:bg-white/90"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Demander un devis
-                </NavLink>
-              </div>
+                    <button
+                      type="button"
+                      onClick={() => setMobileSubmenu(null)}
+                      className="mb-4 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/10"
+                    >
+                      <ArrowLeft className="h-4 w-4" aria-hidden />
+                      Retour
+                    </button>
+
+                    <p className="mb-3 px-1 text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+                      Nos services
+                    </p>
+                    <div className="flex flex-col gap-1">
+                      {serviceLinks.map((s) => (
+                        <Link
+                          key={s.path}
+                          to={s.path}
+                          className="group flex items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-white/[0.06]"
+                          onClick={closeMobileMenu}
+                        >
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] text-white/55 transition group-hover:text-white">
+                            <s.Icon className="h-4 w-4" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold text-white/90 group-hover:text-white">
+                              {s.name}
+                            </span>
+                            <span className="mt-0.5 block text-xs text-white/40">{s.desc}</span>
+                          </span>
+                          <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-white/30" aria-hidden />
+                        </Link>
+                      ))}
+                    </div>
+
+                    <Link
+                      to="/services"
+                      className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 py-3 text-sm font-semibold text-white transition hover:bg-white/5"
+                      onClick={closeMobileMenu}
+                    >
+                      Voir tous les services
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="main"
+                    initial={{ opacity: 0, x: -24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -24 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="flex flex-col gap-1"
+                  >
+                    {navLinks.map((link) =>
+                      link.name === 'Services' ? (
+                        <button
+                          key={link.path}
+                          type="button"
+                          onClick={() => setMobileSubmenu('services')}
+                          className="flex items-center justify-between rounded-xl px-4 py-3 text-left text-base font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                        >
+                          Services
+                          <ChevronRight className="h-5 w-5 text-white/40" aria-hidden />
+                        </button>
+                      ) : (
+                        <NavLink
+                          key={link.path}
+                          to={link.path}
+                          className={({ isActive }) =>
+                            `rounded-xl px-4 py-3 text-base font-medium transition-colors ${
+                              isActive ? 'bg-white/10 text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'
+                            }`
+                          }
+                          onClick={closeMobileMenu}
+                        >
+                          {link.name}
+                        </NavLink>
+                      ),
+                    )}
+
+                    <NavLink
+                      to="/devis"
+                      className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-white py-3.5 text-center text-sm font-semibold text-[#0a0a0a] hover:bg-white/90"
+                      onClick={closeMobileMenu}
+                    >
+                      Demander un devis
+                    </NavLink>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };

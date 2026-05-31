@@ -1,0 +1,73 @@
+import { categoryIllustrations } from '../components/sections/services/ServiceCategoryIllustrations';
+import type { ServiceCategory } from '../components/sections/services/ServiceCategoryCard';
+
+export const SERVICE_PACKAGES: ServiceCategory[] = [
+  {
+    id: 'presence',
+    title: 'Présence',
+    tagline: 'Pour démarrer en ligne',
+    examples: ['Site vitrine one-page', 'Carte pro digitale', 'Formulaire & réseaux sociaux'],
+    price: '99 000 FCFA',
+    priceNote: 'forfait tout inclus',
+    features: [
+      'Site vitrine one-page',
+      'Design template professionnel',
+      'Hébergement + domaine .ci',
+      'Formulaire de contact',
+      'Responsive mobile & desktop',
+    ],
+    Illustration: categoryIllustrations.presence,
+  },
+  {
+    id: 'croissance',
+    title: 'Croissance',
+    tagline: 'Pour structurer votre image',
+    examples: ['Site 5 pages', 'Blog & actualités', 'SEO local Abidjan'],
+    price: '249 000 FCFA',
+    priceNote: 'forfait tout inclus',
+    popular: true,
+    features: [
+      'Site complet (5 pages)',
+      'Design sur mesure',
+      'Blog / actualités',
+      'Référencement SEO local',
+      'Statistiques visiteurs',
+      'Support technique 3 mois',
+    ],
+    Illustration: categoryIllustrations.croissance,
+  },
+  {
+    id: 'vente',
+    title: 'Vente',
+    tagline: 'Pour vendre au quotidien',
+    examples: ['Boutique en ligne', 'Mobile Money', 'Gestion des stocks'],
+    price: '499 000 FCFA',
+    priceNote: 'forfait tout inclus',
+    features: [
+      'Boutique en ligne',
+      "Jusqu'à 50 produits",
+      'Paiement Mobile Money',
+      'Gestion des stocks',
+      'Facturation automatique',
+      'Formation gestion du site',
+    ],
+    Illustration: categoryIllustrations.vente,
+  },
+  {
+    id: 'ecosysteme',
+    title: 'Écosystème',
+    tagline: 'Pour les projets ambitieux',
+    examples: ['Web + PWA', 'CRM clients', 'Pub & chatbot WhatsApp'],
+    price: '749 000 FCFA',
+    priceNote: 'forfait tout inclus',
+    features: [
+      'Site web + application web (PWA)',
+      'CRM / gestion clients',
+      'Campagnes Google & Facebook',
+      'Chatbot WhatsApp',
+      'Maintenance prioritaire',
+      'Audit & stratégie digitale',
+    ],
+    Illustration: categoryIllustrations.ecosysteme,
+  },
+];

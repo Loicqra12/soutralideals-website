@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { SEO } from '../seo/SEO';
 
 interface ServiceLayoutProps {
@@ -35,6 +35,7 @@ export const ServiceLayout = ({
   ctaText = "Demander un devis sur mesure",
   colorTheme = 'gold'
 }: ServiceLayoutProps) => {
+  const { pathname } = useLocation();
   type ThemeKey = NonNullable<ServiceLayoutProps['colorTheme']>;
 
   const themeColors: Record<ThemeKey, string> = {
@@ -83,7 +84,15 @@ export const ServiceLayout = ({
 
   return (
     <>
-      <SEO title={title} description={subtitle} />
+      <SEO
+        title={title}
+        description={subtitle}
+        breadcrumbs={[
+          { name: 'Accueil', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: title, path: pathname },
+        ]}
+      />
       <div className="pt-24 bg-dark-bg min-h-screen">
 
         {/* 1. Hero Section */}
@@ -110,7 +119,7 @@ export const ServiceLayout = ({
               </p>
 
               <Link
-                to="/contact"
+                to="/devis"
                 className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg text-white transition-transform hover:scale-105 shadow-lg bg-gradient-to-r ${gradientTheme[colorTheme]}`}
               >
                 <Sparkles className="w-5 h-5" />
@@ -276,7 +285,7 @@ export const ServiceLayout = ({
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                to="/contact"
+                to="/devis"
                 className={`inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-lg text-white transition-all hover:scale-105 shadow-xl bg-gradient-to-r ${gradientTheme[colorTheme]}`}
               >
                 <Sparkles className="w-5 h-5" />

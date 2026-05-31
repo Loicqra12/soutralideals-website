@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { Suspense, lazy } from 'react';
 import { Loading } from './components/ui/Loading';
@@ -8,10 +8,12 @@ const HomePage = lazy(() => import('./pages/HomePage').then(module => ({ default
 const EcosystemPage = lazy(() => import('./pages/EcosystemPage').then(module => ({ default: module.EcosystemPage })));
 const ServicesPage = lazy(() => import('./pages/ServicesPage').then(module => ({ default: module.ServicesPage })));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage').then(module => ({ default: module.PortfolioPage })));
+const RealisationDetailPage = lazy(() => import('./pages/RealisationDetailPage').then(module => ({ default: module.RealisationDetailPage })));
 const CommunityPage = lazy(() => import('./pages/CommunityPage').then(module => ({ default: module.CommunityPage })));
 const ProjectPage = lazy(() => import('./pages/ProjectPage').then(module => ({ default: module.ProjectPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
+const DevisPage = lazy(() => import('./pages/DevisPage').then(module => ({ default: module.DevisPage })));
 const InformationsLegalesPage = lazy(() =>
   import('./pages/InformationsLegalesPage').then((module) => ({ default: module.InformationsLegalesPage })),
 );
@@ -49,9 +51,12 @@ function App() {
             <Route path="services/marketing-formation" element={<MarketingFormationPage />} />
 
             <Route path="realisations" element={<PortfolioPage />} />
+            <Route path="realisations/:slug" element={<RealisationDetailPage />} />
             <Route path="communaute" element={<CommunityPage />} />
-            <Route path="le-projet" element={<ProjectPage />} />
+            <Route path="plateforme" element={<ProjectPage />} />
+            <Route path="le-projet" element={<Navigate to="/plateforme" replace />} />
             <Route path="a-propos" element={<AboutPage />} />
+            <Route path="devis" element={<DevisPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="informations-legales" element={<InformationsLegalesPage />} />
             <Route path="plan-du-site" element={<PlanDuSitePage />} />

@@ -10,6 +10,7 @@ import { CommunityTeaser } from '../components/sections/CommunityTeaser';
 import { FAQ } from '../components/sections/FAQ';
 import { FinalCTA } from '../components/sections/FinalCTA';
 import { SEO } from '../components/seo/SEO';
+import homeOgImage from '../assets/images/Hero/Hero-1.png';
 
 /**
  * Accueil — fil narratif :
@@ -25,6 +26,7 @@ export const HomePage = () => {
       <SEO
         title="Accueil"
         description="La plateforme tout-en-un pour les travailleurs indépendants en Côte d'Ivoire. Trouvez des missions, gérez votre activité et rejoignez une communauté."
+        ogImage={homeOgImage}
       />
       <Hero />
       <SuperAppServices />

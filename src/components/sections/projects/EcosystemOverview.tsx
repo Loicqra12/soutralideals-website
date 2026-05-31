@@ -1,128 +1,141 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { SectionWrapper } from '../../ui/SectionWrapper';
-import { Smartphone, Globe, LayoutDashboard, Users, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ECOSYSTEM_PLATFORMS } from './ecosystemPlatforms';
+import { EcosystemStageCard } from './EcosystemStageCard';
+import { EcosystemFlowConnector } from './EcosystemFlowConnector';
 
-const projects = [
-    {
-        id: 'dashboard',
-        name: 'Dashboard Admin',
-        icon: LayoutDashboard,
-        bgColor: 'bg-primary-green/10',
-        iconColor: 'text-primary-green',
-        description: 'Centre de pilotage de l\'écosystème'
-    },
-    {
-        id: 'mobile',
-        name: 'App Mobile',
-        icon: Smartphone,
-        bgColor: 'bg-gold-premium/10',
-        iconColor: 'text-gold-premium',
-        description: 'Application tout-en-un pour utilisateurs'
-    },
-    {
-        id: 'web',
-        name: 'Marketplace Web',
-        icon: Globe,
-        bgColor: 'bg-primary-blue/10',
-        iconColor: 'text-primary-blue',
-        description: 'Vitrine publique et marketplace'
-    },
-    {
-        id: 'recensement',
-        name: 'Soutrali Recensement',
-        icon: Users,
-        bgColor: 'bg-primary-green/10',
-        iconColor: 'text-primary-green',
-        description: 'App d\'identification terrain'
-    }
+const PIPELINE_STAGES = [
+  'hsl(199, 89%, 48%)',
+  'hsl(168, 76%, 42%)',
+  'hsl(142, 71%, 45%)',
+  'hsl(48, 96%, 53%)',
+  'hsl(27, 96%, 55%)',
 ];
 
+function PipelineBackdrop() {
+  const reduced = useReducedMotion();
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-x-0 top-1/2 hidden -translate-y-1/2 justify-center gap-3 opacity-[0.14] lg:flex"
+      aria-hidden
+    >
+      {PIPELINE_STAGES.map((color, i) => (
+        <motion.div
+          key={color}
+          className="h-36 w-14 origin-center border border-black/20 shadow-lg"
+          style={{
+            background: `linear-gradient(165deg, ${color}ee, ${color}99)`,
+            clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+          }}
+          initial={reduced ? false : { opacity: 0, scale: 0.85, rotateY: -20 }}
+          whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+          viewport={{ once: true }}
+          animate={reduced ? undefined : { y: [0, -4, 0] }}
+          transition={
+            reduced
+              ? { delay: 0.05 * i, duration: 0.5 }
+              : {
+                  delay: 0.05 * i,
+                  duration: 0.5,
+                  y: {
+                    duration: 4 + i * 0.3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: 0.55 + i * 0.05,
+                  },
+                }
+          }
+        />
+      ))}
+    </div>
+  );
+}
+
 export const EcosystemOverview = () => {
-    const scrollToProject = (id: string) => {
-        const element = document.getElementById(`project-${id}`);
-        element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
+  const reduced = useReducedMotion();
 
-    return (
-        <SectionWrapper id="projects-overview" bg="dark">
-            <div className="container-custom">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center max-w-3xl mx-auto mb-16"
+  const scrollToProject = (id: string) => {
+    document.getElementById(`project-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  return (
+    <SectionWrapper id="projects-overview" bg="dark" className="relative">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,hsl(142,71%,45%)/0.08,transparent_55%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_80%_100%,hsl(217,91%,60%)/0.06,transparent_50%)]"
+        aria-hidden
+      />
+
+      <motion.div
+        initial={reduced ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55 }}
+        className="relative z-10 mx-auto mb-14 max-w-3xl text-center md:mb-20"
+      >
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-primary-green/90">
+          Flux interconnecté
+        </p>
+        <h2 className="font-heading text-3xl font-bold text-white md:text-5xl">
+          Vue d&apos;ensemble de{' '}
+          <span className="bg-gradient-to-r from-primary-green to-primary-blue bg-clip-text text-transparent">
+            l&apos;écosystème
+          </span>
+        </h2>
+        <p className="mt-5 text-base leading-relaxed text-[#b8c2d0] md:text-lg">
+          Soutrali Deals est un écosystème interconnecté composé de plateformes web, mobiles et d&apos;outils
+          terrain, tous reliés par une même vision.
+        </p>
+      </motion.div>
+
+      <div className="relative z-10">
+        <PipelineBackdrop />
+
+        {/* Desktop : pipeline horizontal + connecteurs animés */}
+        <ul className="hidden list-none items-stretch lg:flex">
+          {ECOSYSTEM_PLATFORMS.map((platform, index) => (
+            <li key={platform.id} className="contents">
+              <div className="min-w-0 flex-1">
+                <EcosystemStageCard
+                  platform={platform}
+                  index={index}
+                  onSelect={scrollToProject}
+                />
+              </div>
+              {index < ECOSYSTEM_PLATFORMS.length - 1 && (
+                <div
+                  className="flex w-10 shrink-0 items-center self-center px-0.5 xl:w-14"
+                  aria-hidden
                 >
-                    <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
-                        Vue d'ensemble de <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-primary-blue">l'écosystème</span>
-                    </h2>
-                    <p className="text-lg text-text-secondary leading-relaxed">
-                        Soutrali Deals est un écosystème interconnecté composé de plateformes web, mobiles et d'outils terrain, tous reliés par une même vision.
-                    </p>
-                </motion.div>
-
-                {/* Visual Ecosystem Schema */}
-                <div className="relative mb-16">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                        {projects.map((project, index) => {
-                            const Icon = project.icon;
-                            return (
-                                <motion.div
-                                    key={project.id}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    onClick={() => scrollToProject(project.id)}
-                                    className="group cursor-pointer"
-                                >
-                                    <div className="bg-dark-card border border-dark-border rounded-2xl p-6 hover:border-primary-green/50 transition-all hover:scale-105 h-full">
-                                        <div className={`w-16 h-16 rounded-xl ${project.bgColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                            <Icon className={`w-8 h-8 ${project.iconColor}`} />
-                                        </div>
-                                        <h3 className="font-bold text-white text-lg mb-2 group-hover:text-primary-green transition-colors">
-                                            {project.name}
-                                        </h3>
-                                        <p className="text-sm text-text-secondary mb-4">
-                                            {project.description}
-                                        </p>
-                                        <div className="flex items-center text-primary-green text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                            En savoir plus <ArrowRight className="w-4 h-4 ml-1" />
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-
-                    {/* Connecting Lines (SVG) */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 hidden lg:block" viewBox="0 0 800 200">
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <polygon points="0 0, 10 3, 0 6" fill="currentColor" className="text-primary-green" />
-                            </marker>
-                        </defs>
-                        <path
-                            d="M 200 100 Q 400 50 600 100"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            fill="none"
-                            strokeDasharray="5,5"
-                            className="text-primary-green"
-                            markerEnd="url(#arrowhead)"
-                        />
-                        <path
-                            d="M 200 100 Q 400 150 600 100"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            fill="none"
-                            strokeDasharray="5,5"
-                            className="text-primary-blue"
-                            markerEnd="url(#arrowhead)"
-                        />
-                    </svg>
+                  <EcosystemFlowConnector />
                 </div>
-            </div>
-        </SectionWrapper>
-    );
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile / tablette : grille + connecteur vertical */}
+        <ol className="grid list-none grid-cols-1 gap-5 sm:grid-cols-2 lg:hidden">
+          {ECOSYSTEM_PLATFORMS.map((platform, index) => (
+            <li key={platform.id} className="flex flex-col">
+              <EcosystemStageCard
+                platform={platform}
+                index={index}
+                onSelect={scrollToProject}
+              />
+              {index < ECOSYSTEM_PLATFORMS.length - 1 && (
+                <div className="flex justify-center py-2 sm:hidden">
+                  <EcosystemFlowConnector className="h-10 w-8 rotate-90" />
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </SectionWrapper>
+  );
 };

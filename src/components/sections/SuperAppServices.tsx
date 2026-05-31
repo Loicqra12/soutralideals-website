@@ -40,13 +40,13 @@ const SERVICES: ServiceItem[] = [
   {
     title: 'Soutrali ID',
     description: 'Identité vérifiée pour prestataires et vendeurs.',
-    to: '/le-projet',
+    to: '/plateforme',
     Illustration: IllSoutraliId,
   },
   {
     title: 'SoutraPay',
     description: 'Paiement simple, traçable et sécurisé.',
-    to: '/le-projet',
+    to: '/plateforme',
     Illustration: IllSoutraPay,
   },
   {

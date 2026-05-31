@@ -1,81 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ═══════════════════════════════════════════
+       PAGES PRINCIPALES
+  ═══════════════════════════════════════════ -->
+
+  <!-- Accueil -->
   <url>
     <loc>https://www.soutralideals.com/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Écosystème -->
   <url>
     <loc>https://www.soutralideals.com/ecosysteme</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
+
+  <!-- ═══════════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════════ -->
+
+  <!-- Hub Services -->
   <url>
     <loc>https://www.soutralideals.com/services</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
+
+  <!-- Développement & Produits -->
   <url>
     <loc>https://www.soutralideals.com/services/developpement-produits</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.8</priority>
   </url>
+
+  <!-- Solutions Métiers -->
   <url>
     <loc>https://www.soutralideals.com/services/solutions-metiers</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.8</priority>
   </url>
+
+  <!-- Stratégie & Conseil -->
   <url>
     <loc>https://www.soutralideals.com/services/strategie-conseil</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.8</priority>
   </url>
+
+  <!-- Design & Branding -->
   <url>
     <loc>https://www.soutralideals.com/services/design-branding</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.8</priority>
   </url>
+
+  <!-- Marketing & Formation -->
   <url>
     <loc>https://www.soutralideals.com/services/marketing-formation</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.8</priority>
   </url>
+
+  <!-- ═══════════════════════════════════════════
+       RÉALISATIONS (Portfolio)
+  ═══════════════════════════════════════════ -->
+
+  <!-- Liste des réalisations -->
   <url>
     <loc>https://www.soutralideals.com/realisations</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Soutrali Deals -->
+  <url>
+    <loc>https://www.soutralideals.com/realisations/soutrali-deals</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ChapeChape Résidence -->
+  <url>
+    <loc>https://www.soutralideals.com/realisations/chape-chape-residence</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- APA – Allo Pièce Auto -->
+  <url>
+    <loc>https://www.soutralideals.com/realisations/apa</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- OVPR -->
+  <url>
+    <loc>https://www.soutralideals.com/realisations/ovpr</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Artisan du Bien-Être -->
+  <url>
+    <loc>https://www.soutralideals.com/realisations/artisan-du-bien-etre</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- KPS Services -->
+  <url>
+    <loc>https://www.soutralideals.com/realisations/kps-service</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- CNDPEP-CI -->
+  <url>
+    <loc>https://www.soutralideals.com/realisations/cndepepci</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════
+       COMMUNAUTÉ & PLATEFORME
+  ═══════════════════════════════════════════ -->
+
+  <!-- Communauté -->
+  <url>
+    <loc>https://www.soutralideals.com/communaute</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Plateforme -->
   <url>
-    <loc>https://www.soutralideals.com/communaute</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.soutralideals.com/plateforme</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- ═══════════════════════════════════════════
+       CONVERSION
+  ═══════════════════════════════════════════ -->
+
+  <!-- Demander un devis -->
   <url>
-    <loc>https://www.soutralideals.com/le-projet</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.soutralideals.com/devis</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.85</priority>
   </url>
-  <url>
-    <loc>https://www.soutralideals.com/a-propos</loc>
-    <lastmod>2026-04-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
+
+  <!-- Contact -->
   <url>
     <loc>https://www.soutralideals.com/contact</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
+
+  <!-- ═══════════════════════════════════════════
+       INSTITUTIONNEL
+  ═══════════════════════════════════════════ -->
+
+  <!-- À propos -->
+  <url>
+    <loc>https://www.soutralideals.com/a-propos</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Informations légales -->
+  <url>
+    <loc>https://www.soutralideals.com/informations-legales</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Plan du site -->
+  <url>
+    <loc>https://www.soutralideals.com/plan-du-site</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>

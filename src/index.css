@@ -26,10 +26,34 @@
     @apply border-dark-border;
   }
 
+  html {
+    /* Empêche le zoom involontaire du texte en rotation sur iOS */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-dark-bg text-text-light font-sans antialiased;
     overflow-x: hidden;
+    /* Respecte les encoches / barres système (mobiles modernes) */
+    min-height: 100dvh;
   }
+
+  /* Garde-fous responsive : aucun média ne déborde horizontalement */
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Les éléments interactifs gardent une cible tactile correcte */
+  a,
+  button {
+    touch-action: manipulation;
+  }
+
 
   h1,
   h2,
@@ -164,6 +188,121 @@
 
   .delay-500 {
     animation-delay: 500ms;
+  }
+
+  .rain-sheets {
+    background-image: repeating-linear-gradient(
+      108deg,
+      transparent 0px,
+      transparent 10px,
+      rgba(186, 230, 253, 0.02) 10px,
+      rgba(186, 230, 253, 0.06) 11px,
+      transparent 12px,
+      transparent 24px
+    );
+    background-size: 32px 56px;
+    animation: rain-sheets-scroll 1.4s linear infinite;
+  }
+
+  .rain-drop {
+    border-radius: 9999px;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(186, 230, 253, 0.2) 50%,
+      rgba(147, 197, 253, 0.05) 100%
+    );
+    animation: rain-fall linear infinite;
+    transform: rotate(12deg);
+  }
+
+  .rain-drop--back {
+    filter: blur(0.5px);
+  }
+
+  .rain-drop--mid {
+    animation-name: rain-fall-mid;
+  }
+
+  .rain-drop--front {
+    animation-name: rain-fall-front;
+  }
+
+  .rain-mist {
+    background: rgba(186, 230, 253, 0.12);
+    animation: rain-mist-rise 4.5s ease-in-out infinite;
+  }
+}
+
+@keyframes rain-sheets-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 48px;
+  }
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-15%) translateX(0) rotate(12deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(-18px) rotate(12deg);
+  }
+}
+
+@keyframes rain-fall-mid {
+  0% {
+    transform: translateY(-20%) translateX(0) rotate(10deg);
+  }
+  100% {
+    transform: translateY(115vh) translateX(-24px) rotate(10deg);
+  }
+}
+
+@keyframes rain-fall-front {
+  0% {
+    transform: translateY(-10%) translateX(0) rotate(14deg);
+  }
+  100% {
+    transform: translateY(105vh) translateX(-14px) rotate(14deg);
+  }
+}
+
+@keyframes rain-mist-rise {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.22;
+    transform: translateY(-4px) scale(1.1);
+  }
+}
+
+/* Bande logos clients — défilement infini */
+@keyframes trust-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@layer utilities {
+  .trust-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .trust-marquee-track {
+      animation: trust-marquee-scroll 42s linear infinite;
+    }
   }
 }
 

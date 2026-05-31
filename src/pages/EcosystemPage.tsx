@@ -26,6 +26,7 @@ import marketplaceImage from '../assets/images/pilier_3_marketplace_176848882867
 import sdealsIdImageSrc from '../assets/images/sdeals_id_verification_1768488864696.png';
 import soutrapayImageSrc from '../assets/images/soutrapay_payment_1768488897962.png';
 import dashboardImageSrc from '../assets/images/project/project_dashboard_admin.png';
+import ecosystemOgImage from '../assets/images/ecosystem_schema_circular_1768488702781.png';
 
 const PILLARS = [
   {
@@ -110,6 +111,11 @@ export const EcosystemPage = () => {
       <SEO
         title="Notre Écosystème"
         description="Découvrez comment Freelances, Artisans, Commerçants et Startups collaborent au sein de l'écosystème Soutrali Deals."
+        ogImage={ecosystemOgImage}
+        breadcrumbs={[
+          { name: 'Accueil', path: '/' },
+          { name: 'Écosystème', path: '/ecosysteme' },
+        ]}
       />
       <div className="bg-[#060e1a]">
         <Ecosystem pageHero />

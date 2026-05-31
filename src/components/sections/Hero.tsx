@@ -180,16 +180,15 @@ export const Hero = () => {
         {/* ── Indicateurs carousel (style Gozem) ── */}
         <motion.div
           className="absolute bottom-28 left-4 flex items-center gap-2 md:left-8 lg:left-[max(2rem,calc((100vw-1280px)/2+2rem))]"
-          role="tablist"
+          role="group"
           aria-label="Diaporama hero"
         >
           {HERO_SLIDES.map((_, i) => (
             <button
               key={i}
               type="button"
-              role="tab"
-              aria-selected={i === active}
-              aria-label={`Image ${i + 1} sur ${HERO_SLIDES.length}`}
+              {...(i === active ? { 'aria-current': 'true' } : {})}
+              aria-label={`Afficher l'image ${i + 1} sur ${HERO_SLIDES.length}`}
               onClick={() => goTo(i)}
               className="group p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded"
             >

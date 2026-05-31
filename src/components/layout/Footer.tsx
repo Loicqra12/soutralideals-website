@@ -11,7 +11,7 @@ const columnTitle = 'text-[11px] font-semibold uppercase tracking-[0.22em] text-
 const iconBtnClass =
   'flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/55 transition hover:border-primary-blue/40 hover:text-primary-blue focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue/50';
 
-function socialUrl(key: 'facebook' | 'twitter' | 'instagram' | 'linkedin'): string | undefined {
+function socialUrl(key: 'facebook' | 'twitter' | 'instagram' | 'linkedin'): string {
   const env = import.meta.env as Record<string, string | undefined>;
   const raw =
     key === 'facebook'
@@ -22,7 +22,18 @@ function socialUrl(key: 'facebook' | 'twitter' | 'instagram' | 'linkedin'): stri
           ? env.VITE_SOCIAL_INSTAGRAM
           : env.VITE_SOCIAL_LINKEDIN;
   const u = raw?.trim();
-  return u && /^https?:\/\//i.test(u) ? u : undefined;
+  if (u && /^https?:\/\//i.test(u)) return u;
+
+  switch (key) {
+    case 'facebook':
+      return 'https://www.facebook.com/p/SoutraliDeals-61556925353967/';
+    case 'twitter':
+      return 'https://x.com/SoutraliDeals';
+    case 'instagram':
+      return 'https://www.instagram.com/soutrali_deals/';
+    case 'linkedin':
+      return 'https://ci.linkedin.com/company/soutrali-deals';
+  }
 }
 
 const footerSocialItems = [
@@ -120,8 +131,8 @@ export const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/marketing-formation" className="transition hover:text-white">
-                      Marketing Digital
+                    <Link to="/services/solutions-metiers" className="transition hover:text-white">
+                      Solutions Métiers & Outils
                     </Link>
                   </li>
                   <li>
@@ -130,13 +141,18 @@ export const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services/strategie-conseil" className="transition hover:text-white">
-                      Conseil stratégique
+                    <Link to="/services/marketing-formation" className="transition hover:text-white">
+                      Marketing & Formation
                     </Link>
                   </li>
                   <li>
-                    <Link to="/services" className="transition hover:text-white">
-                      Pack startups & offres
+                    <Link to="/services/strategie-conseil" className="transition hover:text-white">
+                      Stratégie & Conseil
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/services" className="transition hover:text-white text-primary-green font-medium">
+                      Voir tous les services
                     </Link>
                   </li>
                 </ul>

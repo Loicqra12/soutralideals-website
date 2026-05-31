@@ -356,5 +356,283 @@ Cette analyse a été réalisée de manière **stricte et méthodique** en exami
 
 ---
 
-*Rapport généré le : 2024*  
-*Analysé par : Expert Code Review*
+---
+
+## 🔬 ANALYSE SPÉCIFIQUE — PAGES `/devis` & `/contact`
+
+> Analyse ligne par ligne des deux pages les plus critiques du tunnel de conversion.  
+> **Date** : 2026-05-31 · **Fichiers** : `DevisPage.tsx` (1 149 lignes, 46 893 o) · `ContactPage.tsx` (252 lignes, 15 255 o)
+
+---
+
+### A. PAGE `/devis` — `DevisPage.tsx`
+
+#### ✅ Points Forts
+
+| # | Élément | Détail |
+|---|---------|--------|
+| 1 | **Wizard multi-étapes** | 4 étapes (Coordonnées → Projet → Périmètre → Validation) avec `AnimatePresence` + slide directionnel `x: ±48px` — UX exemplaire |
+| 2 | **Barre de progression** | Composant `StepProgress` : label textuel, barre animée (`easeInOut 0.4s`), indicateurs visuels de complétion avec icône `Check` — très soigné |
+| 3 | **Typage TypeScript** | `FormState`, `ProjectTypeId`, union types, `as const` sur les tableaux de données — typage strict et cohérent |
+| 4 | **Memoization** | Handlers wrappés dans `useCallback` (handleField, toggleFeature, setField, goNext, goPrev, handleSubmit) — zéro re-renders inutiles |
+| 5 | **Message d'erreur animé** | `role="alert"` + `AnimatePresence` + `AlertCircle` — accessible et visible |
+| 6 | **Estimation dynamique** | Sidebar affiche le prix indicatif du type de projet sélectionné avec animation `y: ±12` — valeur ajoutée UX forte |
+| 7 | **FAQ accordéon** | `FAQItem` avec `useState` local, `AnimatePresence` + `height: 0 → auto` — 6 questions pertinentes au contexte ivoirien |
+| 8 | **Consentement RGPD** | Checkbox custom avec `role="checkbox"`, `aria-checked`, `aria-required`, focus ring visible — bonne pratique |
+| 9 | **Récapitulatif étape 4** | Affichage conditionnel de chaque champ renseigné dans une `<dl>` — excellente DX utilisateur |
+| 10 | **SEO complet** | `ogImage`, `keywords`, `breadcrumbs` alimentés — meilleure page SEO du projet |
+
+#### ⚠️ Problèmes Détectés
+
+**🔴 Critiques**
+
+```
+Ligne 675, 866, 1080 — PLACEHOLDER WhatsApp (×3)
+href="https://wa.me/22507XXXXXXXX"
+→ Le numéro fictif est déployable en production. Risque d'image de marque.
+→ Extraire dans une constante centrale : const WHATSAPP_URL = import.meta.env.VITE_WHATSAPP_URL
+```
+
+```
+Lignes 818–822 — AUCUNE intégration API réelle
+await new Promise((r) => setTimeout(r, 1800));  // simulation pure
+→ Le formulaire ne transmet AUCUNE donnée. En production : zéro lead reçu.
+→ Intégrer EmailJS, Firebase Functions, ou un endpoint REST avant mise en ligne.
+```
+
+**🟠 Importants**
+
+```
+Ligne 197 — Validation étape 2 uniquement sur projectType
+validateStep(step=3) → retourne TOUJOURS null
+→ L'étape 3 (fonctionnalités, design, délai, budget) n'est jamais validée.
+→ Pas bloquant côté UX, mais aucun guard côté données envoyées.
+```
+
+```
+Ligne 510 — <select name="budget"> sans attribut id
+<select name="budget" value={form.budget} ...>
+→ Impossible d'associer un <label htmlFor="budget"> — problème d'accessibilité.
+→ Ajouter id="budget" pour l'association label/input.
+```
+
+```
+Lignes 1137–1139 — Clé par index dans la FAQ
+{FAQ_ITEMS.map((item, idx) => <FAQItem key={idx} ... />)}
+→ Anti-pattern React : si l'ordre change, React va recréer les composants.
+→ Utiliser une clé stable : key={item.question.slice(0, 30)}
+```
+
+```
+Ligne 771 — selectedProject recalculé à chaque render
+const selectedProject = PROJECT_TYPES.find((p) => p.id === form.projectType);
+→ Envelopper dans useMemo(() => ..., [form.projectType]) pour cohérence.
+```
+
+**🟡 Mineurs**
+
+```
+Ligne 206 — fieldClass défini au niveau module
+→ Correct, mais si utilisé dans plusieurs fichiers → extraire dans un fichier de tokens CSS partagé.
+
+Ligne 413 — onChangeSelect dans Step3 est identique à handleField
+→ La prop est passée mais c'est le même handler. Simplifier la signature de Step3.
+
+Ligne 1055 — <h2> dans la sidebar "Comment ça marche"
+→ La page a déjà un <h1> dans le Hero. Les <h2> de section sont corrects,
+   mais "Comment ça marche" dans la sidebar devrait être un <h3> (sous-section).
+```
+
+#### 📊 Notes `/devis`
+
+| Dimension | Note | Commentaire |
+|-----------|------|-------------|
+| Architecture composants | 9/10 | Découpage exemplaire en sous-composants purs |
+| Qualité TypeScript | 8.5/10 | Quelques `as const` manquants, mais très solide |
+| UX / Tunnel de conversion | 8/10 | Wizard fluide, récap clair, sidebar utile |
+| Validation formulaire | 5/10 | Étape 3 non validée, step 4 minimal |
+| Accessibilité | 6/10 | `role="alert"` OK, mais select sans id, pas d'`aria-live` global |
+| Intégration backend | 0/10 | **CRITIQUE** — simulation pure, aucune donnée envoyée |
+| SEO | 9/10 | Meilleur SEO du projet, ogImage, keywords, breadcrumbs |
+| **TOTAL** | **6.5/10** | Bloqué par l'absence d'intégration réelle |
+
+---
+
+### B. PAGE `/contact` — `ContactPage.tsx`
+
+#### ✅ Points Forts
+
+| # | Élément | Détail |
+|---|---------|--------|
+| 1 | **Structure claire** | Page concise (252 lignes), lisible, bien organisée |
+| 2 | **Coordonnées complètes** | Email, WhatsApp, Localisation (Cocody Riviera 2), horaires — informations utiles |
+| 3 | **Animation d'entrée** | Slide-in `x: ±50` à `0` avec `delay: 0.2` sur la colonne formulaire — transition soignée |
+| 4 | **État de succès** | Affichage conditionnel post-envoi avec icône `CheckCircle` + bouton de reset — bonne UX |
+| 5 | **SEO de base** | Titre, description, breadcrumbs — minimum requis présent |
+
+#### ⚠️ Problèmes Détectés
+
+**🔴 Critiques**
+
+```
+Ligne 33 — Simulation d'envoi identique à DevisPage
+await new Promise(resolve => setTimeout(resolve, 1500));
+→ Aucune donnée ne part. Même problème critique que /devis.
+→ Le formulaire de contact doit être connecté à une vraie API.
+```
+
+```
+Ligne 91 — Numéro de téléphone fictif affiché publiquement
+<a href="https://wa.me/22507000000">+225 07 00 00 00 00</a>
+→ Ce numéro est visible dans le DOM et sera indexé par Google.
+→ Remplacer IMMÉDIATEMENT par le vrai numéro ou une variable d'environnement.
+```
+
+```
+Ligne 50 — Contradiction SEO vs horaires affichés
+description="...Notre équipe est à votre écoute 24/7..."
+mais page affiche : "Lundi - Vendredi : 08h00 - 18h00 / Samedi : 09h00 - 13h00"
+→ Incohérence factuelle indexée par les moteurs de recherche.
+→ Corriger la meta description : "Réponse sous 24h ouvrées"
+```
+
+**🟠 Importants**
+
+```
+Lignes 135–139 — Section réseaux sociaux vide
+<p>Suivez-nous sur les réseaux sociaux...</p>
+→ Aucun lien, aucune icône. Section fantôme visible dans le DOM.
+→ Soit ajouter les vrais liens sociaux, soit supprimer ce bloc.
+```
+
+```
+ContactPage vs DevisPage — Absence du champ téléphone/WhatsApp
+→ Le panneau de coordonnées met en avant le WhatsApp comme canal principal,
+   mais le formulaire ne collecte PAS de numéro de téléphone.
+→ Ajouter un champ "Téléphone / WhatsApp" (optionnel) pour cohérence.
+```
+
+```
+Ligne 176, 189, 203, 222 — Focus ring : gold-premium au lieu de primary-green
+focus:ring-gold-premium focus:border-gold-premium
+→ Incohérence avec DevisPage (focus:ring-primary-green).
+→ Standardiser sur primary-green pour l'ensemble des formulaires du site.
+```
+
+```
+Ligne 203 — <select> sans indicateur visuel personnalisé
+→ DevisPage injecte une flèche SVG custom via backgroundImage.
+   ContactPage utilise appearance-none sans flèche → UX dégradée sur certains navigateurs.
+→ Appliquer le même selectStyle que DevisPage.
+```
+
+**🟡 Mineurs**
+
+```
+Ligne 39 — handleChange sans useCallback
+→ Recréé à chaque render. Ajouter useCallback([]) pour cohérence avec DevisPage.
+
+Ligne 61 — Titre h1 : "Contactez L'Équipe"
+→ Majuscule mid-phrase sur "L'Équipe" — typographie non standard en français.
+→ Corriger : "Contactez notre équipe"
+
+Ligne 229 — Classe inline sur le Button
+className="w-full bg-gold-premium hover:bg-yellow-500 text-black..."
+→ Mélange de variante de design system et de classes ad-hoc.
+   hover:bg-yellow-500 n'est pas dans la palette définie.
+→ Créer une variante "gold" dans le composant Button.
+
+Ligne 252 — Pas de validation côté client
+→ Uniquement HTML5 required. Pas de validation email, longueur message, etc.
+→ Minimum : valider email avec regex avant soumission.
+```
+
+#### 📊 Notes `/contact`
+
+| Dimension | Note | Commentaire |
+|-----------|------|-------------|
+| Lisibilité / Concision | 8/10 | Code clair, court, bien organisé |
+| Cohérence design | 5/10 | Focus ring gold ≠ vert, select sans flèche, hover non-palette |
+| Contenu / Données affichées | 3/10 | Numéro fictif, 24/7 faux, réseaux sociaux vides |
+| Intégration backend | 0/10 | **CRITIQUE** — simulation pure |
+| Accessibilité | 6/10 | Correct mais pas de validation accessible des erreurs |
+| Validation formulaire | 4/10 | HTML5 uniquement, pas de regex email, pas de feedback |
+| SEO | 5/10 | Meta description contradictoire avec le contenu |
+| **TOTAL** | **4.4/10** | Bloqué par données fictives + absence de backend |
+
+---
+
+### C. COMPARAISON `/devis` vs `/contact`
+
+| Critère | `/devis` | `/contact` | Delta |
+|---------|----------|------------|-------|
+| Lignes de code | 1 149 | 252 | DevisPage ×4.6 plus complexe |
+| Intégration API | ❌ Mock | ❌ Mock | Égal — **critique sur les deux** |
+| Validation form | ⚠️ Partielle | ❌ HTML5 only | Devis supérieur |
+| Accessibilité | ⚠️ Bonne base | ⚠️ Bonne base | Comparable |
+| Design consistency | ✅ | ⚠️ Focus ring ≠ | Devis supérieur |
+| SEO | ✅ Complet | ⚠️ Contradictoire | Devis supérieur |
+| Données réelles | ❌ URLs fictives | ❌ Numéro fictif | **Les deux bloqués** |
+| Architecture | ✅ Composants purs | ⚠️ Monolithique | Devis supérieur |
+
+---
+
+### D. PLAN DE CORRECTION PRIORISÉ
+
+#### 🔴 BLOQUANTS — À corriger avant tout déploiement
+
+```
+P0-1 · Connecter les deux formulaires à une vraie API
+       → Recommandation : EmailJS (simple, gratuit 200/mois)
+         ou Firebase Cloud Functions + Nodemailer
+       → Fichiers : DevisPage.tsx L819, ContactPage.tsx L33
+
+P0-2 · Remplacer tous les numéros/URLs WhatsApp fictifs
+       → Créer src/config/contact.ts :
+         export const WHATSAPP = import.meta.env.VITE_WHATSAPP_URL;
+         export const EMAIL    = import.meta.env.VITE_CONTACT_EMAIL;
+       → Fichiers : DevisPage.tsx L675/866/1080, ContactPage.tsx L91
+
+P0-3 · Corriger la meta description de /contact (24/7 → horaires réels)
+       → ContactPage.tsx L50
+```
+
+#### 🟠 IMPORTANTS — Sprint suivant
+
+```
+P1-1 · Ajouter id="budget" au <select> sans id (DevisPage L510)
+P1-2 · Remplacer key={idx} par key stable dans FAQ (DevisPage L1138)
+P1-3 · Compléter la section réseaux sociaux ou la supprimer (ContactPage L135)
+P1-4 · Ajouter champ téléphone au formulaire Contact (ContactPage L166)
+P1-5 · Standardiser focus ring sur primary-green (ContactPage L176/189/203/222)
+P1-6 · Appliquer selectStyle sur le <select> de ContactPage (L203)
+```
+
+#### 🟡 AMÉLIORATIONS — Backlog
+
+```
+P2-1 · useMemo sur selectedProject (DevisPage L771)
+P2-2 · Validation regex email côté client (ContactPage)
+P2-3 · Valider étape 3 du wizard (DevisPage validateStep step=3)
+P2-4 · Créer variante "gold" dans le composant Button (ContactPage L229)
+P2-5 · useCallback sur handleChange (ContactPage L39)
+P2-6 · Corriger majuscule "L'Équipe" → "notre équipe" (ContactPage L61)
+```
+
+---
+
+### E. SYNTHÈSE FINALE
+
+```
+/devis  : 6.5/10  — Excellent sur la forme, bloqué sur le fond (API manquante)
+/contact: 4.4/10  — Basique, données fictives visibles, incohérences multiples
+
+Ces deux pages sont le cœur du tunnel de conversion du site.
+Sans API réelle, ZÉRO lead n'est capturé en production.
+C'est le point de blocage #1 absolu du projet.
+```
+
+---
+
+*Addendum ajouté le : 2026-05-31*  
+*Analysé par : Expert Code Review — Pages /devis & /contact*

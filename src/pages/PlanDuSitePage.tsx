@@ -11,8 +11,9 @@ const groups: { title: string; links: SiteLink[] }[] = [
       { to: '/ecosysteme', label: 'Écosystème' },
       { to: '/realisations', label: 'Réalisations' },
       { to: '/communaute', label: 'Communauté' },
-      { to: '/le-projet', label: 'Le projet' },
+      { to: '/plateforme', label: 'Plateforme' },
       { to: '/a-propos', label: 'À propos' },
+      { to: '/devis', label: 'Demander un devis' },
       { to: '/contact', label: 'Contact' },
     ],
   },
@@ -43,6 +44,7 @@ export const PlanDuSitePage = () => {
       <SEO
         title="Plan du site"
         description="Toutes les pages principales du site Soutrali Deals, classées par thématique."
+        noIndex
       />
       <div className="border-b border-dark-border bg-gradient-to-b from-dark-card to-dark-bg pt-24 pb-16">
         <div className="container-custom">

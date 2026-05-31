@@ -234,8 +234,9 @@ export const Portfolio = ({ standalonePage = false }: PortfolioProps) => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.1 }}
-          className="relative flex h-[480px] items-center justify-center"
+          className="relative flex h-[340px] items-center justify-center sm:h-[420px] lg:h-[480px]"
         >
+          <div className="relative flex h-full w-full origin-center scale-[0.72] items-center justify-center sm:scale-90 lg:scale-100">
           {projects.map((project, i) => {
             const offset = i - activeIndex;
             const isActive = i === activeIndex;
@@ -284,6 +285,7 @@ export const Portfolio = ({ standalonePage = false }: PortfolioProps) => {
               </motion.div>
             );
           })}
+          </div>
 
           {/* Dots de navigation */}
           <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
