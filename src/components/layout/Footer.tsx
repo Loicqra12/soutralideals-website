@@ -192,7 +192,7 @@ export const Footer = () => {
                 <div className="mb-5 flex items-center justify-between gap-3">
                   <h4 className={`${columnTitle} shrink`}>Informations légales</h4>
                   <Link
-                    to="/informations-legales#informations-legales"
+                    to="/informations-legales"
                     className="shrink-0 rounded-lg p-1.5 text-white/45 transition hover:bg-white/5 hover:text-primary-blue focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue/50"
                     aria-label="Consulter les informations légales"
                     title="Informations légales"
@@ -202,12 +202,12 @@ export const Footer = () => {
                 </div>
                 <ul className="space-y-3 text-sm text-white/55">
                   <li>
-                    <Link to="/informations-legales#informations-legales" className="transition hover:text-white">
-                      Informations légales
+                    <Link to="/informations-legales" className="transition hover:text-white">
+                      Portail Légal
                     </Link>
                   </li>
                   <li>
-                    <Link to="/informations-legales#politique-cookies" className="transition hover:text-white">
+                    <Link to="/cookies" className="transition hover:text-white">
                       Politique de cookies
                     </Link>
                   </li>
@@ -221,17 +221,17 @@ export const Footer = () => {
                     </button>
                   </li>
                   <li>
-                    <Link to="/informations-legales#cgv" className="transition hover:text-white">
+                    <Link to="/cgv" className="transition hover:text-white">
                       CGV
                     </Link>
                   </li>
                   <li>
-                    <Link to="/informations-legales#propriete-intellectuelle" className="transition hover:text-white">
+                    <Link to="/informations-legales" className="transition hover:text-white">
                       Propriété intellectuelle
                     </Link>
                   </li>
                   <li>
-                    <Link to="/informations-legales#accessibilite" className="transition hover:text-white">
+                    <Link to="/accessibilite" className="transition hover:text-white">
                       Déclaration d&apos;accessibilité
                     </Link>
                   </li>
@@ -311,13 +311,13 @@ export const Footer = () => {
           <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:justify-end lg:gap-8">
             <FooterLangCurrency />
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-white/10 pt-5 sm:border-t-0 sm:pt-0 lg:border-l lg:border-t-0 lg:pl-8">
-              <Link to="/informations-legales#mentions-legales" className="transition hover:text-white">
+              <Link to="/mentions-legales" className="transition hover:text-white">
                 Mentions légales
               </Link>
-              <Link to="/informations-legales#cgu" className="transition hover:text-white">
+              <Link to="/cgu" className="transition hover:text-white">
                 CGU
               </Link>
-              <Link to="/informations-legales#politique-confidentialite" className="transition hover:text-white">
+              <Link to="/confidentialite" className="transition hover:text-white">
                 Confidentialité
               </Link>
             </div>

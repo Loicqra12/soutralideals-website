@@ -17,6 +17,13 @@ const DevisPage = lazy(() => import('./pages/DevisPage').then(module => ({ defau
 const InformationsLegalesPage = lazy(() =>
   import('./pages/InformationsLegalesPage').then((module) => ({ default: module.InformationsLegalesPage })),
 );
+const MentionsLegalesPage = lazy(() => import('./pages/legal/MentionsLegalesPage'));
+const CGUPage = lazy(() => import('./pages/legal/CGUPage'));
+const CGVPage = lazy(() => import('./pages/legal/CGVPage'));
+const ConfidentialitePage = lazy(() => import('./pages/legal/ConfidentialitePage'));
+const CookiesPage = lazy(() => import('./pages/legal/CookiesPage'));
+const AccessibilitePage = lazy(() => import('./pages/legal/AccessibilitePage'));
+
 const PlanDuSitePage = lazy(() =>
   import('./pages/PlanDuSitePage').then((module) => ({ default: module.PlanDuSitePage })),
 );
@@ -59,6 +66,18 @@ function App() {
             <Route path="devis" element={<DevisPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="informations-legales" element={<InformationsLegalesPage />} />
+            <Route path="mentions-legales" element={<MentionsLegalesPage />} />
+            <Route path="cgu" element={<CGUPage />} />
+            <Route path="cgv" element={<CGVPage />} />
+            <Route path="confidentialite" element={<ConfidentialitePage />} />
+            <Route path="cookies" element={<CookiesPage />} />
+            <Route path="accessibilite" element={<AccessibilitePage />} />
+            <Route path="informations-legales/mentions-legales" element={<Navigate to="/mentions-legales" replace />} />
+            <Route path="informations-legales/cgu" element={<Navigate to="/cgu" replace />} />
+            <Route path="informations-legales/cgv" element={<Navigate to="/cgv" replace />} />
+            <Route path="informations-legales/politique-confidentialite" element={<Navigate to="/confidentialite" replace />} />
+            <Route path="informations-legales/politique-cookies" element={<Navigate to="/cookies" replace />} />
+            <Route path="informations-legales/accessibilite" element={<Navigate to="/accessibilite" replace />} />
             <Route path="plan-du-site" element={<PlanDuSitePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

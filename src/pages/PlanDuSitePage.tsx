@@ -31,8 +31,13 @@ const groups: { title: string; links: SiteLink[] }[] = [
   {
     title: 'Légal & transparence',
     links: [
-      { to: '/informations-legales', label: 'Informations légales' },
-      { to: '/informations-legales#politique-cookies', label: 'Politique de cookies' },
+      { to: '/informations-legales', label: 'Portail Légal' },
+      { to: '/mentions-legales', label: 'Mentions légales' },
+      { to: '/cgu', label: 'CGU' },
+      { to: '/cgv', label: 'CGV' },
+      { to: '/confidentialite', label: 'Confidentialité' },
+      { to: '/cookies', label: 'Politique de cookies' },
+      { to: '/accessibilite', label: 'Accessibilité' },
       { to: '/plan-du-site', label: 'Plan du site' },
     ],
   },
